@@ -1,6 +1,8 @@
 package com.soybeani.items;
 
 import com.soybeani.config.InitValue;
+import com.soybeani.items.material.GrassMaterial;
+import com.soybeani.items.weapon.SwordItemOfGrass;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
@@ -18,12 +20,14 @@ import net.minecraft.util.Identifier;
 public class ItemsRegister {
 
 //    public static final Item GLASS_SWORD = register(new Item(new Item.Settings()), "grass_sword");
-    public static final Item GLASS_SWORD = register(new SwordItem(ToolMaterials.GOLD,new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.DIAMOND, 3, -2.4F))), "grass_sword");
+    public static final Item GRASS_SWORD = register(new SwordItemOfGrass(new GrassMaterial(5),new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(GrassMaterial.INSTANCE, 0, -3.0F)).maxDamage(5)), "grass_sword");
+    public static final Item GRASS_SWORD2 = register(new SwordItemOfGrass(GrassMaterial.INSTANCE,new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(GrassMaterial.INSTANCE, 2, -2.4F))), "grass_sword2");
 
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, ITEM_GROUP_KEY, CUSTOM_ITEM_GROUP);
         ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP_KEY).register(itemGroup->{
-            itemGroup.add(GLASS_SWORD);
+            itemGroup.add(GRASS_SWORD);
+            itemGroup.add(GRASS_SWORD2);
         });
     }
 
@@ -37,7 +41,6 @@ public class ItemsRegister {
     //通用注册
     public static Item register(Item item,String id){
         Identifier itemID = Identifier.of(InitValue.MOD_ID, id);
-        Item registeredItem = Registry.register(Registries.ITEM, itemID, item);
-        return registeredItem;
+        return Registry.register(Registries.ITEM, itemID, item);
     }
 }
