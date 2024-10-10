@@ -13,7 +13,7 @@ public class EventAttack {
     public static void register(){
         AttackBlockCallback.EVENT.register((player, world, hand, pos, direction)-> {
             //草剑事件注册
-            SwordItemOfGrass.EventRegister(player.getStackInHand(hand),world,world.getBlockState(pos),pos);
+            SwordItemOfGrass.EventRegister(player,player.getStackInHand(hand),world,world.getBlockState(pos),pos);
             return ActionResult.PASS;
         });
     }

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#/#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:wheat"
+    },
+    "/": {
+      "item": "fun_item:grass_sword2"
+    }
+  },
+  "result": {
+    "id": "fun_item:wheat_sword",
+    "count": 1
+  }
+}

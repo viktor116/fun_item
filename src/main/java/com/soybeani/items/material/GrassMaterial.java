@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
@@ -15,6 +16,9 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.lang.reflect.Array;
+import java.util.List;
+
 /**
  * @author soybean
  * @date 2024/10/9 14:32
@@ -22,10 +26,12 @@ import net.minecraft.world.World;
  */
 public class GrassMaterial implements ToolMaterial {
     private final int durability;
-    public static final GrassMaterial INSTANCE = new GrassMaterial(10);
+    private final Item repairItem;
+    public static final GrassMaterial INSTANCE = new GrassMaterial(10,null);
 
-    public GrassMaterial(int durability) {
+    public GrassMaterial(int durability, Item repairItem) {
         this.durability = durability;
+        this.repairItem = repairItem;
     }
 
     @Override
@@ -57,7 +63,12 @@ public class GrassMaterial implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(Items.SHORT_GRASS,Items.TALL_GRASS);
+        boolean hasRepairItem = repairItem != null;
+        if(hasRepairItem){
+            return Ingredient.ofItems(Items.SHORT_GRASS,Items.TALL_GRASS,repairItem);
+        }else{
+            return Ingredient.ofItems(Items.SHORT_GRASS,Items.TALL_GRASS);
+        }
     }
 
 }

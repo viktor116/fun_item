@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "/"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:tall_grass"
+    },
+    "/": {
+      "item": "fun_item:grass_sword"
+    }
+  },
+  "result": {
+    "id": "fun_item:grass_sword2",
+    "count": 1
+  }
+}

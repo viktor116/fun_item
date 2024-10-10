@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "fun_item:wheat_sword"
+    }
+  ],
+  "result": {
+    "id": "fun_item:wheat_sword",
+    "count": 1
+  }
+}

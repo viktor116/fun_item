@@ -20,21 +20,23 @@ import net.minecraft.util.Identifier;
 public class ItemsRegister {
 
 //    public static final Item GLASS_SWORD = register(new Item(new Item.Settings()), "grass_sword");
-    public static final Item GRASS_SWORD = register(new SwordItemOfGrass(new GrassMaterial(5),new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(GrassMaterial.INSTANCE, 0, -3.0F)).maxDamage(5)), "grass_sword");
+    public static final Item GRASS_SWORD = register(new SwordItemOfGrass(new GrassMaterial(5,null),new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(GrassMaterial.INSTANCE, 0, -3.0F))), "grass_sword");
     public static final Item GRASS_SWORD2 = register(new SwordItemOfGrass(GrassMaterial.INSTANCE,new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(GrassMaterial.INSTANCE, 2, -2.4F))), "grass_sword2");
+    public static final Item WHEAT_SWORD = register(new SwordItemOfGrass(new GrassMaterial(20,Items.WHEAT),new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(GrassMaterial.INSTANCE, 4, -2.6F))), "wheat_sword");
 
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, ITEM_GROUP_KEY, CUSTOM_ITEM_GROUP);
         ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP_KEY).register(itemGroup->{
             itemGroup.add(GRASS_SWORD);
             itemGroup.add(GRASS_SWORD2);
+            itemGroup.add(WHEAT_SWORD);
         });
     }
 
     //物品组注册
     public static final RegistryKey<ItemGroup> ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(InitValue.MOD_ID, "item_group"));
     public static final ItemGroup CUSTOM_ITEM_GROUP = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(Items.DIAMOND_AXE))
+            .icon(() -> new ItemStack(ItemsRegister.GRASS_SWORD2))
             .displayName(Text.translatable("itemGroup.fun_item"))
             .build();
 
