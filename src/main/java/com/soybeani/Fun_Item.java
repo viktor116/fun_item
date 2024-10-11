@@ -5,8 +5,11 @@ import com.soybeani.event.EventRegister;
 import com.soybeani.items.ItemsRegister;
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.item.ItemStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class Fun_Item implements ModInitializer {
 

@@ -26,11 +26,7 @@
 		]
 	},
 	"mixins": [
-		"fun_item.mixins.json",
-		{
-			"config": "fun_item.client.mixins.json",
-			"environment": "client"
-		}
+		"fun_item.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.5",
