@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "fun_item:item/weapon/wheat_sword"
+    "layer0": "fun_item:item/misc/xiaomi14button"
   }
 }
