@@ -39,7 +39,6 @@ public class PhoneItem extends Item {
         if (hungerManager.isNotFull()) {
             hungerManager.add(1, 0.5f);
         }
-
         return TypedActionResult.success(user.getStackInHand(hand));
     }
 

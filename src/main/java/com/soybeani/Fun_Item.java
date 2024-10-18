@@ -8,6 +8,7 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.ItemStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import software.bernie.geckolib.GeckoLib;
 
 import java.util.List;
 
