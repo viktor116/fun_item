@@ -25,17 +25,17 @@ repositories {
 	}
 }
 
-loom {
-	splitEnvironmentSourceSets()
-
-	mods {
-		"fun_item" {
-			sourceSet sourceSets.main
-			sourceSet sourceSets.client
-		}
-	}
-
-}
+//loom {
+//	splitEnvironmentSourceSets()
+//
+//	mods {
+//		"fun_item" {
+//			sourceSet sourceSets.main
+//			sourceSet sourceSets.client
+//		}
+//	}
+//
+//}
 
 fabricApi {
 	configureDataGeneration()

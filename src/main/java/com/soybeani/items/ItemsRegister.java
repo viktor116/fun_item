@@ -1,6 +1,7 @@
 package com.soybeani.items;
 
 import com.soybeani.config.InitValue;
+import com.soybeani.entity.EntityRegister;
 import com.soybeani.items.item.ButtonItem;
 import com.soybeani.items.item.PhoneItem;
 import com.soybeani.items.material.GrassMaterial;
@@ -27,6 +28,7 @@ public class ItemsRegister {
     public static final Item WHEAT_SWORD = register(new SwordItemOfGrass(new GrassMaterial(20,Items.WHEAT),new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(GrassMaterial.INSTANCE, 4, -2.6F))), "wheat_sword");
     public static final Item XIAOMI14 = register(new PhoneItem(new Item.Settings()), "xiaomi14");
     public static final Item XIAOMI14BUTTON = register(new ButtonItem(new Item.Settings()), "xiaomi14button");
+    public static final Item XIAOMI_SU7_EGG = register(new SpawnEggItem(EntityRegister.SU7, 0x576A3C, 0x0000FF, new Item.Settings()), "su7_spawn_egg");
 
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, ITEM_GROUP_KEY, CUSTOM_ITEM_GROUP);
@@ -36,6 +38,7 @@ public class ItemsRegister {
             itemGroup.add(WHEAT_SWORD);
             itemGroup.add(XIAOMI14);
             itemGroup.add(XIAOMI14BUTTON);
+            itemGroup.add(XIAOMI_SU7_EGG    );
         });
     }
 
