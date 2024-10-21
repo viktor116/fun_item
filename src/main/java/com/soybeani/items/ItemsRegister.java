@@ -8,6 +8,7 @@ import com.soybeani.items.material.GrassMaterial;
 import com.soybeani.items.weapon.SwordItemOfGrass;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -27,6 +28,7 @@ public class ItemsRegister {
     public static final Item GRASS_SWORD2 = register(new SwordItemOfGrass(GrassMaterial.INSTANCE,new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(GrassMaterial.INSTANCE, 2, -2.4F))), "grass_sword2");
     public static final Item WHEAT_SWORD = register(new SwordItemOfGrass(new GrassMaterial(20,Items.WHEAT),new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(GrassMaterial.INSTANCE, 4, -2.6F))), "wheat_sword");
     public static final Item XIAOMI14 = register(new PhoneItem(new Item.Settings()), "xiaomi14");
+    public static final Item XIAOMI14FOOD = register(new Item(new Item.Settings().food(new FoodComponent.Builder().saturationModifier(1F).build())), "xiaomi14"); //视频效果物品
     public static final Item XIAOMI14BUTTON = register(new ButtonItem(new Item.Settings()), "xiaomi14button");
     public static final Item XIAOMI_SU7_EGG = register(new SpawnEggItem(EntityRegister.SU7, 0x576A3C, 0x0000FF, new Item.Settings()), "su7_spawn_egg");
 
@@ -37,8 +39,9 @@ public class ItemsRegister {
             itemGroup.add(GRASS_SWORD2);
             itemGroup.add(WHEAT_SWORD);
             itemGroup.add(XIAOMI14);
+            itemGroup.add(XIAOMI14FOOD); //视频效果物品
             itemGroup.add(XIAOMI14BUTTON);
-            itemGroup.add(XIAOMI_SU7_EGG    );
+            itemGroup.add(XIAOMI_SU7_EGG);
         });
     }
 

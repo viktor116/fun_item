@@ -15,8 +15,7 @@ import java.util.Random;
  * @description
  */
 public class CommonUtils {
-
-    public static final Random RANDOM = new Random();
+    private static final Random RANDOM = new Random();
     public static void spawnParticlesAndPlaySound(World world, Entity entity, ParticleEffect particleType, SoundEvent soundEvent, SoundCategory soundCategory, int particleCount, double particleSpeed, double particleHeight, float volume, float pitch) {
         if (!world.isClient) {
             ((ServerWorld)world).spawnParticles(particleType,
