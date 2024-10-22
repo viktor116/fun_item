@@ -4,6 +4,7 @@ import com.soybeani.config.InitValue;
 import com.soybeani.entity.EntityRegister;
 import com.soybeani.event.EventRegister;
 import com.soybeani.items.ItemsRegister;
+import com.soybeani.network.ModMessage;
 import com.soybeani.sound.SoundRegister;
 import net.fabricmc.api.ModInitializer;
 
@@ -22,6 +23,7 @@ public class Fun_Item implements ModInitializer {
 		ItemsRegister.initialize(); //注册物品
 		EntityRegister.initialize(); //注册实体
 		SoundRegister.initialize(); //声音注册
+		ModMessage.registerS2CPackets(); //network
 		InitValue.LOGGER.info("soybeani fun items start successful q(≧▽≦q)!");
 	}
 }

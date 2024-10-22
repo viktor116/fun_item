@@ -1,7 +1,13 @@
 {
-  "fun_item": {
+  "lei_jun": {
     "sounds": [
-      "fun_item:are_you_ok"
+      "fun_item:leijun/are_you_ok",
+      "fun_item:leijun/diao_bao_le",
+      "fun_item:leijun/hair_handsome",
+      "fun_item:leijun/hello",
+      "fun_item:leijun/how_are_you",
+      "fun_item:leijun/jubigojune",
+      "fun_item:leijun/three_tricks"
     ]
   }
 }

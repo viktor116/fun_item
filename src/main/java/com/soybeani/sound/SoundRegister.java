@@ -1,7 +1,6 @@
 package com.soybeani.sound;
 
 import com.soybeani.config.InitValue;
-import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
@@ -13,7 +12,7 @@ import net.minecraft.util.Identifier;
  * @description
  */
 public class SoundRegister {
-    public static final SoundEvent ARE_YOU_OK_EVENT = register("are_you_ok");
+    public static final SoundEvent LEI_JUN = register("lei_jun");
 
     public static void initialize(){
 

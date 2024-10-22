@@ -33,24 +33,34 @@ public class ItemsRegister {
     public static final Item XIAOMI_SU7_EGG = register(new SpawnEggItem(EntityRegister.SU7, 0x576A3C, 0x0000FF, new Item.Settings()), "su7_spawn_egg");
 
     public static void initialize() {
-        Registry.register(Registries.ITEM_GROUP, ITEM_GROUP_KEY, CUSTOM_ITEM_GROUP);
-        ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP_KEY).register(itemGroup->{
-            itemGroup.add(GRASS_SWORD);
-            itemGroup.add(GRASS_SWORD2);
-            itemGroup.add(WHEAT_SWORD);
+        Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
+        Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
+        ItemGroupEvents.modifyEntriesEvent(FUN_ITEM_GROUP_KEY).register(itemGroup->{ //有趣物品
             itemGroup.add(XIAOMI14);
             itemGroup.add(XIAOMI14FOOD); //视频效果物品
             itemGroup.add(XIAOMI14BUTTON);
             itemGroup.add(XIAOMI_SU7_EGG);
         });
+        ItemGroupEvents.modifyEntriesEvent(COMMON_ITEM_GROUP_KEY).register(itemGroup->{ //普通物品
+            itemGroup.add(GRASS_SWORD);
+            itemGroup.add(GRASS_SWORD2);
+            itemGroup.add(WHEAT_SWORD);
+        });
     }
 
     //物品组注册
-    public static final RegistryKey<ItemGroup> ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(InitValue.MOD_ID, "item_group"));
-    public static final ItemGroup CUSTOM_ITEM_GROUP = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(ItemsRegister.GRASS_SWORD2))
+    public static final RegistryKey<ItemGroup> FUN_ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(InitValue.MOD_ID, "item_group"));
+    public static final RegistryKey<ItemGroup> COMMON_ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(InitValue.MOD_ID, "common_item_group"));
+    public static final ItemGroup ABSTRACT_CUSTOM_ITEM_GROUP = FabricItemGroup.builder()
+            .icon(() -> new ItemStack(ItemsRegister.XIAOMI14BUTTON))
             .displayName(Text.translatable("itemGroup.fun_item"))
             .build();
+
+    public static final ItemGroup COMMON_CUSTOM_ITEM_GROUP = FabricItemGroup.builder()
+            .icon(() -> new ItemStack(ItemsRegister.WHEAT_SWORD))
+            .displayName(Text.translatable("itemGroup.fun_item.common"))
+            .build();
+
 
     //通用注册
     public static Item register(Item item,String id){
