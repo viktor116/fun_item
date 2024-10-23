@@ -1,10 +1,8 @@
-package com.soybeani.entity.unliving;
+package com.soybeani.entity.vehicle;
 
 import com.soybeani.entity.EntityRegister;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -12,8 +10,6 @@ import net.minecraft.entity.passive.HorseEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoAnimatable;
@@ -22,9 +18,7 @@ import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 
 import software.bernie.geckolib.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
-import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.constant.dataticket.SerializableDataTicket;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 
 /**

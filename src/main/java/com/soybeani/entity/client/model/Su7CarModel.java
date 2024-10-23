@@ -1,10 +1,9 @@
 package com.soybeani.entity.client.model;
 
 import com.soybeani.config.InitValue;
-import com.soybeani.entity.unliving.Su7CarEntity;
+import com.soybeani.entity.vehicle.Su7CarEntity;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib.animation.AnimationState;
-import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 
 /**

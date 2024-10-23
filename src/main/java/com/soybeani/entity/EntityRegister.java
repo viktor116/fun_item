@@ -2,9 +2,11 @@ package com.soybeani.entity;
 
 
 import com.soybeani.config.InitValue;
-import com.soybeani.entity.unliving.Su7CarEntity;
+import com.soybeani.entity.client.renderer.IceBoatEntityRenderer;
+import com.soybeani.entity.vehicle.IceBoatEntity;
+import com.soybeani.entity.vehicle.Su7CarEntity;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityType;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -25,5 +27,6 @@ public class EntityRegister {
 
     public static void initialize(){
         FabricDefaultAttributeRegistry.register(SU7,Su7CarEntity.createAttributes());
+        EntityRendererRegistry.register(IceBoatEntity.CUSTOM_BOAT, IceBoatEntityRenderer::new);
     }
 }

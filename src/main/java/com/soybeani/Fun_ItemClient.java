@@ -6,7 +6,6 @@ import com.soybeani.event.keybinds.KeyBindsInputHandler;
 import com.soybeani.network.ModMessage;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.option.KeyBinding;
 
 public class Fun_ItemClient implements ClientModInitializer {
 	@Override

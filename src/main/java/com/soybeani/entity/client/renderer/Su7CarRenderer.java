@@ -2,11 +2,10 @@ package com.soybeani.entity.client.renderer;
 
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.client.model.Su7CarModel;
-import com.soybeani.entity.unliving.Su7CarEntity;
+import com.soybeani.entity.vehicle.Su7CarEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 /**
@@ -30,7 +29,7 @@ public class Su7CarRenderer extends GeoEntityRenderer<Su7CarEntity> {
         if(entity.isBaby()){
             poseStack.scale(.4f,.4f,.4f);
         }
-        poseStack.scale(2f,2f,2f);
+        poseStack.scale(1.5f,1.5f,1.5f);
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 }
