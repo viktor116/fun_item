@@ -1,5 +1,6 @@
 package com.soybeani.items;
 
+import com.soybeani.block.ModBlock;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.EntityRegister;
 import com.soybeani.items.item.ButtonItem;
@@ -32,8 +33,8 @@ public class ItemsRegister {
     public static final Item XIAOMI14 = register(new PhoneItem(new Item.Settings()), "xiaomi14");
     public static final Item XIAOMI14BUTTON = register(new ButtonItem(new Item.Settings()), "xiaomi14button");
     public static final Item XIAOMI_SU7_EGG = register(new SpawnEggItem(EntityRegister.SU7, 0x576A3C, 0x0000FF, new Item.Settings()), "su7_spawn_egg");
-    public static final Item ICE_BOAT = register(new IceBoatItem(new Item.Settings()), "ice_boat");
-    public static final Item ICE2_BOAT = register(new Ice2BoatItem(new Item.Settings()), "ice2_boat");
+    public static final Item ICE_BOAT = register(new IceBoatItem(new Item.Settings().maxCount(1)), "ice_boat");
+    public static final Item ICE2_BOAT = register(new Ice2BoatItem(new Item.Settings().maxCount(1)), "ice2_boat");
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
@@ -48,6 +49,7 @@ public class ItemsRegister {
             itemGroup.add(WHEAT_SWORD);
             itemGroup.add(ICE_BOAT);
             itemGroup.add(ICE2_BOAT);
+            itemGroup.add(ModBlock.AIR_ICE);
         });
     }
 

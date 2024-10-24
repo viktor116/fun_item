@@ -1,5 +1,6 @@
 package com.soybeani.items.item;
 
+import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import com.soybeani.entity.vehicle.IceBoatEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -58,7 +59,7 @@ public class Ice2BoatItem extends Item {
                 BlockPos spawnPos = blockPos.offset(direction);
 
                 if (!world.isClient) {
-                    IceBoatEntity boat = new IceBoatEntity(world,
+                    Ice2BoatEntity boat = new Ice2BoatEntity(world,
                             spawnPos.getX() + 0.5D,
                             spawnPos.getY(),
                             spawnPos.getZ() + 0.5D);

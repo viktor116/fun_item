@@ -29,7 +29,6 @@ import software.bernie.geckolib.constant.dataticket.SerializableDataTicket;
 public class Su7CarEntity extends HorseEntity implements GeoEntity {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-
     public Su7CarEntity(EntityType<? extends HorseEntity> entityType, World world) {
         super(entityType, world);
     }

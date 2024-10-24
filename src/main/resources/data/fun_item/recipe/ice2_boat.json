@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#/#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:ice"
+    },
+    "/": {
+       "item": "fun_item:ice_boat"
+    }
+  },
+  "result": {
+    "id": "fun_item:ice2_boat",
+    "count": 1
+  }
+}

@@ -2,7 +2,10 @@ package com.soybeani.entity;
 
 
 import com.soybeani.config.InitValue;
+import com.soybeani.entity.client.renderer.Ice2BoatEntityRenderer;
 import com.soybeani.entity.client.renderer.IceBoatEntityRenderer;
+import com.soybeani.entity.client.renderer.Su7CarRenderer;
+import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import com.soybeani.entity.vehicle.IceBoatEntity;
 import com.soybeani.entity.vehicle.Su7CarEntity;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -24,9 +27,14 @@ public class EntityRegister {
     public static final EntityType<Su7CarEntity> SU7 = Registry.register(
             Registries.ENTITY_TYPE, Identifier.of(InitValue.MOD_ID, "su7"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE,Su7CarEntity::new) .dimensions(EntityDimensions.fixed(1.5f, 1.5f)).build());
-
     public static void initialize(){
         FabricDefaultAttributeRegistry.register(SU7,Su7CarEntity.createAttributes());
-        EntityRendererRegistry.register(IceBoatEntity.CUSTOM_BOAT, IceBoatEntityRenderer::new);
+
+    }
+
+    public static void initializeClient(){
+        EntityRendererRegistry.register(EntityRegister.SU7, Su7CarRenderer::new);
+        EntityRendererRegistry.register(IceBoatEntity.ICE_BOAT, IceBoatEntityRenderer::new);
+        EntityRendererRegistry.register(Ice2BoatEntity.ICE2_BOAT, Ice2BoatEntityRenderer::new);
     }
 }
