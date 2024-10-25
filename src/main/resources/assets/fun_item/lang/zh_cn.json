@@ -8,8 +8,11 @@
   "item.fun_item.xiaomi14button": "米家控制器",
   "item.fun_item.ice_boat": "冰霜船",
   "item.fun_item.ice2_boat": "冰霜王船",
+  "itemTooltip.fun_item.ice_boat": "用冰块制成的船",
+  "itemTooltip.fun_item.ice2_boat": "用冰块再次加固的船！",
   "block.fun_item.air_ice_0": "空气冰",
 
   "key.fun_item.toggle": "物品交互",
+  "key.fun_item.function": "物品功能",
   "key.category.fun_item.soybean": "豆浆有趣物品键位"
 }

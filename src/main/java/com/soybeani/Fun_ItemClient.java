@@ -1,6 +1,7 @@
 package com.soybeani;
 
 import com.soybeani.block.ModBlock;
+import com.soybeani.config.InitValue;
 import com.soybeani.entity.EntityRegister;
 import com.soybeani.entity.client.renderer.Su7CarRenderer;
 import com.soybeani.event.keybinds.KeyBindsInputHandler;
@@ -8,7 +9,19 @@ import com.soybeani.network.ModMessage;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.texture.NativeImage;
+import net.minecraft.client.texture.NativeImageBackedTexture;
+import net.minecraft.client.texture.PlayerSkinTexture;
+import net.minecraft.entity.player.PlayerModelPart;
+import net.minecraft.util.Identifier;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Fun_ItemClient implements ClientModInitializer {
 	@Override

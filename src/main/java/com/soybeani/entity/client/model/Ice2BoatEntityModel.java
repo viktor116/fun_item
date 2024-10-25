@@ -3,6 +3,8 @@ package com.soybeani.entity.client.model;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import com.soybeani.entity.vehicle.Su7CarEntity;
+import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.render.entity.model.ModelWithWaterPatch;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib.animation.AnimationState;
 import software.bernie.geckolib.model.GeoModel;
@@ -35,4 +37,5 @@ public class Ice2BoatEntityModel extends GeoModel<Ice2BoatEntity> {
     public void setCustomAnimations(Ice2BoatEntity animatable, long instanceId, AnimationState<Ice2BoatEntity> animationState) {
         super.setCustomAnimations(animatable, instanceId, animationState);
     }
+
 }

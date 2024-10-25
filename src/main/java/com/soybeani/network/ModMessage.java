@@ -1,15 +1,10 @@
 package com.soybeani.network;
 
-import com.soybeani.config.InitValue;
-import com.soybeani.network.packet.ExampleC2SPacket;
+import com.soybeani.network.packet.KeyRPacket;
+import com.soybeani.network.packet.KeyVPacket;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.fabricmc.fabric.impl.registry.sync.SyncCompletePayload;
-import net.minecraft.entity.EntityType;
-import net.minecraft.network.packet.CustomPayload;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
 
 /**
  * @author soybean
@@ -17,14 +12,19 @@ import net.minecraft.util.Identifier;
  * @description
  */
 public class ModMessage {
-    public static final Identifier TOGGLE_ID = Identifier.of(InitValue.MOD_ID, "toggle");
-    public static final Identifier TOGGLE_SYNC_ID = Identifier.of(InitValue.MOD_ID, "toggle_sync");
-
     public static void registerC2SPackets(){
-        PayloadTypeRegistry.playC2S().register(ExampleC2SPacket.ID, ExampleC2SPacket.CODEC);
-        ServerPlayNetworking.registerGlobalReceiver(ExampleC2SPacket.ID, ExampleC2SPacket::receive);
+        PayloadTypeRegistry.playC2S().register(KeyRPacket.ID, KeyRPacket.CODEC);
+        ServerPlayNetworking.registerGlobalReceiver(KeyRPacket.ID, KeyRPacket::receive);
+
+        PayloadTypeRegistry.playC2S().register(KeyVPacket.ID, KeyVPacket.CODEC);
+        ServerPlayNetworking.registerGlobalReceiver(KeyVPacket.ID, KeyVPacket::receive);
     }
 
     public static void registerS2CPackets(){
+        PayloadTypeRegistry.playS2C().register(KeyRPacket.ID, KeyRPacket.CODEC);
+        ClientPlayNetworking.registerGlobalReceiver(KeyRPacket.ID, KeyRPacket::receiveOfClient);
+
+        PayloadTypeRegistry.playS2C().register(KeyVPacket.ID, KeyVPacket.CODEC);
+        ClientPlayNetworking.registerGlobalReceiver(KeyVPacket.ID, KeyVPacket::receiveOfClient);
     }
 }
