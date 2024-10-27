@@ -71,29 +71,31 @@ public class Ice2BoatEntity extends BoatEntity implements GeoEntity {
         this.prevY = y;
         this.prevZ = z;
     }
+
     @Override
     public void tick() {
-        if(getFreeze()){
-            if (!(isSubmergedInWater() || isTouchingWater())) {
-                int range = 8;
-                BlockPos blockPos = this.getBlockPos();
-                World world = this.getWorld();
-                BlockState frostIceState = Blocks.FROSTED_ICE.getDefaultState();
-                BlockState airIceState = ModBlock.AIR_ICE.getDefaultState();
-                BlockPos.Mutable mutable = new BlockPos.Mutable();
-                Iterator var7 = BlockPos.iterate(blockPos.add(-range, -1, -range), blockPos.add(range, -1, range)).iterator();
-                while (var7.hasNext()) {
-                    BlockPos blockPos2 = (BlockPos) var7.next();
-                    if (blockPos2.isWithinDistance(this.getPos(), (double) range)) {
-                        mutable.set(blockPos2.getX(), blockPos2.getY() + 1, blockPos2.getZ());
-                        BlockState blockState2 = world.getBlockState(mutable);
-                        if (blockState2.isAir()) {
-                            BlockState blockState3 = world.getBlockState(blockPos2);
-                            if ((blockState3 == FrostedIceBlock.getMeltedState() || blockState3 == frostIceState) && frostIceState.canPlaceAt(world, blockPos2) && world.canPlace(frostIceState, blockPos2, ShapeContext.absent())) {
-                                world.setBlockState(blockPos2, frostIceState);
-                                world.scheduleBlockTick(blockPos2, Blocks.FROSTED_ICE, 200);
-                            }
-                            if(blockState3 == Blocks.AIR.getDefaultState() && airIceState.canPlaceAt(world,blockPos2)){
+
+        if (!(isSubmergedInWater() || isTouchingWater())) {
+            int range = 8;
+            BlockPos blockPos = this.getBlockPos();
+            World world = this.getWorld();
+            BlockState frostIceState = Blocks.FROSTED_ICE.getDefaultState();
+            BlockState airIceState = ModBlock.AIR_ICE.getDefaultState();
+            BlockPos.Mutable mutable = new BlockPos.Mutable();
+            Iterator var7 = BlockPos.iterate(blockPos.add(-range, -1, -range), blockPos.add(range, -1, range)).iterator();
+            while (var7.hasNext()) {
+                BlockPos blockPos2 = (BlockPos) var7.next();
+                if (blockPos2.isWithinDistance(this.getPos(), (double) range)) {
+                    mutable.set(blockPos2.getX(), blockPos2.getY() + 1, blockPos2.getZ());
+                    BlockState blockState2 = world.getBlockState(mutable);
+                    if (blockState2.isAir()) {
+                        BlockState blockState3 = world.getBlockState(blockPos2);
+                        if ((blockState3 == FrostedIceBlock.getMeltedState() || blockState3 == frostIceState) && frostIceState.canPlaceAt(world, blockPos2) && world.canPlace(frostIceState, blockPos2, ShapeContext.absent())) {
+                            world.setBlockState(blockPos2, frostIceState);
+                            world.scheduleBlockTick(blockPos2, Blocks.FROSTED_ICE, 200);
+                        }
+                        if (getFreeze()) {
+                            if (blockState3 == Blocks.AIR.getDefaultState() && airIceState.canPlaceAt(world, blockPos2)) {
                                 world.setBlockState(blockPos2, airIceState);
                                 world.scheduleBlockTick(blockPos2, Blocks.FROSTED_ICE, 200);
                             }
@@ -102,9 +104,11 @@ public class Ice2BoatEntity extends BoatEntity implements GeoEntity {
                 }
             }
         }
-        if(getFly()){
+        if (getFly()) {
             Vec3d velocity = this.getVelocity();
-            this.setVelocity(velocity.x, velocity.y + 0.1, velocity.z);
+            if (velocity.getY() < 1) {
+                this.setVelocity(velocity.x, velocity.y + 0.1, velocity.z);
+            }
         }
         super.tick();
     }
@@ -123,6 +127,7 @@ public class Ice2BoatEntity extends BoatEntity implements GeoEntity {
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
     }
+
     private PlayState predicate(AnimationState<GeoAnimatable> animationState) {
         if (!this.getWorld().isClient()) {
             animationState.getController().setAnimation(RawAnimation.begin()
@@ -149,10 +154,10 @@ public class Ice2BoatEntity extends BoatEntity implements GeoEntity {
         boolean pressingLeft = client.options.leftKey.isPressed();
         boolean pressingRight = client.options.rightKey.isPressed();
 
-        if(getFly()){
+        if (getFly()) {
             animationState.getController().setAnimation(RawAnimation.begin()
                     .then("animation.fly", Animation.LoopType.LOOP));
-        }else if (pressingForward) {
+        } else if (pressingForward) {
             animationState.getController().setAnimation(RawAnimation.begin()
                     .then("animation.move", Animation.LoopType.LOOP));
         } else if (pressingLeft) {
@@ -169,19 +174,19 @@ public class Ice2BoatEntity extends BoatEntity implements GeoEntity {
         return PlayState.CONTINUE;
     }
 
-    public void setFly(boolean b){
+    public void setFly(boolean b) {
         this.fly = b;
     }
 
-    public boolean getFly(){
+    public boolean getFly() {
         return this.fly;
     }
 
-    public void setFreeze(boolean b){
+    public void setFreeze(boolean b) {
         this.freeze = b;
     }
 
-    public boolean getFreeze(){
+    public boolean getFreeze() {
         return this.freeze;
     }
 }

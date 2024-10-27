@@ -67,6 +67,7 @@ public class Ice2BoatItem extends Item {
                             spawnPos.getX() + 0.5D,
                             spawnPos.getY(),
                             spawnPos.getZ() + 0.5D);
+                    boat.setCustomNameVisible(false);
 //                    if (user.getDisplayName() != null) {
 //                        boat.setCustomName(user.getDisplayName());
 //                    }
