@@ -3,14 +3,12 @@ package com.soybeani.items;
 import com.soybeani.block.ModBlock;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.EntityRegister;
-import com.soybeani.items.item.ButtonItem;
-import com.soybeani.items.item.Ice2BoatItem;
-import com.soybeani.items.item.IceBoatItem;
-import com.soybeani.items.item.PhoneItem;
+import com.soybeani.items.item.*;
 import com.soybeani.items.material.GrassMaterial;
 import com.soybeani.items.weapon.SwordItemOfGrass;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -36,6 +34,9 @@ public class ItemsRegister {
     public static final Item XIAOMI_SU7_EGG = register(new SpawnEggItem(EntityRegister.SU7, 0x576A3C, 0x0000FF, new Item.Settings()), "su7_spawn_egg");
     public static final Item ICE_BOAT = register(new IceBoatItem(new Item.Settings().maxCount(1)), "ice_boat");
     public static final Item ICE2_BOAT = register(new Ice2BoatItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)), "ice2_boat");
+    public static final Item LIGHTNING_SPYGLASS = register(new LightningSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)),"lightning_spyglass");
+    public static final ModelIdentifier LIGHTNING_SPYGLASS_MODEL = ModelIdentifier.ofInventoryVariant(Identifier.of(InitValue.MOD_ID, "lightning_spyglass"));
+    public static final ModelIdentifier LIGHTNING_SPYGLASS_IN_HAND = ModelIdentifier.ofInventoryVariant(Identifier.of(InitValue.MOD_ID, "lightning_spyglass_in_hand"));
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
@@ -50,7 +51,7 @@ public class ItemsRegister {
             itemGroup.add(WHEAT_SWORD);
             itemGroup.add(ICE_BOAT);
             itemGroup.add(ICE2_BOAT);
-            itemGroup.add(ModBlock.AIR_ICE);
+            itemGroup.add(LIGHTNING_SPYGLASS);
         });
     }
 
