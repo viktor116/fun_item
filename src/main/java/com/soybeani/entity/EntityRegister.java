@@ -1,39 +1,24 @@
 package com.soybeani.entity;
 
 
-import com.soybeani.Fun_Item;
 import com.soybeani.config.InitValue;
+import com.soybeani.entity.client.renderer.FlyBoatEntityRenderer;
 import com.soybeani.entity.client.renderer.Ice2BoatEntityRenderer;
 import com.soybeani.entity.client.renderer.IceBoatEntityRenderer;
 import com.soybeani.entity.client.renderer.Su7CarRenderer;
+import com.soybeani.entity.vehicle.FlyBoatEntity;
 import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import com.soybeani.entity.vehicle.IceBoatEntity;
 import com.soybeani.entity.vehicle.Su7CarEntity;
-import com.soybeani.items.ItemsRegister;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
-import net.minecraft.client.render.DiffuseLighting;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.item.ItemModels;
-import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
-import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
 
 /**
  * @author soybean
@@ -53,5 +38,6 @@ public class EntityRegister {
         EntityRendererRegistry.register(EntityRegister.SU7, Su7CarRenderer::new);
         EntityRendererRegistry.register(IceBoatEntity.ICE_BOAT, IceBoatEntityRenderer::new);
         EntityRendererRegistry.register(Ice2BoatEntity.ICE2_BOAT, Ice2BoatEntityRenderer::new);
+        EntityRendererRegistry.register(FlyBoatEntity.FLY_BOAT, FlyBoatEntityRenderer::new);
     }
 }

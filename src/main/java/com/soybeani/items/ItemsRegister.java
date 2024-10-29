@@ -34,6 +34,7 @@ public class ItemsRegister {
     public static final Item XIAOMI_SU7_EGG = register(new SpawnEggItem(EntityRegister.SU7, 0x576A3C, 0x0000FF, new Item.Settings()), "su7_spawn_egg");
     public static final Item ICE_BOAT = register(new IceBoatItem(new Item.Settings().maxCount(1)), "ice_boat");
     public static final Item ICE2_BOAT = register(new Ice2BoatItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)), "ice2_boat");
+    public static final Item FLY_BOAT = register(new FlyBoatItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)), "fly_boat");
     public static final Item LIGHTNING_SPYGLASS = register(new LightningSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)),"lightning_spyglass");
     public static final ModelIdentifier LIGHTNING_SPYGLASS_MODEL = ModelIdentifier.ofInventoryVariant(Identifier.of(InitValue.MOD_ID, "lightning_spyglass"));
     public static final ModelIdentifier LIGHTNING_SPYGLASS_IN_HAND = ModelIdentifier.ofInventoryVariant(Identifier.of(InitValue.MOD_ID, "lightning_spyglass_in_hand"));
@@ -51,6 +52,7 @@ public class ItemsRegister {
             itemGroup.add(WHEAT_SWORD);
             itemGroup.add(ICE_BOAT);
             itemGroup.add(ICE2_BOAT);
+            itemGroup.add(FLY_BOAT);
             itemGroup.add(LIGHTNING_SPYGLASS);
         });
     }

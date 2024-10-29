@@ -1,6 +1,7 @@
 package com.soybeani.network.packet;
 
 import com.soybeani.config.InitValue;
+import com.soybeani.entity.vehicle.FlyBoatEntity;
 import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -27,9 +28,14 @@ public class KeyVPacket implements CustomPayload {
         ServerPlayerEntity player = context.player();
         MinecraftServer server = context.server();
         if(player.hasVehicle()){
-            if(player.getVehicle() instanceof Ice2BoatEntity boatEntity){
+            if(player.getVehicle() instanceof Ice2BoatEntity boatEntity){ //冰霜王船
                 boatEntity.setFreeze(!boatEntity.getFreeze());
-                player.sendMessage(Text.of("冻结模式"+ (boatEntity.getFreeze() ? "开启" : "关闭")),true);
+                player.sendMessage(Text.of("冻结模式:"+ (boatEntity.getFreeze() ? "开启" : "关闭")),true);
+                ServerPlayNetworking.send(player,INSTANCE);
+            }
+            if(player.getVehicle() instanceof FlyBoatEntity boatEntity){ //天空船
+                boatEntity.setAccelerate(!boatEntity.getAccelerate());
+                player.sendMessage(Text.of("加速模式:"+ (boatEntity.getAccelerate() ? "开启" : "关闭")),true);
                 ServerPlayNetworking.send(player,INSTANCE);
             }
         }
@@ -38,8 +44,11 @@ public class KeyVPacket implements CustomPayload {
     public static void receiveOfClient(KeyVPacket payload, ClientPlayNetworking.Context context) {
         ClientPlayerEntity player = context.client().player;
         if(player.hasVehicle()){
-            if(player.getVehicle() instanceof Ice2BoatEntity boatEntity){
+            if(player.getVehicle() instanceof Ice2BoatEntity boatEntity){ //冰霜王船
                 boatEntity.setFreeze(!boatEntity.getFreeze());
+            }
+            if(player.getVehicle() instanceof FlyBoatEntity boatEntity){ //天空船
+                boatEntity.setAccelerate(!boatEntity.getAccelerate());
             }
         }
     }

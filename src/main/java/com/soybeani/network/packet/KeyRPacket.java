@@ -1,6 +1,8 @@
 package com.soybeani.network.packet;
 
 import com.soybeani.config.InitValue;
+import com.soybeani.entity.vehicle.BoatAbility;
+import com.soybeani.entity.vehicle.FlyBoatEntity;
 import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -27,9 +29,30 @@ public record KeyRPacket() implements CustomPayload{
         ServerPlayerEntity player = context.player();
         MinecraftServer server = context.server();
         if(player.hasVehicle()){
-            if(player.getVehicle() instanceof Ice2BoatEntity boatEntity){
+            if(player.getVehicle() instanceof BoatAbility boatEntity){
                 boatEntity.setFly(!boatEntity.getFly());
-                player.sendMessage(Text.of("飞行模式"+ (boatEntity.getFly() ? "开启" : "关闭")),true);
+                player.sendMessage(Text.of("飞行模式:"+ (boatEntity.getFly() ? "开启" : "关闭")),true);
+                ServerPlayNetworking.send(player,INSTANCE);
+            }
+            if(player.getVehicle() instanceof FlyBoatEntity flyBoatEntity){
+                flyBoatEntity.SwitchFly();
+                Integer fly = flyBoatEntity.getFly();
+                String sendText;
+                switch (fly){
+                    case 0:
+                        sendText = "关闭";
+                        break;
+                    case 1:
+                        sendText = "开始";
+                        break;
+                    case 2:
+                        sendText = "恒定";
+                        break;
+                    default:
+                        sendText = "出错了";
+                        break;
+                }
+                player.sendMessage(Text.of("飞行模式:" + sendText),true);
                 ServerPlayNetworking.send(player,INSTANCE);
             }
         }
@@ -38,8 +61,11 @@ public record KeyRPacket() implements CustomPayload{
     public static void receiveOfClient(KeyRPacket payload, ClientPlayNetworking.Context context) {
         ClientPlayerEntity player = context.client().player;
         if(player.hasVehicle()){
-            if(player.getVehicle() instanceof Ice2BoatEntity boatEntity){
+            if(player.getVehicle() instanceof BoatAbility boatEntity){
                 boatEntity.setFly(!boatEntity.getFly());
+            }
+            if(player.getVehicle() instanceof FlyBoatEntity flyBoatEntity){
+                flyBoatEntity.SwitchFly();
             }
         }
     }
