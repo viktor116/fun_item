@@ -38,11 +38,20 @@ import java.util.stream.Stream;
  * @description
  */
 public class Ice2BoatEntityRenderer extends GeoEntityRenderer<Ice2BoatEntity> {
-
+    private static final Identifier CUSTOM_BOAT_TEXTURE = Identifier.of(InitValue.MOD_ID +":textures/entity/boat/ice2_boat.png");
     private static final Ice2BoatEntityModel ice2BoatEntityModel = new Ice2BoatEntityModel();
+
+    private final Map<BoatEntity.Type, Pair<Identifier, CompositeEntityModel<BoatEntity>>> texturesAndModels;
 
     public Ice2BoatEntityRenderer(net.minecraft.client.render.entity.EntityRendererFactory.Context renderManager) {
         super(renderManager, ice2BoatEntityModel);
+
+        // 为所有船只类型创建使用自定义材质的映射
+        this.texturesAndModels = Stream.of(BoatEntity.Type.values())
+                .collect(ImmutableMap.toImmutableMap(
+                        type -> type,
+                        type -> Pair.of(CUSTOM_BOAT_TEXTURE, this.createModel(renderManager, type, false))
+                ));
     }
 
     @Override
@@ -50,6 +59,13 @@ public class Ice2BoatEntityRenderer extends GeoEntityRenderer<Ice2BoatEntity> {
         return Identifier.of(InitValue.MOD_ID,"textures/entity/boat/ice2_boat.png");
     }
 
+    private CompositeEntityModel<BoatEntity> createModel(EntityRendererFactory.Context ctx, BoatEntity.Type type, boolean chest) {
+        EntityModelLayer entityModelLayer = EntityModelLayers.createBoat(type);
+        ModelPart modelPart = ctx.getPart(entityModelLayer);
+        return type == BoatEntity.Type.BAMBOO
+                ? new RaftEntityModel(modelPart)
+                : new BoatEntityModel(modelPart);
+    }
     @Override
     public void render(Ice2BoatEntity boatEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         matrixStack.push();
@@ -68,66 +84,25 @@ public class Ice2BoatEntityRenderer extends GeoEntityRenderer<Ice2BoatEntity> {
         if (roll != 0.0F) {
             matrixStack.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(roll));
         }
+        super.render(boatEntity, f, g, matrixStack, vertexConsumerProvider, i);
 
-        Optional<GeoBone> waterPatch = this.getGeoModel().getBone("water_patch");
-        // 如果找到水面遮罩骨骼，单独渲染它来抵消水的效果
-        if (waterPatch.isPresent() && boatEntity.isSubmergedInWater()) {
-            GeoBone waterBone = waterPatch.get();
-            if (!waterBone.isHidden()) {
-                // 使用遮罩渲染层
-                VertexConsumer waterMaskConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getWaterMask());
+        matrixStack.translate(0.0F, 0.375F, 0.0F);
 
-                // 应用骨骼变换
-                matrixStack.translate(
-                        waterBone.getPivotX() / 16.0f,
-                        waterBone.getPivotY() / 16.0f,
-                        waterBone.getPivotZ() / 16.0f
-                );
+        Pair<Identifier, CompositeEntityModel<BoatEntity>> pair = this.texturesAndModels.get(boatEntity.getVariant());
+        CompositeEntityModel<BoatEntity> compositeEntityModel = pair.getSecond();
 
-                // 应用骨骼旋转
-                matrixStack.multiply(RotationAxis.POSITIVE_Z.rotation(waterBone.getRotZ()));
-                matrixStack.multiply(RotationAxis.POSITIVE_Y.rotation(waterBone.getRotY()));
-                matrixStack.multiply(RotationAxis.POSITIVE_X.rotation(waterBone.getRotX()));
+        matrixStack.scale(-1.0F, -1.0F, 1.0F);
+        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90.0F));
+        compositeEntityModel.setAngles(boatEntity, g, 0.0F, -0.1F, 0.0F, 0.0F);
 
-                // 渲染遮罩
-                Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
-                Matrix3f matrix3f = matrixStack.peek().getNormalMatrix();
-
-                // 渲染一个与船体内部形状匹配的遮罩平面
-                waterMaskConsumer.vertex(matrix4f, -1.0F, -1.0F, 0.0F)
-                        .color(0.8F, 0.8F, 0.8F, 1.0F)
-                        .texture(0.0F, 0.0F)
-                        .overlay(OverlayTexture.DEFAULT_UV)
-                        .light(i)
-                        .normal(0.0F, 1.0F, 0.0F);
-
-                waterMaskConsumer.vertex(matrix4f, 1.0F, -1.0F, 0.0F)
-                        .color(0.8F, 0.8F, 0.8F, 1.0F)
-                        .texture(1.0F, 0.0F)
-                        .overlay(OverlayTexture.DEFAULT_UV)
-                        .light(i)
-                        .normal(0.0F, 1.0F, 0.0F);
-
-                waterMaskConsumer.vertex(matrix4f, 1.0F, 1.0F, 0.0F)
-                        .color(0.8F, 0.8F, 0.8F, 1.0F)
-                        .texture(1.0F, 1.0F)
-                        .overlay(OverlayTexture.DEFAULT_UV)
-                        .light(i)
-                        .normal(0.0F, 1.0F, 0.0F);
-
-                waterMaskConsumer.vertex(matrix4f, -1.0F, 1.0F, 0.0F)
-                        .color(0.8F, 0.8F, 0.8F, 1.0F)
-                        .texture(0.0F, 1.0F)
-                        .overlay(OverlayTexture.DEFAULT_UV)
-                        .light(i)
-                        .normal(0.0F, 1.0F, 0.0F);
-
+        if (!boatEntity.isSubmergedInWater()) {
+            VertexConsumer vertexConsumer2 = vertexConsumerProvider.getBuffer(RenderLayer.getWaterMask());
+            if (compositeEntityModel instanceof ModelWithWaterPatch) {
+                ModelWithWaterPatch modelWithWaterPatch = (ModelWithWaterPatch)compositeEntityModel;
+                modelWithWaterPatch.getWaterPatch().render(matrixStack, vertexConsumer2, i, OverlayTexture.DEFAULT_UV);
             }
         }
-        super.render(boatEntity, f, g, matrixStack, vertexConsumerProvider, i);
 
         matrixStack.pop();
     }
-
-
 }
