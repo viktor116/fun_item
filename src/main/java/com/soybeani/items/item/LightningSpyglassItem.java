@@ -1,5 +1,6 @@
 package com.soybeani.items.item;
 
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.item.SpyglassItem;
 
 /**

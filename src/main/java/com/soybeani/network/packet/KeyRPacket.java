@@ -43,7 +43,7 @@ public record KeyRPacket() implements CustomPayload{
                         sendText = "关闭";
                         break;
                     case 1:
-                        sendText = "开始";
+                        sendText = "开启";
                         break;
                     case 2:
                         sendText = "恒定";
