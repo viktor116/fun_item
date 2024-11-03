@@ -38,17 +38,17 @@ public class Fun_ItemClient implements ClientModInitializer {
 		ModMessage.registerC2SPackets(); //network
 		ModBlock.initializeClient(); //client init
 		EntityRegister.initializeClient();
-		ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES)
-				.registerReloadListener(new SimpleSynchronousResourceReloadListener() {
-					@Override
-					public Identifier getFabricId() {
-						return Identifier.of(InitValue.MOD_ID, "models");
-					}
-
-					@Override
-					public void reload(ResourceManager manager) {
-						// 在这里可以添加额外的模型加载逻辑
-					}
-				});
+//		ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES)
+//				.registerReloadListener(new SimpleSynchronousResourceReloadListener() {
+//					@Override
+//					public Identifier getFabricId() {
+//						return Identifier.of(InitValue.MOD_ID, "models");
+//					}
+//
+//					@Override
+//					public void reload(ResourceManager manager) {
+//						// 在这里可以添加额外的模型加载逻辑
+//					}
+//				});
 	}
 }
