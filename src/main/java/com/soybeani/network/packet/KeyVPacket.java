@@ -3,6 +3,8 @@ package com.soybeani.network.packet;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.vehicle.FlyBoatEntity;
 import com.soybeani.entity.vehicle.Ice2BoatEntity;
+import com.soybeani.items.ItemsRegister;
+import com.soybeani.items.item.LightningSpyglassItem;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -37,6 +39,16 @@ public class KeyVPacket implements CustomPayload {
                 boatEntity.setAccelerate(!boatEntity.getAccelerate());
                 player.sendMessage(Text.of("加速模式:"+ (boatEntity.getAccelerate() ? "开启" : "关闭")),true);
                 ServerPlayNetworking.send(player,INSTANCE);
+            }
+        }
+        if(player.getMainHandStack().getItem() == ItemsRegister.LIGHTNING_SPYGLASS){
+            LightningSpyglassItem spyglassItem =(LightningSpyglassItem) player.getMainHandStack().getItem();
+            if(spyglassItem.getOpenLightning()){
+                spyglassItem.setLevel(spyglassItem.getLevel()+1);
+                if(spyglassItem.getLevel() > LightningSpyglassItem.LEVEL_MAX){
+                    spyglassItem.setLevel(1);
+                }
+                player.sendMessage(Text.of("范围:"+ spyglassItem.getLevel()),true);
             }
         }
     }

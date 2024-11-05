@@ -1,6 +1,7 @@
 package com.soybeani.event;
 
 import com.soybeani.event.entity.EventAttack;
+import com.soybeani.event.entity.EventTick;
 import com.soybeani.event.entity.EventUse;
 
 /**
@@ -10,6 +11,7 @@ import com.soybeani.event.entity.EventUse;
  */
 public class EventRegister {
     public static void initialize() {
+        EventTick.register();
         EventAttack.register();
         EventUse.register();
     }

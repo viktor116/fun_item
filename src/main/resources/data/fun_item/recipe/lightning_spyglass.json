@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#/#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "/": {
+      "item": "minecraft:spyglass"
+    }
+  },
+  "result": {
+    "id": "fun_item:lightning_spyglass",
+    "count": 1
+  }
+}

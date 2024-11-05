@@ -4,15 +4,19 @@ import com.soybeani.config.InitValue;
 import com.soybeani.entity.vehicle.BoatAbility;
 import com.soybeani.entity.vehicle.FlyBoatEntity;
 import com.soybeani.entity.vehicle.Ice2BoatEntity;
+import com.soybeani.items.ItemsRegister;
+import com.soybeani.items.item.LightningSpyglassItem;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 
 /**
@@ -55,6 +59,12 @@ public record KeyRPacket() implements CustomPayload{
                 player.sendMessage(Text.of("飞行模式:" + sendText),true);
                 ServerPlayNetworking.send(player,INSTANCE);
             }
+        }
+        //大雷之镜
+        if(player.getMainHandStack().getItem() == ItemsRegister.LIGHTNING_SPYGLASS){
+            LightningSpyglassItem spyglassItem =(LightningSpyglassItem) player.getMainHandStack().getItem();
+            spyglassItem.setOpenLightning(!spyglassItem.getOpenLightning());
+            player.sendMessage(Text.of("大雷模式:"+ (spyglassItem.getOpenLightning() ? "开启" : "关闭")),true);
         }
     }
 

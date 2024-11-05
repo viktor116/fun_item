@@ -36,7 +36,6 @@ public class ItemsRegister {
     public static final Item ICE2_BOAT = register(new Ice2BoatItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)), "ice2_boat");
     public static final Item FLY_BOAT = register(new FlyBoatItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)), "fly_boat");
     public static final Item LIGHTNING_SPYGLASS = register(new LightningSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)),"lightning_spyglass");
-    public static final ModelIdentifier LIGHTNING_SPYGLASS_MODEL = ModelIdentifier.ofInventoryVariant(Identifier.of(InitValue.MOD_ID, "lightning_spyglass"));
     public static final ModelIdentifier LIGHTNING_SPYGLASS_IN_HAND = ModelIdentifier.ofInventoryVariant(Identifier.of(InitValue.MOD_ID, "lightning_spyglass_in_hand"));
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
