@@ -1,5 +1,6 @@
 package com.soybeani.items.item;
 
+import com.soybeani.entity.custom.PurpleLightningEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -40,12 +41,9 @@ public class NirvanaSpyglassItem extends SpyglassItem {
             mutable.set(blockPos2.getX(), blockPos2.getY(), blockPos2.getZ());
             BlockState blockState3 = world.getBlockState(blockPos2);
             if (blockState3 != Blocks.AIR.getDefaultState() && world.getBlockState(blockPos2.up()) == Blocks.AIR.getDefaultState()) {
-//                PurpleLightningEntity lightning = new PurpleLightningEntity(PurpleLightningEntity.PURPLE_LIGHTNING, world);
-//                lightning.setPosition(blockPos2.getX(), blockPos2.getY(), blockPos2.getZ());
-//                world.spawnEntity(lightning);
-                LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(world);
-                lightningEntity.refreshPositionAndAngles(blockPos2.getX() + 0.5, blockPos2.getY(), blockPos2.getZ() + 0.5, 0.0F, 0.0F);
-                world.spawnEntity(lightningEntity);
+                PurpleLightningEntity lightning = new PurpleLightningEntity(PurpleLightningEntity.PURPLE_LIGHTNING, world);
+                lightning.setPosition(blockPos2.getX(), blockPos2.getY(), blockPos2.getZ());
+                world.spawnEntity(lightning);
             }
         }
     }

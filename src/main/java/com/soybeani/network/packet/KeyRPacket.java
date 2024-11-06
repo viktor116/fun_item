@@ -6,6 +6,7 @@ import com.soybeani.entity.vehicle.FlyBoatEntity;
 import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import com.soybeani.items.ItemsRegister;
 import com.soybeani.items.item.LightningSpyglassItem;
+import com.soybeani.items.item.NirvanaSpyglassItem;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -65,6 +66,12 @@ public record KeyRPacket() implements CustomPayload{
             LightningSpyglassItem spyglassItem =(LightningSpyglassItem) player.getMainHandStack().getItem();
             spyglassItem.setOpenLightning(!spyglassItem.getOpenLightning());
             player.sendMessage(Text.of("大雷模式:"+ (spyglassItem.getOpenLightning() ? "开启" : "关闭")),true);
+        }
+        //寂寞之镜
+        if(player.getMainHandStack().getItem() == ItemsRegister.NIRVANA_SPYGLASS){
+            NirvanaSpyglassItem spyglassItem =(NirvanaSpyglassItem) player.getMainHandStack().getItem();
+            spyglassItem.setOpenLightning(!spyglassItem.getOpenLightning());
+            player.sendMessage(Text.of("寂灭模式:"+ (spyglassItem.getOpenLightning() ? "开启" : "关闭")),true);
         }
     }
 

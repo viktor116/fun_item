@@ -5,6 +5,7 @@ import com.soybeani.entity.vehicle.FlyBoatEntity;
 import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import com.soybeani.items.ItemsRegister;
 import com.soybeani.items.item.LightningSpyglassItem;
+import com.soybeani.items.item.NirvanaSpyglassItem;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -41,8 +42,18 @@ public class KeyVPacket implements CustomPayload {
                 ServerPlayNetworking.send(player,INSTANCE);
             }
         }
-        if(player.getMainHandStack().getItem() == ItemsRegister.LIGHTNING_SPYGLASS){
+        if(player.getMainHandStack().getItem() == ItemsRegister.LIGHTNING_SPYGLASS){ //大雷之镜
             LightningSpyglassItem spyglassItem =(LightningSpyglassItem) player.getMainHandStack().getItem();
+            if(spyglassItem.getOpenLightning()){
+                spyglassItem.setLevel(spyglassItem.getLevel()+1);
+                if(spyglassItem.getLevel() > LightningSpyglassItem.LEVEL_MAX){
+                    spyglassItem.setLevel(1);
+                }
+                player.sendMessage(Text.of("范围:"+ spyglassItem.getLevel()),true);
+            }
+        }
+        if(player.getMainHandStack().getItem() == ItemsRegister.NIRVANA_SPYGLASS){ //大雷之镜
+            NirvanaSpyglassItem spyglassItem =(NirvanaSpyglassItem) player.getMainHandStack().getItem();
             if(spyglassItem.getOpenLightning()){
                 spyglassItem.setLevel(spyglassItem.getLevel()+1);
                 if(spyglassItem.getLevel() > LightningSpyglassItem.LEVEL_MAX){
