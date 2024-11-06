@@ -1,18 +1,11 @@
 package com.soybeani.items.item;
 
-import com.soybeani.entity.EntityRegister;
-import com.soybeani.entity.custom.PurpleLightningEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpyglassItem;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -21,20 +14,19 @@ import java.util.Iterator;
 
 /**
  * @author soybean
- * @date 2024/10/28 11:38
+ * @date 2024/11/6 16:38
  * @description
  */
-public class LightningSpyglassItem extends SpyglassItem {
-
+public class NirvanaSpyglassItem extends SpyglassItem {
     private boolean openLightning = false;
     private int level = 1;
     public static final int LEVEL_MAX = 15;
-    public LightningSpyglassItem(Settings settings) {
+    public NirvanaSpyglassItem(Settings settings) {
         super(settings);
         openLightning = false;
     }
 
-    public void lookLightning(PlayerEntity player,int level){
+    public void lookLightning(PlayerEntity player, int level){
         if(!openLightning) return;
         BlockHitResult hitResult = (BlockHitResult) player.raycast(300.0D, 0.0F, true);
         BlockPos blockPos = hitResult.getBlockPos();
