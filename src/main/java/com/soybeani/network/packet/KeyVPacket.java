@@ -52,14 +52,14 @@ public class KeyVPacket implements CustomPayload {
                 player.sendMessage(Text.of("范围:"+ spyglassItem.getLevel()),true);
             }
         }
-        if(player.getMainHandStack().getItem() == ItemsRegister.NIRVANA_SPYGLASS){ //大雷之镜
+        if(player.getMainHandStack().getItem() == ItemsRegister.NIRVANA_SPYGLASS){ //寂灭之镜
             NirvanaSpyglassItem spyglassItem =(NirvanaSpyglassItem) player.getMainHandStack().getItem();
             if(spyglassItem.getOpenLightning()){
-                spyglassItem.setLevel(spyglassItem.getLevel()+1);
-                if(spyglassItem.getLevel() > LightningSpyglassItem.LEVEL_MAX){
-                    spyglassItem.setLevel(1);
+                spyglassItem.setSpyglassMode(spyglassItem.getSpyglassMode()+1);
+                if(spyglassItem.getSpyglassMode() > NirvanaSpyglassItem.LEVEL_MAX){
+                    spyglassItem.setSpyglassMode(1);
                 }
-                player.sendMessage(Text.of("范围:"+ spyglassItem.getLevel()),true);
+                player.sendMessage(Text.of("当前模式:"+ NirvanaSpyglassItem.getModeName(spyglassItem.getSpyglassMode())),true);
             }
         }
     }

@@ -1,12 +1,10 @@
 package com.soybeani.event.entity;
 
 
-import com.soybeani.config.InitValue;
 import com.soybeani.items.ItemsRegister;
 import com.soybeani.items.item.LightningSpyglassItem;
 import com.soybeani.items.item.NirvanaSpyglassItem;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 
@@ -30,7 +28,7 @@ public class EventTick {
                 //寂灭之镜
                 if(serverPlayer.isUsingSpyglass() && serverPlayer.getMainHandStack().getItem() == ItemsRegister.NIRVANA_SPYGLASS){
                     NirvanaSpyglassItem spyglassItem =(NirvanaSpyglassItem) serverPlayer.getMainHandStack().getItem();
-                    spyglassItem.lookLightning((PlayerEntity) serverPlayer,spyglassItem.getLevel());
+                    spyglassItem.lookLightning((PlayerEntity) serverPlayer,spyglassItem.getSpyglassMode());
                 }
             }
         });
