@@ -71,7 +71,7 @@ public record KeyRPacket() implements CustomPayload{
         if(player.getMainHandStack().getItem() == ItemsRegister.NIRVANA_SPYGLASS){
             NirvanaSpyglassItem spyglassItem =(NirvanaSpyglassItem) player.getMainHandStack().getItem();
             spyglassItem.setOpenLightning(!spyglassItem.getOpenLightning());
-            player.sendMessage(Text.of("寂灭模式:"+ (spyglassItem.getOpenLightning() ? "开启" : "关闭")),true);
+            player.sendMessage(Text.of("大雷模式:"+ (spyglassItem.getOpenLightning() ? "开启" : "关闭")),true);
         }
     }
 
