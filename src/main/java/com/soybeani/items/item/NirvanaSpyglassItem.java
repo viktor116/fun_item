@@ -159,7 +159,7 @@ public class NirvanaSpyglassItem extends SpyglassItem {
                 return "普通模式";
             }
             case LINEAR_MODE -> {
-                return "排行模型";
+                return "排行模式";
             }
             case STRAIGHT_MODE -> {
                 return "路径模式";
