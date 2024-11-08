@@ -7,14 +7,14 @@
   ],
   "key": {
     "#": {
-      "item": "fun_item:purple_lightning"
+      "item": "minecraft:amethyst_block"
     },
     "/": {
-      "item": "minecraft:spyglass"
+      "item": "fun_item:lightning"
     }
   },
   "result": {
-    "id": "fun_item:nirvana_spyglass",
+    "id": "fun_item:purple_lightning",
     "count": 1
   }
 }

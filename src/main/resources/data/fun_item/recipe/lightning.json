@@ -7,14 +7,14 @@
   ],
   "key": {
     "#": {
-      "item": "fun_item:purple_lightning"
+      "item": "minecraft:iron_block"
     },
     "/": {
-      "item": "minecraft:spyglass"
+      "item": "minecraft:lightning_rod"
     }
   },
   "result": {
-    "id": "fun_item:nirvana_spyglass",
+    "id": "fun_item:lightning",
     "count": 1
   }
 }

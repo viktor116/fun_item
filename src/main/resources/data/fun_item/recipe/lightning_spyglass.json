@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:diamond"
+      "item": "fun_item:lightning"
     },
     "/": {
       "item": "minecraft:spyglass"

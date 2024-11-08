@@ -38,14 +38,10 @@ public class ItemsRegister {
     public static final Item FLY_BOAT = register(new FlyBoatItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)), "fly_boat");
     public static final Item LIGHTNING_SPYGLASS = register(new LightningSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)),"lightning_spyglass");
     public static final Item NIRVANA_SPYGLASS = register(new NirvanaSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)),"nirvana_spyglass");
-    public static final Item PURPLE_LIGHTNING = Registry.register(
-            Registries.ITEM,
-            Identifier.of(InitValue.MOD_ID, "purple_lightning"),
-            new Item(new Item.Settings()
-                    .maxCount(64) // 可以堆叠
-                    .rarity(Rarity.RARE)) // 设置为稀有物品
-    );
-       //    public static final ModelIdentifier LIGHTNING_SPYGLASS_IN_HAND = ModelIdentifier.ofInventoryVariant(Identifier.of(InitValue.MOD_ID, "lightning_spyglass_in_hand"));
+    public static final Item PURPLE_LIGHTNING = register(new PurpleLightningItem(new Item.Settings().maxCount(16).rarity(Rarity.RARE)),"purple_lightning");
+    public static final Item LIGHTNING =  register(new LightningItem(new Item.Settings().maxCount(16)),"lightning");
+
+    //    public static final ModelIdentifier LIGHTNING_SPYGLASS_IN_HAND = ModelIdentifier.ofInventoryVariant(Identifier.of(InitValue.MOD_ID, "lightning_spyglass_in_hand"));
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
@@ -63,6 +59,7 @@ public class ItemsRegister {
             itemGroup.add(FLY_BOAT);
             itemGroup.add(LIGHTNING_SPYGLASS);
             itemGroup.add(NIRVANA_SPYGLASS);
+            itemGroup.add(LIGHTNING);
             itemGroup.add(PURPLE_LIGHTNING);
         });
     }

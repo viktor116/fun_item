@@ -63,18 +63,25 @@ public abstract class ItemRendererMixin {
                 }
             }
         }
-        if (Registries.ITEM.getId(stack.getItem()).equals(Identifier.of(InitValue.MOD_ID, "purple_lightning"))) {
-            ci.cancel();
-            // 渲染生物模型
-            PurpleLightningEntity lightningEntity = new PurpleLightningEntity(PurpleLightningEntity.PURPLE_LIGHTNING, MinecraftClient.getInstance().world);
-            matrices.push();
+        if ((stack.isOf(ItemsRegister.PURPLE_LIGHTNING) || stack.isOf(ItemsRegister.LIGHTNING))) {
+            if(renderMode != ModelTransformationMode.GUI){
+                ci.cancel();
+                // 渲染生物模型
+                LightningEntity lightningEntity;
+                if(stack.isOf(ItemsRegister.PURPLE_LIGHTNING)) {
+                    lightningEntity = new PurpleLightningEntity(PurpleLightningEntity.PURPLE_LIGHTNING, MinecraftClient.getInstance().world);
+                }else{
+                    lightningEntity = new LightningEntity(EntityType.LIGHTNING_BOLT, MinecraftClient.getInstance().world);
+                }
+
+                matrices.push();
 //            // 使用 org.joml.Quaternionf 进行旋转
 //            Quaternionf rotation = new Quaternionf().rotateY((float) Math.toRadians(180));
 //            matrices.multiply(rotation);
-
-            matrices.scale(0.5F, 0.5F, 0.5F);// 调整缩放比例
-            MinecraftClient.getInstance().getEntityRenderDispatcher().render(lightningEntity, 0, 0, 0, 0.0F, 1.0F, matrices, vertexConsumers, light);
-            matrices.pop();
+                matrices.scale(0.5F, 0.5F, 0.5F);
+                MinecraftClient.getInstance().getEntityRenderDispatcher().render(lightningEntity, 0, 0, 0, 0.0F, 1.0F, matrices, vertexConsumers, light);
+                matrices.pop();
+            }
         }
     }
 
@@ -94,15 +101,16 @@ public abstract class ItemRendererMixin {
 
     @ModifyVariable(method = "renderItem", at = @At(value = "HEAD"), argsOnly = true)
     public BakedModel useSpyglassModel(BakedModel value, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        if (renderMode != ModelTransformationMode.GUI &&
-                renderMode != ModelTransformationMode.GROUND &&
-                renderMode != ModelTransformationMode.FIXED) {
-            if (stack.isOf(ItemsRegister.LIGHTNING_SPYGLASS)) {
-                return models.getModelManager().getModel(EntityRegister.LIGHTNING_SPYGLASS_IN_HAND);
-            } else if (stack.isOf(ItemsRegister.NIRVANA_SPYGLASS)) {
-                return models.getModelManager().getModel(EntityRegister.NIRVANA_SPYGLASS_IN_HAND);
+        if (renderMode != ModelTransformationMode.GUI) {
+            if(renderMode != ModelTransformationMode.GROUND && renderMode != ModelTransformationMode.FIXED){ //望眼镜渲染2d以及3d
+                if (stack.isOf(ItemsRegister.LIGHTNING_SPYGLASS)) {
+                    return models.getModelManager().getModel(EntityRegister.LIGHTNING_SPYGLASS_IN_HAND);
+                } else if (stack.isOf(ItemsRegister.NIRVANA_SPYGLASS)) {
+                    return models.getModelManager().getModel(EntityRegister.NIRVANA_SPYGLASS_IN_HAND);
+                }
             }
         }
+
 
         return value;
     }
