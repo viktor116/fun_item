@@ -3,13 +3,11 @@ package com.soybeani.items;
 import com.soybeani.block.ModBlock;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.EntityRegister;
-import com.soybeani.entity.custom.PurpleLightningEntity;
 import com.soybeani.items.item.*;
 import com.soybeani.items.material.GrassMaterial;
 import com.soybeani.items.weapon.SwordItemOfGrass;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -17,6 +15,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+
 
 
 /**
@@ -61,6 +60,7 @@ public class ItemsRegister {
             itemGroup.add(NIRVANA_SPYGLASS);
             itemGroup.add(LIGHTNING);
             itemGroup.add(PURPLE_LIGHTNING);
+            itemGroup.add(ModBlock.SUPER_SLIME_BLOCK);
         });
     }
 
