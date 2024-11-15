@@ -13,12 +13,14 @@
   "item.fun_item.nirvana_spyglass": "寂灭之镜",
   "item.fun_item.purple_lightning": "紫雷",
   "item.fun_item.lightning":"雷电",
+  "item.fun_item.air_pickaxe": "",
 
   "itemTooltip.fun_item.ice_boat": "用冰块制成的船",
   "itemTooltip.fun_item.ice2_boat": "用冰块再次加固的船！",
   "itemTooltip.fun_item.fly_boat": "想要突破天空的船",
   "block.fun_item.air_ice_0": "空气冰",
   "block.fun_item.super_slime_block": "超级黏液块",
+  "block.fun_item.super_slime_block_max": "超超级黏液块",
 
   "key.fun_item.toggle": "物品交互",
   "key.fun_item.function": "物品功能",

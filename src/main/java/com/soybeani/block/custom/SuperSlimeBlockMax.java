@@ -13,8 +13,8 @@ import net.minecraft.world.World;
  * @date 2024/11/11 16:38
  * @description
  */
-public class SuperSlimeBlock extends SlimeBlock {
-    public SuperSlimeBlock(Settings settings) {
+public class SuperSlimeBlockMax extends SlimeBlock {
+    public SuperSlimeBlockMax(Settings settings) {
         super(settings);
 
     }
@@ -36,7 +36,7 @@ public class SuperSlimeBlock extends SlimeBlock {
     private void bounce(Entity entity) {
         Vec3d vec3d = entity.getVelocity();
         if (vec3d.y < 0.0) {
-            double d = 2.5;
+            double d = 100;
             entity.setVelocity(vec3d.x, -vec3d.y * d, vec3d.z);
         }
     }

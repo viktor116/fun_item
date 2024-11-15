@@ -4,6 +4,7 @@ import com.soybeani.block.ModBlock;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.EntityRegister;
 import com.soybeani.items.item.*;
+import com.soybeani.items.material.AirMaterial;
 import com.soybeani.items.material.GrassMaterial;
 import com.soybeani.items.weapon.SwordItemOfGrass;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -39,17 +40,16 @@ public class ItemsRegister {
     public static final Item NIRVANA_SPYGLASS = register(new NirvanaSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)),"nirvana_spyglass");
     public static final Item PURPLE_LIGHTNING = register(new PurpleLightningItem(new Item.Settings().maxCount(16).rarity(Rarity.RARE)),"purple_lightning");
     public static final Item LIGHTNING =  register(new LightningItem(new Item.Settings().maxCount(16)),"lightning");
-
-    //    public static final ModelIdentifier LIGHTNING_SPYGLASS_IN_HAND = ModelIdentifier.ofInventoryVariant(Identifier.of(InitValue.MOD_ID, "lightning_spyglass_in_hand"));
+    public static final Item AIR_PICKAXE = register(new UnbreakablePickaxeItem(AirMaterial.INSTANCE,new Item.Settings().attributeModifiers(PickaxeItem.createAttributeModifiers(AirMaterial.INSTANCE, 9999.0F, 9999F)).maxCount(1).maxDamage(-1)),"air_pickaxe");
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
         ItemGroupEvents.modifyEntriesEvent(FUN_ITEM_GROUP_KEY).register(itemGroup->{ //有趣物品
             itemGroup.add(XIAOMI14);
             itemGroup.add(XIAOMI14BUTTON);
-            itemGroup.add(XIAOMI_SU7_EGG);
         });
         ItemGroupEvents.modifyEntriesEvent(COMMON_ITEM_GROUP_KEY).register(itemGroup->{ //普通物品
+            itemGroup.add(AIR_PICKAXE);
             itemGroup.add(GRASS_SWORD);
             itemGroup.add(GRASS_SWORD2);
             itemGroup.add(WHEAT_SWORD);
@@ -61,6 +61,7 @@ public class ItemsRegister {
             itemGroup.add(LIGHTNING);
             itemGroup.add(PURPLE_LIGHTNING);
             itemGroup.add(ModBlock.SUPER_SLIME_BLOCK);
+            itemGroup.add(ModBlock.SUPER_SLIME_BLOCK_MAX);
         });
     }
 

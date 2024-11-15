@@ -1,0 +1,40 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "fun_item:block/super_slime_block_max",
+    "down": "fun_item:block/super_slime_block_max",
+    "up": "fun_item:block/super_slime_block_max",
+    "north": "fun_item:block/super_slime_block_max",
+    "east": "fun_item:block/super_slime_block_max",
+    "south": "fun_item:block/super_slime_block_max",
+    "west": "fun_item:block/super_slime_block_max"
+  },
+  "elements": [
+    {
+      "name": "outer",
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "down":  {"texture": "#down", "cullface": "down"},
+        "up":    {"texture": "#up", "cullface": "up"},
+        "north": {"texture": "#north", "cullface": "north"},
+        "south": {"texture": "#south", "cullface": "south"},
+        "west":  {"texture": "#west", "cullface": "west"},
+        "east":  {"texture": "#east", "cullface": "east"}
+      }
+    },
+    {
+      "name": "inner",
+      "from": [3, 3, 3],
+      "to": [13, 13, 13],
+      "faces": {
+        "down":  {"texture": "#down"},
+        "up":    {"texture": "#up"},
+        "north": {"texture": "#north"},
+        "south": {"texture": "#south"},
+        "west":  {"texture": "#west"},
+        "east":  {"texture": "#east"}
+      }
+    }
+  ]
+}

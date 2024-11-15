@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:slime_block"
+    }
+  },
+  "result": {
+    "id": "fun_item:super_slime_block",
+    "count": 1
+  }
+}
