@@ -5,13 +5,13 @@
 	"mixins": [
 		"ExampleMixin",
 		"PlayerEntityMixin",
-		"EntityMixin",
-		"HeldItemRendererMixin"
+		"EntityMixin"
 	],
 	"client": [
 		"ItemRendererMixin",
 		"InGameHudMixin",
-		"ModLoaderMixin"
+		"ModLoaderMixin",
+		"HeldItemRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

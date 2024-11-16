@@ -3,6 +3,8 @@ package com.soybeani.hud.custom;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.soybeani.hud.HudRegister;
 import com.soybeani.items.ItemsRegister;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.*;
@@ -16,6 +18,7 @@ import net.minecraft.util.math.MathHelper;
  * @date 2024/11/5 13:53
  * @description
  */
+@Environment(EnvType.CLIENT)
 public class SpyglassHudOverlay {
 
     public static void renderSpyglassOverlay(DrawContext context, float scale, Identifier spyglassId) {

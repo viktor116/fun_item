@@ -3,6 +3,8 @@ package com.soybeani.entity.client.renderer;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.client.model.Su7CarModel;
 import com.soybeani.entity.vehicle.Su7CarEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
@@ -13,6 +15,7 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
  * @date 2024/10/19 12:10
  * @description
  */
+@Environment(EnvType.CLIENT)
 public class Su7CarRenderer extends GeoEntityRenderer<Su7CarEntity> {
 
     public Su7CarRenderer(net.minecraft.client.render.entity.EntityRendererFactory.Context renderManager) {

@@ -2,6 +2,7 @@ package com.soybeani.mixin;
 
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.EntityRegister;
+import com.soybeani.entity.EntityRegisterClient;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.render.model.BlockStatesLoader;
 import net.minecraft.client.render.model.ModelLoader;
@@ -32,7 +33,7 @@ public abstract class ModLoaderMixin {
 
     @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/model/ModelLoader;loadItemModel(Lnet/minecraft/client/util/ModelIdentifier;)V", ordinal = 1, shift = At.Shift.AFTER))
     public void addSpyglass(BlockColors blockColors, Profiler profiler, Map<Identifier, JsonUnbakedModel> jsonUnbakedModels, Map<Identifier, List<BlockStatesLoader.SourceTrackedData>> blockStates, CallbackInfo ci){
-        this.loadItemModel(EntityRegister.LIGHTNING_SPYGLASS_IN_HAND);
-        this.loadItemModel(EntityRegister.NIRVANA_SPYGLASS_IN_HAND);
+        this.loadItemModel(EntityRegisterClient.LIGHTNING_SPYGLASS_IN_HAND);
+        this.loadItemModel(EntityRegisterClient.NIRVANA_SPYGLASS_IN_HAND);
     }
 }

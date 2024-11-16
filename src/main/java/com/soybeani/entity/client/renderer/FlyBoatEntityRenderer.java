@@ -5,6 +5,8 @@ import com.mojang.datafixers.util.Pair;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.client.model.FlyBoatEntityModel;
 import com.soybeani.entity.vehicle.FlyBoatEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -30,6 +32,7 @@ import java.util.stream.Stream;
  * @date 2024/10/19 12:10
  * @description
  */
+@Environment(EnvType.CLIENT)
 public class FlyBoatEntityRenderer extends GeoEntityRenderer<FlyBoatEntity> {
 
     private static final FlyBoatEntityModel flyBoatEntityModel = new FlyBoatEntityModel();

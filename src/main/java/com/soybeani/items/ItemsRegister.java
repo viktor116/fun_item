@@ -32,7 +32,6 @@ public class ItemsRegister {
     public static final Item WHEAT_SWORD = register(new SwordItemOfGrass(new GrassMaterial(20,Items.WHEAT),new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(GrassMaterial.INSTANCE, 4, -2.6F))), "wheat_sword");
     public static final Item XIAOMI14 = register(new PhoneItem(new Item.Settings()), "xiaomi14");
     public static final Item XIAOMI14BUTTON = register(new ButtonItem(new Item.Settings()), "xiaomi14button");
-    public static final Item XIAOMI_SU7_EGG = register(new SpawnEggItem(EntityRegister.SU7, 0x576A3C, 0x0000FF, new Item.Settings()), "su7_spawn_egg");
     public static final Item ICE_BOAT = register(new IceBoatItem(new Item.Settings().maxCount(1)), "ice_boat");
     public static final Item ICE2_BOAT = register(new Ice2BoatItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)), "ice2_boat");
     public static final Item FLY_BOAT = register(new FlyBoatItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)), "fly_boat");
@@ -60,8 +59,8 @@ public class ItemsRegister {
             itemGroup.add(NIRVANA_SPYGLASS);
             itemGroup.add(LIGHTNING);
             itemGroup.add(PURPLE_LIGHTNING);
-            itemGroup.add(ModBlock.SUPER_SLIME_BLOCK);
-            itemGroup.add(ModBlock.SUPER_SLIME_BLOCK_MAX);
+            itemGroup.add(ModBlock.SUPER_SLIME_BLOCK.asItem());
+            itemGroup.add(ModBlock.SUPER_SLIME_BLOCK_MAX.asItem());
         });
     }
 

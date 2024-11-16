@@ -2,7 +2,11 @@ package com.soybeani.entity.vehicle;
 
 import com.soybeani.block.ModBlock;
 import com.soybeani.config.InitValue;
+import com.soybeani.entity.EntityRegister;
+import com.soybeani.entity.EntityRegisterClient;
 import com.soybeani.items.ItemsRegister;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -50,14 +54,7 @@ public class Ice2BoatEntity extends BoatEntity implements GeoEntity,BoatAbility 
 
     private boolean fly = false;
     private boolean freeze = false;
-    public static final EntityType<Ice2BoatEntity> ICE2_BOAT = Registry.register(
-            Registries.ENTITY_TYPE,
-            Identifier.of(InitValue.MOD_ID, "ice2_boat"),
-            FabricEntityTypeBuilder.<Ice2BoatEntity>create(SpawnGroup.MISC, Ice2BoatEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.375F, 0.5625F))
-                    .trackRangeBlocks(10)
-                    .build()
-    );
+
 
     public Ice2BoatEntity(EntityType<? extends BoatEntity> entityType, World world) {
         super(entityType, world);
@@ -65,7 +62,7 @@ public class Ice2BoatEntity extends BoatEntity implements GeoEntity,BoatAbility 
     }
 
     public Ice2BoatEntity(World world, double x, double y, double z) {
-        this(ICE2_BOAT, world);
+        this(EntityRegister.ICE2_BOAT, world);
         this.setPosition(x, y, z);
         this.prevX = x;
         this.prevY = y;
@@ -125,6 +122,8 @@ public class Ice2BoatEntity extends BoatEntity implements GeoEntity,BoatAbility 
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
     }
+
+    @Environment(EnvType.CLIENT)
     private PlayState predicate(AnimationState<GeoAnimatable> animationState) {
         if (!this.getWorld().isClient()) {
             animationState.getController().setAnimation(RawAnimation.begin()

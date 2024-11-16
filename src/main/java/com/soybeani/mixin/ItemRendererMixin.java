@@ -2,6 +2,7 @@ package com.soybeani.mixin;
 
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.EntityRegister;
+import com.soybeani.entity.EntityRegisterClient;
 import com.soybeani.entity.custom.PurpleLightningEntity;
 import com.soybeani.items.ItemsRegister;
 import net.minecraft.client.MinecraftClient;
@@ -104,9 +105,9 @@ public abstract class ItemRendererMixin {
         if (renderMode != ModelTransformationMode.GUI) {
             if(renderMode != ModelTransformationMode.GROUND && renderMode != ModelTransformationMode.FIXED){ //望眼镜渲染2d以及3d
                 if (stack.isOf(ItemsRegister.LIGHTNING_SPYGLASS)) {
-                    return models.getModelManager().getModel(EntityRegister.LIGHTNING_SPYGLASS_IN_HAND);
+                    return models.getModelManager().getModel(EntityRegisterClient.LIGHTNING_SPYGLASS_IN_HAND);
                 } else if (stack.isOf(ItemsRegister.NIRVANA_SPYGLASS)) {
-                    return models.getModelManager().getModel(EntityRegister.NIRVANA_SPYGLASS_IN_HAND);
+                    return models.getModelManager().getModel(EntityRegisterClient.NIRVANA_SPYGLASS_IN_HAND);
                 }
             }
         }

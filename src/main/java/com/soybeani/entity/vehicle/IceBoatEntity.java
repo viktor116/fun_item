@@ -1,6 +1,8 @@
 package com.soybeani.entity.vehicle;
 
 import com.soybeani.config.InitValue;
+import com.soybeani.entity.EntityRegister;
+import com.soybeani.entity.EntityRegisterClient;
 import com.soybeani.items.ItemsRegister;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.BlockState;
@@ -25,21 +27,13 @@ import java.util.Iterator;
  */
 // CustomBoatEntity.java
 public class IceBoatEntity extends BoatEntity {
-    public static final EntityType<IceBoatEntity> ICE_BOAT = Registry.register(
-            Registries.ENTITY_TYPE,
-            Identifier.of(InitValue.MOD_ID, "ice_boat"),
-            FabricEntityTypeBuilder.<IceBoatEntity>create(SpawnGroup.MISC, IceBoatEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.375F, 0.5625F))
-                    .trackRangeBlocks(10)
-                    .build()
-    );
 
     public IceBoatEntity(EntityType<? extends BoatEntity> entityType, World world) {
         super(entityType, world);
     }
 
     public IceBoatEntity(World world, double x, double y, double z) {
-        this(ICE_BOAT, world);
+        this(EntityRegister.ICE_BOAT, world);
         this.setPosition(x, y, z);
         this.prevX = x;
         this.prevY = y;

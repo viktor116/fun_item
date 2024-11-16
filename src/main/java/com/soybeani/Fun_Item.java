@@ -14,12 +14,13 @@ public class Fun_Item implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		EventRegister.initialize(); //事件初始化
-		ModBlock.initialize(); //方块初始化
 		ItemsRegister.initialize(); //注册物品
+		ModBlock.initialize(); //方块初始化
+		EventRegister.initialize(); //事件初始化
 		EntityRegister.initialize(); //注册实体
 		SoundRegister.initialize(); //声音注册
-		ModMessage.registerS2CPackets(); //network
+
+		ModMessage.registerS2CPackets();  // 注册S2C包
 		HudRegister.Initialize();
 		InitValue.LOGGER.info("soybeani fun items start successful q(≧▽≦q)!");
 	}

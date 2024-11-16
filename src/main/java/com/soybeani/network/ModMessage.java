@@ -8,9 +8,10 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 
 /**
  * @author soybean
- * @date 2024/10/22 16:16
+ * @date 2024/11/16 13:43
  * @description
  */
+
 public class ModMessage {
     public static void registerC2SPackets(){
         PayloadTypeRegistry.playC2S().register(KeyRPacket.ID, KeyRPacket.CODEC);

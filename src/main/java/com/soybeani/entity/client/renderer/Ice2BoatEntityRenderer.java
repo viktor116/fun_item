@@ -5,6 +5,8 @@ import com.mojang.datafixers.util.Pair;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.client.model.Ice2BoatEntityModel;
 import com.soybeani.entity.vehicle.Ice2BoatEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -37,6 +39,7 @@ import java.util.stream.Stream;
  * @date 2024/10/19 12:10
  * @description
  */
+@Environment(EnvType.CLIENT)
 public class Ice2BoatEntityRenderer extends GeoEntityRenderer<Ice2BoatEntity> {
     private static final Identifier CUSTOM_BOAT_TEXTURE = Identifier.of(InitValue.MOD_ID +":textures/entity/boat/ice2_boat.png");
     private static final Ice2BoatEntityModel ice2BoatEntityModel = new Ice2BoatEntityModel();

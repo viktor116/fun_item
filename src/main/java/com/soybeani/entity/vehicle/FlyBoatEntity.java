@@ -1,7 +1,11 @@
 package com.soybeani.entity.vehicle;
 
 import com.soybeani.config.InitValue;
+import com.soybeani.entity.EntityRegister;
+import com.soybeani.entity.EntityRegisterClient;
 import com.soybeani.items.ItemsRegister;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
@@ -28,21 +32,13 @@ public class FlyBoatEntity extends BoatEntity implements GeoEntity {
     private static final Integer CONSTANT_FLY = 2;
     private Integer fly = 0;
     private boolean accelerate = false;
-    public static final EntityType<FlyBoatEntity> FLY_BOAT = Registry.register(
-            Registries.ENTITY_TYPE,
-            Identifier.of(InitValue.MOD_ID, "fly_boat"),
-            FabricEntityTypeBuilder.<FlyBoatEntity>create(SpawnGroup.MISC, FlyBoatEntity::new)
-                    .dimensions(EntityDimensions.fixed(1.375F, 0.5625F))
-                    .trackRangeBlocks(10)
-                    .build()
-    );
 
     public FlyBoatEntity(EntityType<? extends BoatEntity> entityType, World world) {
         super(entityType, world);
     }
 
     public FlyBoatEntity(World world, double x, double y, double z) {
-        this(FLY_BOAT, world);
+        this(EntityRegister.FLY_BOAT, world);
         this.setPosition(x, y, z);
         this.prevX = x;
         this.prevY = y;
@@ -91,6 +87,7 @@ public class FlyBoatEntity extends BoatEntity implements GeoEntity {
         return cache;
     }
 
+    @Environment(EnvType.CLIENT)
     private PlayState predicate(AnimationState<GeoAnimatable> animationState) {
         if (!this.getWorld().isClient()) {
             animationState.getController().setAnimation(RawAnimation.begin()
