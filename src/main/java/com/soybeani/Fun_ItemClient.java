@@ -12,7 +12,7 @@ public class Fun_ItemClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		KeyBindsInputHandler.register(); //register keyBinds
 		ModBlock.initializeClient(); //client init
-		ModMessage.registerC2SPackets();  // 注册服务端接收器
+		ModMessage.registerS2CPackets();  // 注册服务端接收器
 		EntityRegisterClient.initializeClient();
 		HudRegister.Initialize();
 	}

@@ -15,17 +15,17 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 public class ModMessage {
     public static void registerC2SPackets(){
         PayloadTypeRegistry.playC2S().register(KeyRPacket.ID, KeyRPacket.CODEC);
-        ServerPlayNetworking.registerGlobalReceiver(KeyRPacket.ID, KeyRPacket::receive);
-
         PayloadTypeRegistry.playC2S().register(KeyVPacket.ID, KeyVPacket.CODEC);
+
+        ServerPlayNetworking.registerGlobalReceiver(KeyRPacket.ID, KeyRPacket::receive);
         ServerPlayNetworking.registerGlobalReceiver(KeyVPacket.ID, KeyVPacket::receive);
     }
 
     public static void registerS2CPackets(){
         PayloadTypeRegistry.playS2C().register(KeyRPacket.ID, KeyRPacket.CODEC);
-        ClientPlayNetworking.registerGlobalReceiver(KeyRPacket.ID, KeyRPacket::receiveOfClient);
-
         PayloadTypeRegistry.playS2C().register(KeyVPacket.ID, KeyVPacket.CODEC);
+
+        ClientPlayNetworking.registerGlobalReceiver(KeyRPacket.ID, KeyRPacket::receiveOfClient);
         ClientPlayNetworking.registerGlobalReceiver(KeyVPacket.ID, KeyVPacket::receiveOfClient);
     }
 }

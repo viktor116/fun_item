@@ -20,7 +20,7 @@ public class Fun_Item implements ModInitializer {
 		EntityRegister.initialize(); //注册实体
 		SoundRegister.initialize(); //声音注册
 
-		ModMessage.registerS2CPackets();  // 注册S2C包
+		ModMessage.registerC2SPackets();
 		HudRegister.Initialize();
 		InitValue.LOGGER.info("soybeani fun items start successful q(≧▽≦q)!");
 	}
