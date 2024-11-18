@@ -35,5 +35,6 @@ public class ModItemTagProvider extends FabricTagProvider<Item> {
                 .add(ItemsRegister.FLY_BOAT);
         getOrCreateTagBuilder(ItemTags.PICKAXES)
                 .add(ItemsRegister.AIR_PICKAXE);
+
     }
 }

@@ -2,13 +2,14 @@ package com.soybeani.items;
 
 import com.soybeani.block.ModBlock;
 import com.soybeani.config.InitValue;
-import com.soybeani.entity.EntityRegister;
+import com.soybeani.items.food.FoodRegister;
 import com.soybeani.items.item.*;
 import com.soybeani.items.material.AirMaterial;
 import com.soybeani.items.material.GrassMaterial;
 import com.soybeani.items.weapon.SwordItemOfGrass;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -40,6 +41,11 @@ public class ItemsRegister {
     public static final Item PURPLE_LIGHTNING = register(new PurpleLightningItem(new Item.Settings().maxCount(16).rarity(Rarity.RARE)),"purple_lightning");
     public static final Item LIGHTNING =  register(new LightningItem(new Item.Settings().maxCount(16)),"lightning");
     public static final Item AIR_PICKAXE = register(new UnbreakablePickaxeItem(AirMaterial.INSTANCE,new Item.Settings().attributeModifiers(PickaxeItem.createAttributeModifiers(AirMaterial.INSTANCE, 9999.0F, 9999F)).maxCount(1).maxDamage(-1)),"air_pickaxe");
+    public static final Item EMERALD_APPLE = register(new Item(new Item.Settings().rarity(Rarity.EPIC).food(FoodRegister.EMERALD_APPLE).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)),"emerald_apple");
+    public static final Item LAPIS_APPLE = register(new Item(new Item.Settings().rarity(Rarity.EPIC).food(FoodRegister.LAPIS_APPLE).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)),"lapis_apple");
+    public static final Item REDSTONE_APPLE = register(new Item(new Item.Settings().rarity(Rarity.EPIC).food(FoodRegister.REDSTONE_APPLE).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)),"redstone_apple");
+    public static final Item DETECT_STAFF = register(new Item(new Item.Settings()),"detect_staff");
+    public static final Item GOLDEN_DETECT_STAFF = register(new Item(new Item.Settings()),"golden_detect_staff");
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
@@ -61,6 +67,11 @@ public class ItemsRegister {
             itemGroup.add(PURPLE_LIGHTNING);
             itemGroup.add(ModBlock.SUPER_SLIME_BLOCK.asItem());
             itemGroup.add(ModBlock.SUPER_SLIME_BLOCK_MAX.asItem());
+            itemGroup.add(EMERALD_APPLE);
+            itemGroup.add(LAPIS_APPLE);
+            itemGroup.add(REDSTONE_APPLE);
+            itemGroup.add(DETECT_STAFF);
+            itemGroup.add(GOLDEN_DETECT_STAFF);
         });
     }
 
@@ -69,12 +80,12 @@ public class ItemsRegister {
     public static final RegistryKey<ItemGroup> COMMON_ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(InitValue.MOD_ID, "common_item_group"));
     public static final ItemGroup ABSTRACT_CUSTOM_ITEM_GROUP = FabricItemGroup.builder()
             .icon(() -> new ItemStack(ItemsRegister.XIAOMI14BUTTON))
-            .displayName(Text.translatable("itemGroup.fun_item"))
+            .displayName(Text.translatable("itemGroup."+InitValue.MOD_ID))
             .build();
 
     public static final ItemGroup COMMON_CUSTOM_ITEM_GROUP = FabricItemGroup.builder()
             .icon(() -> new ItemStack(ItemsRegister.WHEAT_SWORD))
-            .displayName(Text.translatable("itemGroup.fun_item.common"))
+            .displayName(Text.translatable("itemGroup."+InitValue.MOD_ID+".common"))
             .build();
 
 

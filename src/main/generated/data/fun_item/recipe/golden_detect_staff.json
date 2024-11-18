@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "E": {
+      "item": "minecraft:gold_ingot"
+    },
+    "S": {
+      "item": "fun_item:detect_staff"
+    }
+  },
+  "pattern": [
+    "EEE",
+    "ESE",
+    "EEE"
+  ],
+  "result": {
+    "count": 1,
+    "id": "fun_item:golden_detect_staff"
+  }
+}

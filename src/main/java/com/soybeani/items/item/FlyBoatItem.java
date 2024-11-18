@@ -1,5 +1,6 @@
 package com.soybeani.items.item;
 
+import com.soybeani.config.InitValue;
 import com.soybeani.entity.vehicle.FlyBoatEntity;
 import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import net.minecraft.entity.Entity;
@@ -83,8 +84,10 @@ public class FlyBoatItem extends Item {
         return TypedActionResult.pass(itemStack);
     }
 
+    public static final Text FLY_BOAT_TOOLTIP = Text.translatable("itemTooltip."+ InitValue.MOD_ID +".fly_boat").formatted(Formatting.WHITE);
+
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        tooltip.add(Text.translatable("itemTooltip.fun_item.fly_boat").formatted(Formatting.WHITE));
+        tooltip.add(FLY_BOAT_TOOLTIP);
     }
 }

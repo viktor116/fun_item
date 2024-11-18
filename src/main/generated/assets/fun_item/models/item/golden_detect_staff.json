@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "fun_item:item/golden_detect_staff"
+  }
+}
