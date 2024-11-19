@@ -10,9 +10,9 @@ import net.minecraft.entity.effect.StatusEffects;
  * @date 2024/11/18 10:37
  * @description
  */
-public class FoodRegister {
-    public static final FoodComponent EMERALD_APPLE = new FoodComponent.Builder().nutrition(4).saturationModifier(1.2f).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 400, 1), 1.0f).statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 6000, 0), 1.0f).statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 6000, 0), 1.0f).statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 2400, 3), 1.0f).alwaysEdible().build();
-    public static final FoodComponent LAPIS_APPLE = new FoodComponent.Builder().nutrition(4).saturationModifier(1.2f).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 400, 1), 1.0f).statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 6000, 0), 1.0f).statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 6000, 0), 1.0f).statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 2400, 3), 1.0f).alwaysEdible().build();
-    public static final FoodComponent REDSTONE_APPLE = new FoodComponent.Builder().nutrition(4).saturationModifier(1.2f).statusEffect(new StatusEffectInstance(ItemsRegister.effectGetEntry(ItemsRegister.RED_STONE_EFFECT), 400, 1), 1.0f).alwaysEdible().build();
+public class  FoodRegister {
+    public static final FoodComponent EMERALD_APPLE = new FoodComponent.Builder().nutrition(4).saturationModifier(1.2f).statusEffect(new StatusEffectInstance(ItemsRegister.EMERLD_EFFECT_ENTRY, 1200, 1), 1.0f).alwaysEdible().build();
+    public static final FoodComponent LAPIS_APPLE = new FoodComponent.Builder().nutrition(4).saturationModifier(1.2f).statusEffect(new StatusEffectInstance(ItemsRegister.LAPIS_EFFECT_ENTRY, 1200, 1), 1.0f).alwaysEdible().build();
+    public static final FoodComponent REDSTONE_APPLE = new FoodComponent.Builder().nutrition(4).saturationModifier(1.2f).statusEffect(new StatusEffectInstance(ItemsRegister.RED_STONE_EFFECT_ENTRY, 1200, 1), 1.0f).statusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 72000, 1),1.0f).alwaysEdible().build();
 
 }

@@ -2,6 +2,8 @@ package com.soybeani.items;
 
 import com.soybeani.block.ModBlock;
 import com.soybeani.config.InitValue;
+import com.soybeani.items.effect.EmeraldStatusEffect;
+import com.soybeani.items.effect.LapisStatusEffect;
 import com.soybeani.items.effect.RedStoneStatusEffect;
 import com.soybeani.items.food.FoodRegister;
 import com.soybeani.items.item.*;
@@ -16,6 +18,7 @@ import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -29,8 +32,15 @@ import net.minecraft.util.Rarity;
  * @description
  */
 public class ItemsRegister {
-
-//    public static final Item GLASS_SWORD = register(new Item(new Item.Settings()), "grass_sword");
+    public static final RegistryKey<StatusEffect> EMERALD_EFFECT_KEY = register("emerald_effect");
+    public static final RegistryKey<StatusEffect> LAPIS_EFFECT_KEY = register("lapis_effect");
+    public static final RegistryKey<StatusEffect> RED_STONE_EFFECT_KEY = register("redstone_effect");
+    public static final StatusEffect EMERALD_EFFECT = register(new EmeraldStatusEffect(),EMERALD_EFFECT_KEY);
+    public static final StatusEffect LAPIS_EFFECT = register(new LapisStatusEffect(),LAPIS_EFFECT_KEY);
+    public static final StatusEffect RED_STONE_EFFECT = register(new RedStoneStatusEffect(),RED_STONE_EFFECT_KEY);
+    public static final RegistryEntry<StatusEffect> EMERLD_EFFECT_ENTRY = Registries.STATUS_EFFECT.getEntry(EMERALD_EFFECT_KEY).orElseThrow(() -> new IllegalStateException("Red Stone Effect not registered"));
+    public static final RegistryEntry<StatusEffect> LAPIS_EFFECT_ENTRY = Registries.STATUS_EFFECT.getEntry(LAPIS_EFFECT_KEY).orElseThrow(() -> new IllegalStateException("Red Stone Effect not registered"));
+    public static final RegistryEntry<StatusEffect> RED_STONE_EFFECT_ENTRY = Registries.STATUS_EFFECT.getEntry(RED_STONE_EFFECT_KEY).orElseThrow(() -> new IllegalStateException("Red Stone Effect not registered"));
     public static final Item GRASS_SWORD = register(new SwordItemOfGrass(new GrassMaterial(5,null),new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(GrassMaterial.INSTANCE, 0, -3.0F))), "grass_sword");
     public static final Item GRASS_SWORD2 = register(new SwordItemOfGrass(GrassMaterial.INSTANCE,new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(GrassMaterial.INSTANCE, 2, -2.4F))), "grass_sword2");
     public static final Item WHEAT_SWORD = register(new SwordItemOfGrass(new GrassMaterial(20,Items.WHEAT),new Item.Settings().attributeModifiers(SwordItem.createAttributeModifiers(GrassMaterial.INSTANCE, 4, -2.6F))), "wheat_sword");
@@ -49,7 +59,8 @@ public class ItemsRegister {
     public static final Item REDSTONE_APPLE = register(new Item(new Item.Settings().rarity(Rarity.EPIC).food(FoodRegister.REDSTONE_APPLE).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)),"redstone_apple");
     public static final Item DETECT_STAFF = register(new Item(new Item.Settings()),"detect_staff");
     public static final Item GOLDEN_DETECT_STAFF = register(new Item(new Item.Settings()),"golden_detect_staff");
-    public static final StatusEffect RED_STONE_EFFECT = register(new RedStoneStatusEffect(),"redstone_effect");
+
+
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
@@ -99,12 +110,16 @@ public class ItemsRegister {
         return Registry.register(Registries.ITEM, itemID, item);
     }
 
-    public static StatusEffect register(StatusEffect statusEffect,String id){
+    public static RegistryKey<StatusEffect> register(String id){
         Identifier statusID = Identifier.of(InitValue.MOD_ID, id);
-        return Registry.register(Registries.STATUS_EFFECT, statusID, statusEffect);
+        return RegistryKey.of(RegistryKeys.STATUS_EFFECT, statusID);
     }
 
+    public static StatusEffect register(StatusEffect statusEffect,RegistryKey<StatusEffect> key){
+        return Registry.register(Registries.STATUS_EFFECT, key.getValue(), statusEffect);
+    }
     public static RegistryEntry<StatusEffect> effectGetEntry(StatusEffect statusEffect){
+
         return RegistryEntry.of(statusEffect);
     }
 }
