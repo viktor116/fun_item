@@ -55,9 +55,11 @@ public class ModChineseLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ItemsRegister.REDSTONE_APPLE,"附魔红苹果");
         translationBuilder.add(ItemsRegister.DETECT_STAFF,"探测法杖");
         translationBuilder.add(ItemsRegister.GOLDEN_DETECT_STAFF,"金质探测法杖");
+        translationBuilder.add(ItemsRegister.RED_STONE_EFFECT,"附魔红苹果");
         translationBuilder.add(ModBlock.AIR_ICE,"空气冰");
         translationBuilder.add(ModBlock.SUPER_SLIME_BLOCK,"超级黏液块");
         translationBuilder.add(ModBlock.SUPER_SLIME_BLOCK_MAX,"超超级黏液块");
+
 
 
 

@@ -2,6 +2,7 @@ package com.soybeani.items;
 
 import com.soybeani.block.ModBlock;
 import com.soybeani.config.InitValue;
+import com.soybeani.items.effect.RedStoneStatusEffect;
 import com.soybeani.items.food.FoodRegister;
 import com.soybeani.items.item.*;
 import com.soybeani.items.material.AirMaterial;
@@ -10,10 +11,12 @@ import com.soybeani.items.weapon.SwordItemOfGrass;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
@@ -46,6 +49,7 @@ public class ItemsRegister {
     public static final Item REDSTONE_APPLE = register(new Item(new Item.Settings().rarity(Rarity.EPIC).food(FoodRegister.REDSTONE_APPLE).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)),"redstone_apple");
     public static final Item DETECT_STAFF = register(new Item(new Item.Settings()),"detect_staff");
     public static final Item GOLDEN_DETECT_STAFF = register(new Item(new Item.Settings()),"golden_detect_staff");
+    public static final StatusEffect RED_STONE_EFFECT = register(new RedStoneStatusEffect(),"redstone_effect");
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
@@ -93,5 +97,14 @@ public class ItemsRegister {
     public static Item register(Item item,String id){
         Identifier itemID = Identifier.of(InitValue.MOD_ID, id);
         return Registry.register(Registries.ITEM, itemID, item);
+    }
+
+    public static StatusEffect register(StatusEffect statusEffect,String id){
+        Identifier statusID = Identifier.of(InitValue.MOD_ID, id);
+        return Registry.register(Registries.STATUS_EFFECT, statusID, statusEffect);
+    }
+
+    public static RegistryEntry<StatusEffect> effectGetEntry(StatusEffect statusEffect){
+        return RegistryEntry.of(statusEffect);
     }
 }

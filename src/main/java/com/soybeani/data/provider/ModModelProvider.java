@@ -31,4 +31,5 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ItemsRegister.DETECT_STAFF,Models.HANDHELD);
         itemModelGenerator.register(ItemsRegister.GOLDEN_DETECT_STAFF,Models.HANDHELD);
     }
+
 }
