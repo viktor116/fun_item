@@ -33,7 +33,13 @@ public class RedStoneStatusEffect extends StatusEffect {
 
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-        BlockPos blockPos = entity.getBlockPos().down();
+        BlockPos blockPos;
+        if(entity.hasVehicle()){
+            blockPos = entity.getBlockPos();
+        }else{
+            blockPos = entity.getBlockPos().down();
+        }
+
         World world = entity.getWorld();
         BlockState blockState = Blocks.REDSTONE_WIRE.getDefaultState();
         if(world.getBlockState(blockPos.up()) == Blocks.AIR.getDefaultState() && world.getBlockState(blockPos) != Blocks.AIR.getDefaultState()) {

@@ -57,8 +57,8 @@ public class ItemsRegister {
     public static final Item EMERALD_APPLE = register(new Item(new Item.Settings().rarity(Rarity.EPIC).food(FoodRegister.EMERALD_APPLE).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)),"emerald_apple");
     public static final Item LAPIS_APPLE = register(new Item(new Item.Settings().rarity(Rarity.EPIC).food(FoodRegister.LAPIS_APPLE).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)),"lapis_apple");
     public static final Item REDSTONE_APPLE = register(new Item(new Item.Settings().rarity(Rarity.EPIC).food(FoodRegister.REDSTONE_APPLE).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)),"redstone_apple");
-    public static final Item DETECT_STAFF = register(new Item(new Item.Settings()),"detect_staff");
-    public static final Item GOLDEN_DETECT_STAFF = register(new Item(new Item.Settings()),"golden_detect_staff");
+    public static final Item DETECT_STAFF = register(new DetectStaffItem(new Item.Settings(),false),"detect_staff");
+    public static final Item GOLDEN_DETECT_STAFF = register(new DetectStaffItem(new Item.Settings(),true),"golden_detect_staff");
 
 
     public static void initialize() {

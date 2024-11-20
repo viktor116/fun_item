@@ -1,6 +1,7 @@
 package com.soybeani.event;
 
 import com.soybeani.event.entity.EventAttack;
+import com.soybeani.event.entity.EventBreak;
 import com.soybeani.event.entity.EventTick;
 import com.soybeani.event.entity.EventUse;
 
@@ -14,5 +15,6 @@ public class EventRegister {
         EventTick.register();
         EventAttack.register();
         EventUse.register();
+        EventBreak.register();
     }
 }

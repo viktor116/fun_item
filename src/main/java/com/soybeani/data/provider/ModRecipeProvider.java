@@ -42,6 +42,37 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModBlock.SUPER_SLIME_BLOCK), conditionsFromItem(ModBlock.SUPER_SLIME_BLOCK))
                 .offerTo(exporter);
 
+        //苹果
+        ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, ItemsRegister.EMERALD_APPLE)
+                .input('E', Items.EMERALD_BLOCK)
+                .input('S', Items.APPLE)
+                .pattern("EEE")
+                .pattern("ESE")
+                .pattern("EEE")
+                .criterion(hasItem(Items.EMERALD_BLOCK), conditionsFromItem(Items.EMERALD_BLOCK))
+                .criterion(hasItem(Items.APPLE), conditionsFromItem(Items.APPLE))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, ItemsRegister.LAPIS_APPLE)
+                .input('E', Items.LAPIS_BLOCK)
+                .input('S', Items.APPLE)
+                .pattern("EEE")
+                .pattern("ESE")
+                .pattern("EEE")
+                .criterion(hasItem(Items.LAPIS_BLOCK), conditionsFromItem(Items.LAPIS_BLOCK))
+                .criterion(hasItem(Items.APPLE), conditionsFromItem(Items.APPLE))
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, ItemsRegister.REDSTONE_APPLE)
+                .input('E', Items.REDSTONE_BLOCK)
+                .input('S', Items.APPLE)
+                .pattern("EEE")
+                .pattern("ESE")
+                .pattern("EEE")
+                .criterion(hasItem(Items.REDSTONE_BLOCK), conditionsFromItem(Items.REDSTONE_BLOCK))
+                .criterion(hasItem(Items.APPLE), conditionsFromItem(Items.APPLE))
+                .offerTo(exporter);
+
         //探测法杖
         ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ItemsRegister.DETECT_STAFF)
                 .input('S', Items.STICK)

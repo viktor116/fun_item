@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "minecraft:lapis_block"
+    },
+    "S": {
+      "item": "minecraft:apple"
+    }
+  },
+  "pattern": [
+    "EEE",
+    "ESE",
+    "EEE"
+  ],
+  "result": {
+    "count": 1,
+    "id": "fun_item:lapis_apple"
+  }
+}
