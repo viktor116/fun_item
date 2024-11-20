@@ -118,7 +118,7 @@ public class DetectStaffItem extends Item {
         // 根据矿石类型生成不同的消息
         String oreName = getOreName(blockState);
         Text message = Text.literal(String.format(
-                "在%s方向 %d 格处探测到 %s",
+                "在%s %d 格处探测到 %s",
                 getDirectionName(direction),
                 distance,
                 oreName
