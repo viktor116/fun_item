@@ -43,7 +43,7 @@ public class LapisStatusEffect extends StatusEffect {
     }
 
     public static void EventRegister(PlayerEntity player, BlockEntity entity, World world, BlockState state, BlockPos pos){
-        if (LapisStatusEffect.hasEffect(player) && !player.isCreative()) {
+        if (LapisStatusEffect.hasEffect(player) && !player.isCreative() && !world.isClient) {
             // 获取方块的掉落物
             List<ItemStack> drops = Block.getDroppedStacks(state, (ServerWorld)world, pos, entity, player, player.getMainHandStack());
 

@@ -33,6 +33,9 @@ public class RedStoneStatusEffect extends StatusEffect {
 
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
+        if(world.isClient){
+           return false;
+        }
         BlockPos blockPos;
         if(entity.hasVehicle()){
             blockPos = entity.getBlockPos();
