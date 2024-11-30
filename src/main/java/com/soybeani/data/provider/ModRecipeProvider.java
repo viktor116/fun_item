@@ -93,5 +93,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.GOLD_INGOT), conditionsFromItem(Items.GOLD_INGOT))
                 .criterion(hasItem(ItemsRegister.DETECT_STAFF), conditionsFromItem(ItemsRegister.DETECT_STAFF))
                 .offerTo(exporter);
+        //小飞棍
+        ShapedRecipeJsonBuilder.create(RecipeCategory.TOOLS, ItemsRegister.FLYING_STICK)
+                .input('S', Items.GOLD_INGOT)
+                .input('E', Items.STICK)
+                .pattern("EEE")
+                .pattern("ESE")
+                .pattern("EEE")
+                .criterion(hasItem(Items.GOLD_INGOT), conditionsFromItem(Items.GOLD_INGOT))
+                .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
+                .offerTo(exporter);
     }
 }

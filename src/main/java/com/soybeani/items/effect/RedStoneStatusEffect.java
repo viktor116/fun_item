@@ -33,6 +33,7 @@ public class RedStoneStatusEffect extends StatusEffect {
 
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
+        World world = entity.getWorld();
         if(world.isClient){
            return false;
         }
@@ -43,7 +44,6 @@ public class RedStoneStatusEffect extends StatusEffect {
             blockPos = entity.getBlockPos().down();
         }
 
-        World world = entity.getWorld();
         BlockState blockState = Blocks.REDSTONE_WIRE.getDefaultState();
         if(world.getBlockState(blockPos.up()) == Blocks.AIR.getDefaultState() && world.getBlockState(blockPos) != Blocks.AIR.getDefaultState()) {
             world.setBlockState(blockPos.up(),blockState);

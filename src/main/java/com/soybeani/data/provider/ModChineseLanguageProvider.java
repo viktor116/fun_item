@@ -58,12 +58,12 @@ public class ModChineseLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ItemsRegister.RED_STONE_EFFECT,"附魔红苹果");
         translationBuilder.add(ItemsRegister.EMERALD_EFFECT,"附魔绿苹果");
         translationBuilder.add(ItemsRegister.LAPIS_EFFECT,"附魔青苹果");
+        translationBuilder.add(ItemsRegister.FLYING_STICK,"小飞棍");
+
         translationBuilder.add(ModBlock.AIR_ICE,"空气冰");
         translationBuilder.add(ModBlock.SUPER_SLIME_BLOCK,"超级黏液块");
         translationBuilder.add(ModBlock.SUPER_SLIME_BLOCK_MAX,"超超级黏液块");
-
-
-
+        translationBuilder.add(ModBlock.TT_BLOCK,"T_T");
 
         addText(translationBuilder, Text.of(KeyBindsInputHandler.KEY_CATEGORY_ID),"豆浆有趣物品键位");
         addText(translationBuilder, Text.of(KeyBindsInputHandler.KEY_TOGGLE_NAME),"物品交互");

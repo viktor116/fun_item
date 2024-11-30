@@ -59,8 +59,7 @@ public class ItemsRegister {
     public static final Item REDSTONE_APPLE = register(new Item(new Item.Settings().rarity(Rarity.EPIC).food(FoodRegister.REDSTONE_APPLE).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)),"redstone_apple");
     public static final Item DETECT_STAFF = register(new DetectStaffItem(new Item.Settings(),false),"detect_staff");
     public static final Item GOLDEN_DETECT_STAFF = register(new DetectStaffItem(new Item.Settings(),true),"golden_detect_staff");
-
-
+    public static final Item FLYING_STICK = register(new FlyingStickItem(new Item.Settings().maxCount(1)),"flying_stick");
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
@@ -87,6 +86,8 @@ public class ItemsRegister {
             itemGroup.add(REDSTONE_APPLE);
             itemGroup.add(DETECT_STAFF);
             itemGroup.add(GOLDEN_DETECT_STAFF);
+            itemGroup.add(FLYING_STICK);
+            itemGroup.add(ModBlock.TT_BLOCK);
         });
     }
 

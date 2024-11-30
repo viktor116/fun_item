@@ -21,5 +21,6 @@ public class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
     public void generate() {
         addDrop(ModBlock.SUPER_SLIME_BLOCK);
         addDrop(ModBlock.SUPER_SLIME_BLOCK_MAX);
+        addDrop(ModBlock.TT_BLOCK);
     }
 }

@@ -3,8 +3,10 @@ package com.soybeani.block;
 import com.soybeani.block.custom.AirIceBlock;
 import com.soybeani.block.custom.SuperSlimeBlock;
 import com.soybeani.block.custom.SuperSlimeBlockMax;
+import com.soybeani.block.custom.TTBlock;
 import com.soybeani.config.InitValue;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.BlockItem;
@@ -23,6 +25,7 @@ public class ModBlock {
     public static final Block AIR_ICE =  register(new AirIceBlock(AbstractBlock.Settings.create().slipperiness(0.98F).ticksRandomly().strength(0.5F).nonOpaque().sounds(BlockSoundGroup.GLASS)), "air_ice_0",true);
     public static final Block SUPER_SLIME_BLOCK = register(new SuperSlimeBlock(AbstractBlock.Settings.create().mapColor(MapColor.YELLOW).slipperiness(0.8f).sounds(BlockSoundGroup.SLIME).nonOpaque()),"super_slime_block",true);
     public static final Block SUPER_SLIME_BLOCK_MAX = register(new SuperSlimeBlockMax(AbstractBlock.Settings.create().mapColor(MapColor.RED).slipperiness(0.8f).sounds(BlockSoundGroup.SLIME).nonOpaque()),"super_slime_block_max",true);
+    public static final Block TT_BLOCK = register(new TTBlock(AbstractBlock.Settings.copy(Blocks.TNT)), "tt_block",true);
     public static void initialize(){
 
     }
