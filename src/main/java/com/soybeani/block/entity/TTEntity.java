@@ -56,9 +56,9 @@ public class TTEntity extends TntEntity {
             // 获取爆炸中心点
             Vec3d explosionPos = this.getPos();
 
-            // 创建爆炸效果但不破坏方块
-            world.createExplosion(this, explosionPos.x, explosionPos.y, explosionPos.z,
-                    EXPLOSION_RADIUS, false, World.ExplosionSourceType.TNT);
+//            // 创建爆炸效果但不破坏方块
+//            world.createExplosion(this, explosionPos.x, explosionPos.y, explosionPos.z,
+//                    EXPLOSION_RADIUS, false, World.ExplosionSourceType.TNT);
 
             // 获取爆炸范围内的所有方块
             Box explosionBox = new Box(

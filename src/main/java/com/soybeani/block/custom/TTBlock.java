@@ -3,6 +3,7 @@ package com.soybeani.block.custom;
 import com.soybeani.block.entity.TTEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.TntBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
