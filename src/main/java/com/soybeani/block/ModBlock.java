@@ -54,6 +54,7 @@ public class ModBlock {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlock.AIR_ICE, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlock.SUPER_SLIME_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlock.SUPER_SLIME_BLOCK_MAX, RenderLayer.getTranslucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlock.TT_BLOCK, RenderLayer.getCutout());
         EntityRendererRegistry.register(TT_ENTITY, TTEntityRenderer::new);
     }
 

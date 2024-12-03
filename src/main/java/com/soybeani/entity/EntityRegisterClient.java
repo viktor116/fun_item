@@ -1,5 +1,6 @@
 package com.soybeani.entity;
 
+import com.soybeani.block.client.renderer.TTEntityRenderer;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.client.renderer.*;
 import com.soybeani.entity.custom.PurpleLightningEntity;
@@ -35,6 +36,7 @@ public class EntityRegisterClient {
         EntityRendererRegistry.register(EntityRegister.ICE2_BOAT, Ice2BoatEntityRenderer::new);
         EntityRendererRegistry.register(EntityRegister.FLY_BOAT, FlyBoatEntityRenderer::new);
         EntityRendererRegistry.register(PurpleLightningEntity.PURPLE_LIGHTNING, PurpleLightningRenderer::new);
+
     }
 
 }

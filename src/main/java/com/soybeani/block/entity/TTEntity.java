@@ -1,5 +1,6 @@
 package com.soybeani.block.entity;
 
+import com.soybeani.block.ModBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FallingBlockEntity;
@@ -122,5 +123,10 @@ public class TTEntity extends TntEntity {
         }
 
         this.discard();
+    }
+
+    @Override
+    public BlockState getBlockState() {
+        return ModBlock.TT_BLOCK.getDefaultState();
     }
 }
