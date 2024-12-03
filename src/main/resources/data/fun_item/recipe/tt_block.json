@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "///",
+    "///",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:gunpowder"
+    },
+    "/": {
+       "item": "minecraft:sand"
+    }
+  },
+  "result": {
+    "id": "fun_item:tt_block",
+    "count": 1
+  }
+}

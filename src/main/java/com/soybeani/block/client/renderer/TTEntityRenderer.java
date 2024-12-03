@@ -50,7 +50,7 @@ public class TTEntityRenderer extends EntityRenderer<TTEntity> {
         matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-90.0f));
         matrixStack.translate(-0.5f, -0.5f, 0.5f);
         matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90.0f));
-      //  TTEntityRenderer.renderFlashingBlock(this.blockRenderManager, ttEntity.getBlockState(), matrixStack, vertexConsumerProvider, i, j / 5 % 2 == 0);
+        TTEntityRenderer.renderFlashingBlock(this.blockRenderManager, ttEntity.getBlockState(), matrixStack, vertexConsumerProvider, i, j / 5 % 2 == 0);
         matrixStack.pop();
     }
     @Override
