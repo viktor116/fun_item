@@ -26,10 +26,11 @@ import net.minecraft.util.Identifier;
  * @description
  */
 public record KeyRPacket() implements CustomPayload{
-    public static KeyRPacket INSTANCE = new KeyRPacket();
 
+    public static final KeyRPacket INSTANCE = new KeyRPacket();
     public static final CustomPayload.Id<KeyRPacket> ID = new CustomPayload.Id<>(Identifier.of(InitValue.MOD_ID, "key_r"));
     public static final PacketCodec<PacketByteBuf, KeyRPacket> CODEC = PacketCodec.unit(INSTANCE);
+
     public static void receive(KeyRPacket payload, ServerPlayNetworking.Context context) {
         ServerPlayerEntity player = context.player();
         MinecraftServer server = context.server();
@@ -37,7 +38,7 @@ public record KeyRPacket() implements CustomPayload{
             if(player.getVehicle() instanceof BoatAbility boatEntity){
                 boatEntity.setFly(!boatEntity.getFly());
                 player.sendMessage(Text.of("飞行模式:"+ (boatEntity.getFly() ? "开启" : "关闭")),true);
-                ServerPlayNetworking.send(player,INSTANCE);
+                ServerPlayNetworking.send(player,new KeyRPacket());
             }
             if(player.getVehicle() instanceof FlyBoatEntity flyBoatEntity){
                 flyBoatEntity.SwitchFly();
@@ -58,7 +59,7 @@ public record KeyRPacket() implements CustomPayload{
                         break;
                 }
                 player.sendMessage(Text.of("飞行模式:" + sendText),true);
-                ServerPlayNetworking.send(player,INSTANCE);
+                ServerPlayNetworking.send(player,new KeyRPacket());
             }
         }
         //大雷之镜

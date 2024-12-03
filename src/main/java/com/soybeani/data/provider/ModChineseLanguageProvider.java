@@ -40,6 +40,7 @@ public class ModChineseLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ItemsRegister.FUN_ITEM_GROUP_KEY,"豆浆有趣物品");
         translationBuilder.add(ItemsRegister.GRASS_SWORD,"小草剑");
         translationBuilder.add(ItemsRegister.GRASS_SWORD2,"草剑");
+        translationBuilder.add(ItemsRegister.WHEAT_SWORD,"麦剑");
         translationBuilder.add(ItemsRegister.XIAOMI14,"小米14");
         translationBuilder.add(ItemsRegister.XIAOMI14BUTTON,"米家控制器");
         translationBuilder.add(ItemsRegister.ICE_BOAT,"冰霜船");

@@ -1,14 +1,24 @@
 package com.soybeani.block;
 
+import com.soybeani.block.client.renderer.TTEntityRenderer;
 import com.soybeani.block.custom.AirIceBlock;
 import com.soybeani.block.custom.SuperSlimeBlock;
 import com.soybeani.block.custom.SuperSlimeBlockMax;
 import com.soybeani.block.custom.TTBlock;
+import com.soybeani.block.entity.TTEntity;
 import com.soybeani.config.InitValue;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -26,6 +36,17 @@ public class ModBlock {
     public static final Block SUPER_SLIME_BLOCK = register(new SuperSlimeBlock(AbstractBlock.Settings.create().mapColor(MapColor.YELLOW).slipperiness(0.8f).sounds(BlockSoundGroup.SLIME).nonOpaque()),"super_slime_block",true);
     public static final Block SUPER_SLIME_BLOCK_MAX = register(new SuperSlimeBlockMax(AbstractBlock.Settings.create().mapColor(MapColor.RED).slipperiness(0.8f).sounds(BlockSoundGroup.SLIME).nonOpaque()),"super_slime_block_max",true);
     public static final Block TT_BLOCK = register(new TTBlock(AbstractBlock.Settings.copy(Blocks.TNT)), "tt_block",true);
+
+    public static final EntityType<TTEntity> TT_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE,
+            Identifier.of(InitValue.MOD_ID, "tt_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, TTEntity::create)
+                    .dimensions(EntityDimensions.fixed(0.98f, 0.98f))
+                    .trackRangeBlocks(64)
+                    .trackedUpdateRate(10)
+                    .build()
+    );
+
     public static void initialize(){
 
     }
@@ -33,6 +54,7 @@ public class ModBlock {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlock.AIR_ICE, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlock.SUPER_SLIME_BLOCK, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlock.SUPER_SLIME_BLOCK_MAX, RenderLayer.getTranslucent());
+        EntityRendererRegistry.register(TT_ENTITY, TTEntityRenderer::new);
     }
 
     public static Block register(Block block, String id,boolean shouldRegisterItem){

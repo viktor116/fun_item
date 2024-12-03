@@ -96,7 +96,6 @@ public class IceBoatEntityRenderer extends BoatEntityRenderer{
         }
 
         matrixStack.pop();
-//        super.render(boatEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }
 
     @Override

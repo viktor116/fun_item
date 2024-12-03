@@ -22,7 +22,7 @@ public class TTEntity extends TntEntity {
     private static final int FUSE = 80; // 4秒
     private static final float EXPLOSION_RADIUS = 4.0f; // 爆炸半径
 
-    public TTEntity(EntityType<? extends TntEntity> entityType, World world) {
+    public TTEntity(EntityType<? extends TTEntity> entityType, World world) {
         super(entityType, world);
         this.setFuse(FUSE);
     }
@@ -31,7 +31,10 @@ public class TTEntity extends TntEntity {
         super(world, x, y, z, igniter);
         this.setFuse(FUSE);
     }
-
+    // 静态方法用于EntityType构建器
+    public static TTEntity create(EntityType<TTEntity> type, World world) {
+        return new TTEntity(type, world);
+    }
     @Override
     public void tick() {
         if (this.getFuse() <= 0) {

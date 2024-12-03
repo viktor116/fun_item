@@ -5,6 +5,8 @@ import com.soybeani.network.packet.KeyVPacket;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 
 /**
  * @author soybean
@@ -13,6 +15,8 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
  */
 
 public class ModMessage {
+
+
     public static void registerC2SPackets(){
         PayloadTypeRegistry.playC2S().register(KeyRPacket.ID, KeyRPacket.CODEC);
         PayloadTypeRegistry.playC2S().register(KeyVPacket.ID, KeyVPacket.CODEC);

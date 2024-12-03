@@ -7,15 +7,18 @@ import com.soybeani.items.ItemsRegister;
 import com.soybeani.items.item.LightningSpyglassItem;
 import com.soybeani.items.item.NirvanaSpyglassItem;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 
 /**
  * @author soybean
@@ -25,8 +28,8 @@ import net.minecraft.util.Identifier;
 public class KeyVPacket implements CustomPayload {
     public static KeyVPacket INSTANCE = new KeyVPacket();
 
-    public static final CustomPayload.Id<KeyVPacket> ID = new CustomPayload.Id<>(Identifier.of(InitValue.MOD_ID, "key_t"));
-    public static final PacketCodec<PacketByteBuf, KeyVPacket> CODEC = PacketCodec.unit(INSTANCE);
+    public static final CustomPayload.Id<KeyVPacket> ID = new CustomPayload.Id<>(Identifier.of(InitValue.MOD_ID, "key_v"));
+    public static final PacketCodec<PacketByteBuf, KeyVPacket> CODEC =  PacketCodec.unit(INSTANCE);
     public static void receive(KeyVPacket payload, ServerPlayNetworking.Context context) {
         ServerPlayerEntity player = context.player();
         MinecraftServer server = context.server();

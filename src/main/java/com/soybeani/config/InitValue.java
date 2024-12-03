@@ -1,5 +1,6 @@
 package com.soybeani.config;
 
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +10,10 @@ import org.slf4j.LoggerFactory;
  * @description
  */
 public class InitValue {
-
     public static final Logger LOGGER = LoggerFactory.getLogger(InitValue.MOD_ID);
     public static final String MOD_ID = "fun_item";
+
+    public static Identifier id(String path) {
+        return Identifier.of(MOD_ID, path);
+    }
 }
