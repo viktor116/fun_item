@@ -60,6 +60,8 @@ public class ModChineseLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ItemsRegister.EMERALD_EFFECT,"附魔绿苹果");
         translationBuilder.add(ItemsRegister.LAPIS_EFFECT,"附魔青苹果");
         translationBuilder.add(ItemsRegister.FLYING_STICK,"小飞棍");
+        translationBuilder.add(ItemsRegister.WHEAT,"小麦生物");
+        translationBuilder.add(ItemsRegister.COW_PLANT,"牛植物");
 
         translationBuilder.add(ModBlock.AIR_ICE,"空气冰");
         translationBuilder.add(ModBlock.SUPER_SLIME_BLOCK,"超级黏液块");

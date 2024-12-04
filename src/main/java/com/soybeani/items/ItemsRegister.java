@@ -60,6 +60,8 @@ public class ItemsRegister {
     public static final Item DETECT_STAFF = register(new DetectStaffItem(new Item.Settings(),false),"detect_staff");
     public static final Item GOLDEN_DETECT_STAFF = register(new DetectStaffItem(new Item.Settings(),true),"golden_detect_staff");
     public static final Item FLYING_STICK = register(new FlyingStickItem(new Item.Settings().maxCount(1)),"flying_stick");
+    public static final Item WHEAT = register(new WheatItem(new Item.Settings()),"wheat");
+    public static final Item COW_PLANT = register(new AliasedBlockItem(ModBlock.COW_PLANT,new Item.Settings()),"cow_plant");
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
@@ -88,6 +90,8 @@ public class ItemsRegister {
             itemGroup.add(GOLDEN_DETECT_STAFF);
             itemGroup.add(FLYING_STICK);
             itemGroup.add(ModBlock.TT_BLOCK);
+            itemGroup.add(WHEAT);
+            itemGroup.add(COW_PLANT);
         });
     }
 

@@ -4,6 +4,7 @@ package com.soybeani.entity;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.client.renderer.*;
 import com.soybeani.entity.custom.PurpleLightningEntity;
+import com.soybeani.entity.custom.WheatEntity;
 import com.soybeani.entity.vehicle.FlyBoatEntity;
 import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import com.soybeani.entity.vehicle.IceBoatEntity;
@@ -60,6 +61,6 @@ public class EntityRegister {
     );
     public static void initialize(){
         FabricDefaultAttributeRegistry.register(SU7,Su7CarEntity.createAttributes());
-
+        FabricDefaultAttributeRegistry.register(WheatEntity.WHEAT, WheatEntity.createAttributes());
     }
 }

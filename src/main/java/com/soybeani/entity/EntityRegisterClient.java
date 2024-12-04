@@ -4,6 +4,7 @@ import com.soybeani.block.client.renderer.TTEntityRenderer;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.client.renderer.*;
 import com.soybeani.entity.custom.PurpleLightningEntity;
+import com.soybeani.entity.custom.WheatEntity;
 import com.soybeani.entity.vehicle.FlyBoatEntity;
 import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import com.soybeani.entity.vehicle.IceBoatEntity;
@@ -36,7 +37,7 @@ public class EntityRegisterClient {
         EntityRendererRegistry.register(EntityRegister.ICE2_BOAT, Ice2BoatEntityRenderer::new);
         EntityRendererRegistry.register(EntityRegister.FLY_BOAT, FlyBoatEntityRenderer::new);
         EntityRendererRegistry.register(PurpleLightningEntity.PURPLE_LIGHTNING, PurpleLightningRenderer::new);
-
+        EntityRendererRegistry.register(WheatEntity.WHEAT, WheatRenderer::new);
     }
 
 }

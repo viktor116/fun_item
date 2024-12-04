@@ -23,7 +23,7 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerSingleton(ModBlock.TT_BLOCK, TexturedModel.CUBE_BOTTOM_TOP);
- }
+    }
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
@@ -33,6 +33,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ItemsRegister.DETECT_STAFF,Models.HANDHELD);
         itemModelGenerator.register(ItemsRegister.GOLDEN_DETECT_STAFF,Models.HANDHELD);
         itemModelGenerator.register(ItemsRegister.FLYING_STICK,Models.HANDHELD);
+        itemModelGenerator.register(ItemsRegister.WHEAT,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.COW_PLANT,Models.GENERATED);
     }
-
 }

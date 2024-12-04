@@ -1,10 +1,9 @@
 package com.soybeani.block;
 
+import com.soybeani.block.client.renderer.CowPlantBlockRenderer;
 import com.soybeani.block.client.renderer.TTEntityRenderer;
-import com.soybeani.block.custom.AirIceBlock;
-import com.soybeani.block.custom.SuperSlimeBlock;
-import com.soybeani.block.custom.SuperSlimeBlockMax;
-import com.soybeani.block.custom.TTBlock;
+import com.soybeani.block.custom.*;
+import com.soybeani.block.entity.CowPlantBlockEntity;
 import com.soybeani.block.entity.TTEntity;
 import com.soybeani.config.InitValue;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -47,6 +46,19 @@ public class ModBlock {
                     .build()
     );
 
+    public static final Block COW_PLANT = register("cow_plant", new CowPlantBlock(AbstractBlock.Settings.create()
+            .nonOpaque()
+            .noCollision()
+            .ticksRandomly()
+            .breakInstantly()
+            .sounds(BlockSoundGroup.CROP)),false);
+
+    public static final BlockEntityType<CowPlantBlockEntity> COW_PLANT_TYPE = Registry.register(
+            Registries.BLOCK_ENTITY_TYPE,
+            Identifier.of(InitValue.MOD_ID, "cow_plant"),
+            FabricBlockEntityTypeBuilder.create(CowPlantBlockEntity::new, ModBlock.COW_PLANT).build(null)
+    );
+
     public static void initialize(){
 
     }
@@ -56,9 +68,20 @@ public class ModBlock {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlock.SUPER_SLIME_BLOCK_MAX, RenderLayer.getTranslucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlock.TT_BLOCK, RenderLayer.getCutout());
         EntityRendererRegistry.register(TT_ENTITY, TTEntityRenderer::new);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), COW_PLANT);
+        BlockEntityRendererRegistry.register(COW_PLANT_TYPE, CowPlantBlockRenderer::new);
     }
 
     public static Block register(Block block, String id,boolean shouldRegisterItem){
+        Identifier itemID = Identifier.of(InitValue.MOD_ID, id);
+        if (shouldRegisterItem) {
+            BlockItem blockItem = new BlockItem(block, new Item.Settings());
+            Registry.register(Registries.ITEM, itemID, blockItem);
+        }
+        return Registry.register(Registries.BLOCK, itemID, block);
+    }
+
+    public static Block register(String id,Block block, boolean shouldRegisterItem){
         Identifier itemID = Identifier.of(InitValue.MOD_ID, id);
         if (shouldRegisterItem) {
             BlockItem blockItem = new BlockItem(block, new Item.Settings());
