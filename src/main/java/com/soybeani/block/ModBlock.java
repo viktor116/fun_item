@@ -6,6 +6,7 @@ import com.soybeani.block.custom.*;
 import com.soybeani.block.entity.CowPlantBlockEntity;
 import com.soybeani.block.entity.TTEntity;
 import com.soybeani.config.InitValue;
+import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -39,7 +40,7 @@ public class ModBlock {
     public static final EntityType<TTEntity> TT_ENTITY = Registry.register(
             Registries.ENTITY_TYPE,
             Identifier.of(InitValue.MOD_ID, "tt_entity"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, TTEntity::create)
+            FabricEntityTypeBuilder.<TTEntity>create(SpawnGroup.MISC, TTEntity::new)
                     .dimensions(EntityDimensions.fixed(0.98f, 0.98f))
                     .trackRangeBlocks(64)
                     .trackedUpdateRate(10)
