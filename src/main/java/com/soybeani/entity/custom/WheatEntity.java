@@ -167,7 +167,7 @@ public class WheatEntity extends AnimalEntity implements GeoEntity {
     // 现有的动画相关方法
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controller) {
-        controller.add(new AnimationController<GeoAnimatable>(this, "controller", 0, this::predicate));
+        controller.add(new AnimationController<GeoAnimatable>(this, "controller", 20, this::predicate));
     }
 
     private PlayState predicate(AnimationState<GeoAnimatable> animationState) {

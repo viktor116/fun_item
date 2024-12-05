@@ -19,8 +19,9 @@ public class WheatRenderer extends GeoEntityRenderer<WheatEntity> {
     public void render(WheatEntity entity, float entityYaw, float partialTick, MatrixStack poseStack, VertexConsumerProvider bufferSource, int packedLight) {
         if(entity.isBaby()){
             poseStack.scale(.6f,.6f,.6f);
+        }else{
+            poseStack.scale(1f,1f,1f);
         }
-        poseStack.scale(1f,1f,1f);
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 }
