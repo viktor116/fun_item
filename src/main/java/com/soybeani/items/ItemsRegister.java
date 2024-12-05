@@ -62,6 +62,9 @@ public class ItemsRegister {
     public static final Item FLYING_STICK = register(new FlyingStickItem(new Item.Settings().maxCount(1)),"flying_stick");
     public static final Item WHEAT = register(new WheatItem(new Item.Settings()),"wheat");
     public static final Item COW_PLANT = register(new AliasedBlockItem(ModBlock.COW_PLANT,new Item.Settings()),"cow_plant");
+    public static final Item PIG_PLANT = register(new AliasedBlockItem(ModBlock.PIG_PLANT,new Item.Settings()),"pig_plant");
+    public static final Item ZOMBIE_PLANT = register(new AliasedBlockItem(ModBlock.ZOMBIE_PLANT,new Item.Settings()),"zombie_plant");
+    public static final Item DIAMOND_SWORD_PLANT = register(new AliasedBlockItem(ModBlock.COW_PLANT,new Item.Settings()),"diamond_sword_plant");
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
@@ -92,6 +95,9 @@ public class ItemsRegister {
             itemGroup.add(ModBlock.TT_BLOCK);
             itemGroup.add(WHEAT);
             itemGroup.add(COW_PLANT);
+            itemGroup.add(PIG_PLANT);
+            itemGroup.add(ZOMBIE_PLANT);
+            itemGroup.add(DIAMOND_SWORD_PLANT);
         });
     }
 

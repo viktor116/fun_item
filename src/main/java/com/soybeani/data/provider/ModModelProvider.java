@@ -35,5 +35,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ItemsRegister.FLYING_STICK,Models.HANDHELD);
         itemModelGenerator.register(ItemsRegister.WHEAT,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.COW_PLANT,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.PIG_PLANT,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.ZOMBIE_PLANT,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.DIAMOND_SWORD_PLANT,Models.HANDHELD);
     }
 }

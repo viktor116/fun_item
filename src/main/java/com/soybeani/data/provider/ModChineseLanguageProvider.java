@@ -62,6 +62,9 @@ public class ModChineseLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ItemsRegister.FLYING_STICK,"小飞棍");
         translationBuilder.add(ItemsRegister.WHEAT,"小麦生物");
         translationBuilder.add(ItemsRegister.COW_PLANT,"牛植物");
+        translationBuilder.add(ItemsRegister.PIG_PLANT,"猪植物");
+        translationBuilder.add(ItemsRegister.ZOMBIE_PLANT,"僵尸植物");
+        translationBuilder.add(ItemsRegister.DIAMOND_SWORD_PLANT,"钻石剑植物");
 
         translationBuilder.add(ModBlock.AIR_ICE,"空气冰");
         translationBuilder.add(ModBlock.SUPER_SLIME_BLOCK,"超级黏液块");
