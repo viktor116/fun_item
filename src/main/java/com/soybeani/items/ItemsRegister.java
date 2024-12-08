@@ -7,6 +7,7 @@ import com.soybeani.items.effect.LapisStatusEffect;
 import com.soybeani.items.effect.RedStoneStatusEffect;
 import com.soybeani.items.food.FoodRegister;
 import com.soybeani.items.item.*;
+import com.soybeani.items.item.MinecartItem;
 import com.soybeani.items.material.AirMaterial;
 import com.soybeani.items.material.GrassMaterial;
 import com.soybeani.items.weapon.SwordItemOfGrass;
@@ -60,23 +61,36 @@ public class ItemsRegister {
     public static final Item DETECT_STAFF = register(new DetectStaffItem(new Item.Settings(),false),"detect_staff");
     public static final Item GOLDEN_DETECT_STAFF = register(new DetectStaffItem(new Item.Settings(),true),"golden_detect_staff");
     public static final Item FLYING_STICK = register(new FlyingStickItem(new Item.Settings().maxCount(1)),"flying_stick");
-    public static final Item WHEAT = register(new WheatItem(new Item.Settings()),"wheat");
+    public static final Item WHEAT_LIVE = register(new WheatItem(new Item.Settings()),"wheat");
     public static final Item COW_PLANT = register(new AliasedBlockItem(ModBlock.COW_PLANT,new Item.Settings()),"cow_plant");
     public static final Item PIG_PLANT = register(new AliasedBlockItem(ModBlock.PIG_PLANT,new Item.Settings()),"pig_plant");
     public static final Item ZOMBIE_PLANT = register(new AliasedBlockItem(ModBlock.ZOMBIE_PLANT,new Item.Settings()),"zombie_plant");
     public static final Item DIAMOND_SWORD_PLANT = register(new AliasedBlockItem(ModBlock.COW_PLANT,new Item.Settings()),"diamond_sword_plant");
+    public static final Item MINECART_LIVE = register(new MinecartItem(new Item.Settings()),"minecart_live");
+    public static final Item OAK_BOAT_LIVE = register(new OakBoatItem(new Item.Settings()),"oak_boat_live");
+    public static final Item HAY_BLOCK_LIVE = register(new HayBlockEntityItem(new Item.Settings()),"hay_block_live");
+    public static final Item DIAMOND_ORE_LIVE = register(new DiamondOreEntityItem(new Item.Settings()), "diamond_ore_live");
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
         ItemGroupEvents.modifyEntriesEvent(FUN_ITEM_GROUP_KEY).register(itemGroup->{ //有趣物品
-            itemGroup.add(XIAOMI14);
-            itemGroup.add(XIAOMI14BUTTON);
+            itemGroup.add(WHEAT_LIVE);
+            itemGroup.add(COW_PLANT);
+            itemGroup.add(PIG_PLANT);
+            itemGroup.add(ZOMBIE_PLANT);
+            itemGroup.add(MINECART_LIVE);
+            itemGroup.add(OAK_BOAT_LIVE);
+            itemGroup.add(HAY_BLOCK_LIVE);
+            itemGroup.add(DIAMOND_ORE_LIVE);
+            itemGroup.add(DIAMOND_SWORD_PLANT); //未完成
         });
         ItemGroupEvents.modifyEntriesEvent(COMMON_ITEM_GROUP_KEY).register(itemGroup->{ //普通物品
             itemGroup.add(AIR_PICKAXE);
             itemGroup.add(GRASS_SWORD);
             itemGroup.add(GRASS_SWORD2);
             itemGroup.add(WHEAT_SWORD);
+            itemGroup.add(XIAOMI14);
+            itemGroup.add(XIAOMI14BUTTON);
             itemGroup.add(ICE_BOAT);
             itemGroup.add(ICE2_BOAT);
             itemGroup.add(FLY_BOAT);
@@ -93,11 +107,7 @@ public class ItemsRegister {
             itemGroup.add(GOLDEN_DETECT_STAFF);
             itemGroup.add(FLYING_STICK);
             itemGroup.add(ModBlock.TT_BLOCK);
-            itemGroup.add(WHEAT);
-            itemGroup.add(COW_PLANT);
-            itemGroup.add(PIG_PLANT);
-            itemGroup.add(ZOMBIE_PLANT);
-            itemGroup.add(DIAMOND_SWORD_PLANT);
+
         });
     }
 
@@ -105,7 +115,7 @@ public class ItemsRegister {
     public static final RegistryKey<ItemGroup> FUN_ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(InitValue.MOD_ID, "item_group"));
     public static final RegistryKey<ItemGroup> COMMON_ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(InitValue.MOD_ID, "common_item_group"));
     public static final ItemGroup ABSTRACT_CUSTOM_ITEM_GROUP = FabricItemGroup.builder()
-            .icon(() -> new ItemStack(ItemsRegister.XIAOMI14BUTTON))
+            .icon(() -> new ItemStack(ItemsRegister.WHEAT_LIVE))
             .displayName(Text.translatable("itemGroup."+InitValue.MOD_ID))
             .build();
 

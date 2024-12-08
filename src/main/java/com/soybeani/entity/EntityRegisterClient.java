@@ -1,23 +1,12 @@
 package com.soybeani.entity;
 
-import com.soybeani.block.client.renderer.TTEntityRenderer;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.client.renderer.*;
-import com.soybeani.entity.custom.PurpleLightningEntity;
-import com.soybeani.entity.custom.WheatEntity;
-import com.soybeani.entity.vehicle.FlyBoatEntity;
-import com.soybeani.entity.vehicle.Ice2BoatEntity;
-import com.soybeani.entity.vehicle.IceBoatEntity;
+import com.soybeani.entity.custom.*;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.client.util.ModelIdentifier;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 /**
@@ -38,6 +27,10 @@ public class EntityRegisterClient {
         EntityRendererRegistry.register(EntityRegister.FLY_BOAT, FlyBoatEntityRenderer::new);
         EntityRendererRegistry.register(PurpleLightningEntity.PURPLE_LIGHTNING, PurpleLightningRenderer::new);
         EntityRendererRegistry.register(WheatEntity.WHEAT, WheatRenderer::new);
+        EntityRendererRegistry.register(MinecartEntity.MINECART,MinecartEntityRenderer::new);
+        EntityRendererRegistry.register(OakBoatEntity.OAK_BOAT,OakBoatEntityRenderer::new);
+        EntityRendererRegistry.register(HayBlockEntity.HAY_BLOCK,HayBlockEntityRenderer::new);
+        EntityRendererRegistry.register(DiamondOreEntity.DIAMOND_ORE, DiamondOreEntityRenderer::new);
     }
 
 }

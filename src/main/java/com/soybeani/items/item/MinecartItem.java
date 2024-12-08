@@ -1,5 +1,6 @@
 package com.soybeani.items.item;
 
+import com.soybeani.entity.custom.MinecartEntity;
 import com.soybeani.entity.custom.WheatEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -9,25 +10,27 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class WheatItem extends Item {
-    public WheatItem(Settings settings) {
+public class MinecartItem extends Item {
+
+    public MinecartItem(Settings settings) {
         super(settings);
     }
+
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         BlockPos blockPos = context.getBlockPos();
         PlayerEntity player = context.getPlayer();
         ItemStack itemStack = player.getStackInHand(context.getHand());
         World world = player.getWorld();
-        WheatEntity wheatEntity = WheatEntity.WHEAT.create(world);
-        if (wheatEntity != null) {
-            wheatEntity.setPosition(
+        MinecartEntity minecart = MinecartEntity.MINECART.create(world);
+        if (minecart != null) {
+            minecart.setPosition(
                     blockPos.getX() + 0.5, // 中心对齐
                     blockPos.getY() + 1.0, // 在方块上方1格
                     blockPos.getZ() + 0.5  // 中心对齐
             );
-            wheatEntity.setYaw(player.getYaw());
-            world.spawnEntity(wheatEntity);
+            minecart.setYaw(player.getYaw());
+            world.spawnEntity(minecart);
             // 如果不是创造模式，减少物品数量
             if (!player.getAbilities().creativeMode) {
                 itemStack.decrement(1);

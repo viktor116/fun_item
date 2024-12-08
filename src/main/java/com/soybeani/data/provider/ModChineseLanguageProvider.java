@@ -37,7 +37,7 @@ public class ModChineseLanguageProvider extends FabricLanguageProvider {
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, TranslationBuilder translationBuilder) {
         translationBuilder.add(ItemsRegister.COMMON_ITEM_GROUP_KEY,"豆浆普通物品");
-        translationBuilder.add(ItemsRegister.FUN_ITEM_GROUP_KEY,"豆浆有趣物品");
+        translationBuilder.add(ItemsRegister.FUN_ITEM_GROUP_KEY,"蛋浆生物");
         translationBuilder.add(ItemsRegister.GRASS_SWORD,"小草剑");
         translationBuilder.add(ItemsRegister.GRASS_SWORD2,"草剑");
         translationBuilder.add(ItemsRegister.WHEAT_SWORD,"麦剑");
@@ -60,11 +60,15 @@ public class ModChineseLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ItemsRegister.EMERALD_EFFECT,"附魔绿苹果");
         translationBuilder.add(ItemsRegister.LAPIS_EFFECT,"附魔青苹果");
         translationBuilder.add(ItemsRegister.FLYING_STICK,"小飞棍");
-        translationBuilder.add(ItemsRegister.WHEAT,"小麦生物");
+        translationBuilder.add(ItemsRegister.WHEAT_LIVE,"小麦生物");
         translationBuilder.add(ItemsRegister.COW_PLANT,"牛植物");
         translationBuilder.add(ItemsRegister.PIG_PLANT,"猪植物");
         translationBuilder.add(ItemsRegister.ZOMBIE_PLANT,"僵尸植物");
         translationBuilder.add(ItemsRegister.DIAMOND_SWORD_PLANT,"钻石剑植物");
+        translationBuilder.add(ItemsRegister.MINECART_LIVE,"矿车生物");
+        translationBuilder.add(ItemsRegister.OAK_BOAT_LIVE,"橡木船生物");
+        translationBuilder.add(ItemsRegister.HAY_BLOCK_LIVE,"干草块生物");
+        translationBuilder.add(ItemsRegister.DIAMOND_ORE_LIVE,"钻石矿石生物");
 
         translationBuilder.add(ModBlock.AIR_ICE,"空气冰");
         translationBuilder.add(ModBlock.SUPER_SLIME_BLOCK,"超级黏液块");

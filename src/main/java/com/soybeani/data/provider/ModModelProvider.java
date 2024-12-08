@@ -4,10 +4,10 @@ import com.soybeani.block.ModBlock;
 import com.soybeani.items.ItemsRegister;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.client.*;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.Direction;
+import net.minecraft.util.Identifier;
+
+import java.util.Optional;
 
 /**
  * @author soybean
@@ -33,10 +33,16 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ItemsRegister.DETECT_STAFF,Models.HANDHELD);
         itemModelGenerator.register(ItemsRegister.GOLDEN_DETECT_STAFF,Models.HANDHELD);
         itemModelGenerator.register(ItemsRegister.FLYING_STICK,Models.HANDHELD);
-        itemModelGenerator.register(ItemsRegister.WHEAT,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.WHEAT_LIVE,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.COW_PLANT,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.PIG_PLANT,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.ZOMBIE_PLANT,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.DIAMOND_SWORD_PLANT,Models.HANDHELD);
+        itemModelGenerator.register(ItemsRegister.MINECART_LIVE,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.OAK_BOAT_LIVE,Models.GENERATED);
+
+        //ModelIds.getMinecraftNamespacedItem("hay_block");
+        itemModelGenerator.register(ItemsRegister.HAY_BLOCK_LIVE, new Model(Optional.of(Identifier.ofVanilla("block/hay_block")), Optional.empty()));
+        itemModelGenerator.register(ItemsRegister.DIAMOND_ORE_LIVE, new Model(Optional.of(Identifier.ofVanilla("block/diamond_ore")), Optional.empty()));
     }
 }

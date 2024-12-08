@@ -2,19 +2,13 @@ package com.soybeani.entity;
 
 
 import com.soybeani.config.InitValue;
-import com.soybeani.entity.client.renderer.*;
-import com.soybeani.entity.custom.PurpleLightningEntity;
-import com.soybeani.entity.custom.WheatEntity;
+import com.soybeani.entity.custom.*;
 import com.soybeani.entity.vehicle.FlyBoatEntity;
 import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import com.soybeani.entity.vehicle.IceBoatEntity;
 import com.soybeani.entity.vehicle.Su7CarEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -62,5 +56,9 @@ public class EntityRegister {
     public static void initialize(){
         FabricDefaultAttributeRegistry.register(SU7,Su7CarEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(WheatEntity.WHEAT, WheatEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(MinecartEntity.MINECART,MinecartEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(OakBoatEntity.OAK_BOAT,OakBoatEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(HayBlockEntity.HAY_BLOCK,HayBlockEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(DiamondOreEntity.DIAMOND_ORE,DiamondOreEntity.createAttributes());
     }
 }

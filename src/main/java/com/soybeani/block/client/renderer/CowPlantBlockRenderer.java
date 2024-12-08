@@ -10,6 +10,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.vehicle.MinecartEntity;
 
 public class CowPlantBlockRenderer implements BlockEntityRenderer<CowPlantBlockEntity> {
     private CowEntity cowEntity;
