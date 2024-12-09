@@ -47,7 +47,7 @@ public class MinecartEntityRenderer extends EntityRenderer<MinecartEntity>  {
             matrices.scale(.6f, .6f, .6f);
         }
         
-        matrices.translate(0.0F, 0.5F, 0.0F);
+        matrices.translate(0.0F, 0.375F, 0.0F);
         
         float interpolatedYaw = MathHelper.lerpAngleDegrees(tickDelta, entity.prevYaw, entity.getYaw());
         
@@ -60,7 +60,7 @@ public class MinecartEntityRenderer extends EntityRenderer<MinecartEntity>  {
         }
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(this.getTexture(entity)));
-        this.model.render(matrices, vertexConsumer, light, overlay, 0xffffff);
+        this.model.render(matrices, vertexConsumer, light, overlay);
         matrices.pop();
     }
 }

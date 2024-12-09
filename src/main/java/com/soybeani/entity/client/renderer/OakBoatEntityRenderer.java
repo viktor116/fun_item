@@ -76,7 +76,7 @@ public class OakBoatEntityRenderer extends EntityRenderer<OakBoatEntity>  {
         }
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(this.getTexture(entity)));
-        this.model.render(matrices, vertexConsumer, light, overlay, 0xffffff);
+        this.model.render(matrices, vertexConsumer, light, overlay);
 
         if (!entity.isSubmergedInWater() && this.model instanceof ModelWithWaterPatch) {
             ModelWithWaterPatch modelWithWaterPatch = (ModelWithWaterPatch)this.model;
