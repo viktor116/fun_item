@@ -31,6 +31,9 @@ public class EntityRegisterClient {
         EntityRendererRegistry.register(OakBoatEntity.OAK_BOAT,OakBoatEntityRenderer::new);
         EntityRendererRegistry.register(HayBlockEntity.HAY_BLOCK,HayBlockEntityRenderer::new);
         EntityRendererRegistry.register(DiamondOreEntity.DIAMOND_ORE, DiamondOreEntityRenderer::new);
+        EntityRendererRegistry.register(SkeletonZombieEntity.SKELETON_ZOMBIE, SkeletonZombieEntityRenderer::new);
+        EntityRendererRegistry.register(CreeperSkeletonEntity.CREEPER_SKELETON, CreeperSkeletonEntityRenderer::new);
+        EntityRendererRegistry.register(ZombieCreeperEntity.ZOMBIE_CREEPER, ZombieCreeperEntityRenderer::new);
     }
 
 }

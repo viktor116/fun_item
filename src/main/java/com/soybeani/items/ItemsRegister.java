@@ -2,6 +2,9 @@ package com.soybeani.items;
 
 import com.soybeani.block.ModBlock;
 import com.soybeani.config.InitValue;
+import com.soybeani.entity.custom.CreeperSkeletonEntity;
+import com.soybeani.entity.custom.SkeletonZombieEntity;
+import com.soybeani.entity.custom.ZombieCreeperEntity;
 import com.soybeani.items.effect.EmeraldStatusEffect;
 import com.soybeani.items.effect.LapisStatusEffect;
 import com.soybeani.items.effect.RedStoneStatusEffect;
@@ -14,6 +17,7 @@ import com.soybeani.items.weapon.SwordItemOfGrass;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
@@ -70,10 +74,13 @@ public class ItemsRegister {
     public static final Item OAK_BOAT_LIVE = register(new OakBoatItem(new Item.Settings()),"oak_boat_live");
     public static final Item HAY_BLOCK_LIVE = register(new HayBlockEntityItem(new Item.Settings()),"hay_block_live");
     public static final Item DIAMOND_ORE_LIVE = register(new DiamondOreEntityItem(new Item.Settings()), "diamond_ore_live");
+    public static final Item SKELETON_ZOMBIE_SPAWN_EGG = register(new SpawnEggItem(SkeletonZombieEntity.SKELETON_ZOMBIE, 0xC1C1C1, 0x494949, new Item.Settings()),"skeleton_zombie_spawn_egg");
+    public static final Item CREEPER_SKELETON_SPAWN_EGG = register(new SpawnEggItem(CreeperSkeletonEntity.CREEPER_SKELETON, 894731, 0, new Item.Settings()),"creeper_skeleton_spawn_egg");
+    public static final Item ZOMBIE_CREEPER_SPAWN_EGG = register(new SpawnEggItem(ZombieCreeperEntity.ZOMBIE_CREEPER, 44975, 7969893, new Item.Settings()),"zombie_creeper_spawn_egg");
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
-        ItemGroupEvents.modifyEntriesEvent(FUN_ITEM_GROUP_KEY).register(itemGroup->{ //有趣物品
+        ItemGroupEvents.modifyEntriesEvent(FUN_ITEM_GROUP_KEY).register(itemGroup->{ //生物
             itemGroup.add(WHEAT_LIVE);
             itemGroup.add(COW_PLANT);
             itemGroup.add(PIG_PLANT);
@@ -82,6 +89,9 @@ public class ItemsRegister {
             itemGroup.add(OAK_BOAT_LIVE);
             itemGroup.add(HAY_BLOCK_LIVE);
             itemGroup.add(DIAMOND_ORE_LIVE);
+            itemGroup.add(SKELETON_ZOMBIE_SPAWN_EGG);
+            itemGroup.add(CREEPER_SKELETON_SPAWN_EGG);
+            itemGroup.add(ZOMBIE_CREEPER_SPAWN_EGG);
             itemGroup.add(DIAMOND_SWORD_PLANT); //未完成
         });
         ItemGroupEvents.modifyEntriesEvent(COMMON_ITEM_GROUP_KEY).register(itemGroup->{ //普通物品
@@ -107,7 +117,6 @@ public class ItemsRegister {
             itemGroup.add(GOLDEN_DETECT_STAFF);
             itemGroup.add(FLYING_STICK);
             itemGroup.add(ModBlock.TT_BLOCK);
-
         });
     }
 

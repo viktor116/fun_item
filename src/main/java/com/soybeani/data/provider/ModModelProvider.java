@@ -15,6 +15,7 @@ import java.util.Optional;
  * @description
  */
 public class ModModelProvider extends FabricModelProvider {
+    private final Identifier TEMPLATE_SPAWN_EGG = Identifier.ofVanilla("item/template_spawn_egg");
 
     public ModModelProvider(FabricDataOutput output) {
         super(output);
@@ -40,6 +41,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ItemsRegister.DIAMOND_SWORD_PLANT,Models.HANDHELD);
         itemModelGenerator.register(ItemsRegister.MINECART_LIVE,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.OAK_BOAT_LIVE,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.SKELETON_ZOMBIE_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));
+        itemModelGenerator.register(ItemsRegister.CREEPER_SKELETON_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));
+        itemModelGenerator.register(ItemsRegister.ZOMBIE_CREEPER_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));
 
         //ModelIds.getMinecraftNamespacedItem("hay_block");
         itemModelGenerator.register(ItemsRegister.HAY_BLOCK_LIVE, new Model(Optional.of(Identifier.ofVanilla("block/hay_block")), Optional.empty()));

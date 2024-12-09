@@ -12,6 +12,9 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.mob.SkeletonEntity;
+import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -60,5 +63,8 @@ public class EntityRegister {
         FabricDefaultAttributeRegistry.register(OakBoatEntity.OAK_BOAT,OakBoatEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(HayBlockEntity.HAY_BLOCK,HayBlockEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(DiamondOreEntity.DIAMOND_ORE,DiamondOreEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(SkeletonZombieEntity.SKELETON_ZOMBIE, ZombieEntity.createZombieAttributes());
+        FabricDefaultAttributeRegistry.register(CreeperSkeletonEntity.CREEPER_SKELETON, SkeletonEntity.createAbstractSkeletonAttributes());
+        FabricDefaultAttributeRegistry.register(ZombieCreeperEntity.ZOMBIE_CREEPER, CreeperEntity.createCreeperAttributes());
     }
 }
