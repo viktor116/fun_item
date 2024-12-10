@@ -72,6 +72,7 @@ public class ModChineseLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ItemsRegister.SKELETON_ZOMBIE_SPAWN_EGG,"骷髅僵尸刷怪蛋");
         translationBuilder.add(ItemsRegister.CREEPER_SKELETON_SPAWN_EGG,"爬行者骷髅刷怪蛋");
         translationBuilder.add(ItemsRegister.ZOMBIE_CREEPER_SPAWN_EGG,"僵尸爬行者刷怪蛋");
+        translationBuilder.add(ItemsRegister.DIAMOND_ORE_PLANT,"钻石矿石植物");
 
 
         translationBuilder.add(ModBlock.AIR_ICE,"空气冰");

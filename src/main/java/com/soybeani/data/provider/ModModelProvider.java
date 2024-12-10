@@ -38,7 +38,6 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ItemsRegister.COW_PLANT,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.PIG_PLANT,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.ZOMBIE_PLANT,Models.GENERATED);
-        itemModelGenerator.register(ItemsRegister.DIAMOND_SWORD_PLANT,Models.HANDHELD);
         itemModelGenerator.register(ItemsRegister.MINECART_LIVE,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.OAK_BOAT_LIVE,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.SKELETON_ZOMBIE_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));
@@ -48,5 +47,7 @@ public class ModModelProvider extends FabricModelProvider {
         //ModelIds.getMinecraftNamespacedItem("hay_block");
         itemModelGenerator.register(ItemsRegister.HAY_BLOCK_LIVE, new Model(Optional.of(Identifier.ofVanilla("block/hay_block")), Optional.empty()));
         itemModelGenerator.register(ItemsRegister.DIAMOND_ORE_LIVE, new Model(Optional.of(Identifier.ofVanilla("block/diamond_ore")), Optional.empty()));
+        itemModelGenerator.register(ItemsRegister.DIAMOND_ORE_PLANT, new Model(Optional.of(Identifier.ofVanilla("item/diamond")), Optional.empty()));
+        itemModelGenerator.register(ItemsRegister.DIAMOND_SWORD_PLANT, new Model(Optional.of(Identifier.ofVanilla("item/diamond_sword")), Optional.empty()));
     }
 }

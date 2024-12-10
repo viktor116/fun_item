@@ -69,7 +69,8 @@ public class ItemsRegister {
     public static final Item COW_PLANT = register(new AliasedBlockItem(ModBlock.COW_PLANT,new Item.Settings()),"cow_plant");
     public static final Item PIG_PLANT = register(new AliasedBlockItem(ModBlock.PIG_PLANT,new Item.Settings()),"pig_plant");
     public static final Item ZOMBIE_PLANT = register(new AliasedBlockItem(ModBlock.ZOMBIE_PLANT,new Item.Settings()),"zombie_plant");
-    public static final Item DIAMOND_SWORD_PLANT = register(new AliasedBlockItem(ModBlock.COW_PLANT,new Item.Settings()),"diamond_sword_plant");
+    public static final Item DIAMOND_ORE_PLANT = register(new AliasedBlockItem(ModBlock.DIAMOND_ORE_PLANT,new Item.Settings()),"diamond_ore_plant");
+    public static final Item DIAMOND_SWORD_PLANT = register(new AliasedBlockItem(ModBlock.DIAMOND_SWORD_PLANT,new Item.Settings()),"diamond_sword_plant");
     public static final Item MINECART_LIVE = register(new MinecartItem(new Item.Settings()),"minecart_live");
     public static final Item OAK_BOAT_LIVE = register(new OakBoatItem(new Item.Settings()),"oak_boat_live");
     public static final Item HAY_BLOCK_LIVE = register(new HayBlockEntityItem(new Item.Settings()),"hay_block_live");
@@ -89,6 +90,7 @@ public class ItemsRegister {
             itemGroup.add(OAK_BOAT_LIVE);
             itemGroup.add(HAY_BLOCK_LIVE);
             itemGroup.add(DIAMOND_ORE_LIVE);
+            itemGroup.add(DIAMOND_ORE_PLANT);
             itemGroup.add(SKELETON_ZOMBIE_SPAWN_EGG);
             itemGroup.add(CREEPER_SKELETON_SPAWN_EGG);
             itemGroup.add(ZOMBIE_CREEPER_SPAWN_EGG);
@@ -117,6 +119,7 @@ public class ItemsRegister {
             itemGroup.add(GOLDEN_DETECT_STAFF);
             itemGroup.add(FLYING_STICK);
             itemGroup.add(ModBlock.TT_BLOCK);
+
         });
     }
 

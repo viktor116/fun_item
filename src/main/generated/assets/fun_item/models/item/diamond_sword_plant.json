@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/handheld",
-  "textures": {
-    "layer0": "fun_item:item/diamond_sword_plant"
-  }
+  "parent": "minecraft:item/diamond_sword"
 }
