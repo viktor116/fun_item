@@ -25,30 +25,36 @@ public class DiamondSwordPlantRenderer implements BlockEntityRenderer<DiamondSwo
                       VertexConsumerProvider vertexConsumers, int light, int overlay) {
         matrices.push();
         BlockState state = entity.getCachedState();
+
         if (state.getBlock() instanceof DiamondSwordPlantBlock block) {
             float scale = block.getScale(state);
 
+            // 1. 移动到方块中心点
             matrices.translate(0.5, 0.0, 0.5);
-            
-            // 随着生长升高（从0.0开始，最高升到0.5）
-            matrices.translate(0.0, block.getScale(state) * 0.5, 0.0);
 
-//            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-135));
-            matrices.scale(scale*2, scale*2, scale*2);
-            
-            // 调整回中心点
-            matrices.translate(-0.5, 0.0, -0.5);
+            // 2. 调整基准高度，确保不会陷入地面
+            matrices.translate(0.0, 0.2 + (scale * 0.3), 0.0);
+
+            // 3. 先进行旋转，避免旋转影响位置
+            matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(135));
+
+            // 4. 应用缩放
+            float adjustedScale = scale * 1.0f; // 减小缩放比例
+            matrices.scale(adjustedScale, adjustedScale, adjustedScale);
+
+            // 5. 最后进行微调，确保在方块正中心
+            matrices.translate(0, 0.0, 0.0); // 略微向左调整
 
             // 渲染钻石剑物品模型
             MinecraftClient.getInstance().getItemRenderer().renderItem(
-                new ItemStack(Items.DIAMOND_SWORD),
-                ModelTransformationMode.FIXED,
-                light,
-                overlay,
-                matrices,
-                vertexConsumers,
-                entity.getWorld(),
-                0
+                    new ItemStack(Items.DIAMOND_SWORD),
+                    ModelTransformationMode.FIXED,
+                    light,
+                    overlay,
+                    matrices,
+                    vertexConsumers,
+                    entity.getWorld(),
+                    0
             );
         }
         matrices.pop();

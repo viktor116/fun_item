@@ -47,7 +47,7 @@ public class ModModelProvider extends FabricModelProvider {
         //ModelIds.getMinecraftNamespacedItem("hay_block");
         itemModelGenerator.register(ItemsRegister.HAY_BLOCK_LIVE, new Model(Optional.of(Identifier.ofVanilla("block/hay_block")), Optional.empty()));
         itemModelGenerator.register(ItemsRegister.DIAMOND_ORE_LIVE, new Model(Optional.of(Identifier.ofVanilla("block/diamond_ore")), Optional.empty()));
-        itemModelGenerator.register(ItemsRegister.DIAMOND_ORE_PLANT, new Model(Optional.of(Identifier.ofVanilla("item/diamond")), Optional.empty()));
-        itemModelGenerator.register(ItemsRegister.DIAMOND_SWORD_PLANT, new Model(Optional.of(Identifier.ofVanilla("item/diamond_sword")), Optional.empty()));
+        itemModelGenerator.register(ItemsRegister.DIAMOND_ORE_PLANT, new Model(Optional.of(Identifier.ofVanilla("block/diamond_ore")), Optional.empty()));
+        itemModelGenerator.register(ItemsRegister.DIAMOND_SWORD_PLANT, new Model(Optional.of(Identifier.ofVanilla("item/diamond")), Optional.empty()));
     }
 }
