@@ -63,7 +63,7 @@ public class EntityRegister {
         FabricDefaultAttributeRegistry.register(OakBoatEntity.OAK_BOAT,OakBoatEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(HayBlockEntity.HAY_BLOCK,HayBlockEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(DiamondOreEntity.DIAMOND_ORE,DiamondOreEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(SkeletonZombieEntity.SKELETON_ZOMBIE, ZombieEntity.createZombieAttributes());
+        FabricDefaultAttributeRegistry.register(SkeletonZombieEntity.SKELETON_ZOMBIE, SkeletonZombieEntity.createSkeletonZombieAttributes());
         FabricDefaultAttributeRegistry.register(CreeperSkeletonEntity.CREEPER_SKELETON, SkeletonEntity.createAbstractSkeletonAttributes());
         FabricDefaultAttributeRegistry.register(ZombieCreeperEntity.ZOMBIE_CREEPER, CreeperEntity.createCreeperAttributes());
     }

@@ -2,6 +2,9 @@ package com.soybeani.data.provider;
 
 import com.soybeani.block.ModBlock;
 import com.soybeani.config.InitValue;
+import com.soybeani.entity.custom.CreeperSkeletonEntity;
+import com.soybeani.entity.custom.SkeletonZombieEntity;
+import com.soybeani.entity.custom.ZombieCreeperEntity;
 import com.soybeani.event.keybinds.KeyBindsInputHandler;
 import com.soybeani.items.ItemsRegister;
 import com.soybeani.items.item.FlyBoatItem;
@@ -67,15 +70,16 @@ public class ModChineseLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ItemsRegister.MINECART_LIVE,"矿车生物");
         translationBuilder.add(ItemsRegister.OAK_BOAT_LIVE,"橡木船生物");
         translationBuilder.add(ItemsRegister.HAY_BLOCK_LIVE,"干草块生物");
-
-        translationBuilder.add(ItemsRegister.DIAMOND_ORE_LIVE,"钻石矿石"); //生物
-        translationBuilder.add(ItemsRegister.DIAMOND_ORE_PLANT,"钻石矿石"); //植物
-        translationBuilder.add(ItemsRegister.DIAMOND_SWORD_PLANT,"钻石"); //剑植物
-
+        translationBuilder.add(ItemsRegister.DIAMOND_ORE_LIVE,"钻石矿石生物"); //生物
+        translationBuilder.add(ItemsRegister.DIAMOND_ORE_PLANT,"钻石矿石植物"); //植物
+        translationBuilder.add(ItemsRegister.DIAMOND_SWORD_PLANT,"钻石剑植物"); //剑植物
         translationBuilder.add(ItemsRegister.SKELETON_ZOMBIE_SPAWN_EGG,"骷髅僵尸刷怪蛋");
         translationBuilder.add(ItemsRegister.CREEPER_SKELETON_SPAWN_EGG,"爬行者骷髅刷怪蛋");
         translationBuilder.add(ItemsRegister.ZOMBIE_CREEPER_SPAWN_EGG,"僵尸爬行者刷怪蛋");
 
+        translationBuilder.add(SkeletonZombieEntity.SKELETON_ZOMBIE,"骷髅僵尸");
+        translationBuilder.add(CreeperSkeletonEntity.CREEPER_SKELETON,"爬行骷髅射手");
+        translationBuilder.add(ZombieCreeperEntity.ZOMBIE_CREEPER,"僵尸爬行者");
 
         translationBuilder.add(ModBlock.AIR_ICE,"空气冰");
         translationBuilder.add(ModBlock.SUPER_SLIME_BLOCK,"超级黏液块");
