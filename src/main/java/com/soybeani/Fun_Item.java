@@ -22,8 +22,6 @@ public class Fun_Item implements ModInitializer {
 		ModBlock.initialize(); //方块初始化
 		EventRegister.initialize(); //事件初始化
 
-
-
 		InitValue.LOGGER.info("soybeani fun items start successful q(≧▽≦q)!");
 	}
 }
