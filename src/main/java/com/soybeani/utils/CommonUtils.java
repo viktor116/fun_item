@@ -2,6 +2,9 @@ package com.soybeani.utils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleType;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -28,6 +31,26 @@ public class CommonUtils {
                     soundEvent,
                     soundCategory,
                     volume, pitch);
+        }
+    }
+
+    public static void spawnSelfParticle(ServerWorld serverWorld, Entity entity, SimpleParticleType particleType){
+        for (int i = 0; i < 20; i++) { // 生成20个粒子
+            double d0 = entity.getWorld().random.nextGaussian() * 0.02D;
+            double d1 = entity.getWorld().random.nextGaussian() * 0.02D;
+            double d2 = entity.getWorld().random.nextGaussian() * 0.02D;
+
+            serverWorld.spawnParticles(
+                    particleType,
+                    entity.getX() + (entity.getWorld().random.nextDouble() - 0.5) * 2.0,
+                    entity.getY() + entity.getWorld().random.nextDouble() * 2.0,
+                    entity.getZ() + (entity.getWorld().random.nextDouble() - 0.5) * 2.0,
+                    1, // 每个位置生成的粒子数量
+                    d0, // X方向速度
+                    d1 + 0.05, // Y方向速度，稍微向上漂浮
+                    d2, // Z方向速度
+                    0.0D // 粒子速度
+            );
         }
     }
 

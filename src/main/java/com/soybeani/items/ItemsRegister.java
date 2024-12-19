@@ -78,6 +78,17 @@ public class ItemsRegister {
     public static final Item SKELETON_ZOMBIE_SPAWN_EGG = register(new SpawnEggItem(SkeletonZombieEntity.SKELETON_ZOMBIE, 0xC1C1C1, 0x494949, new Item.Settings()),"skeleton_zombie_spawn_egg");
     public static final Item CREEPER_SKELETON_SPAWN_EGG = register(new SpawnEggItem(CreeperSkeletonEntity.CREEPER_SKELETON, 894731, 0, new Item.Settings()),"creeper_skeleton_spawn_egg");
     public static final Item ZOMBIE_CREEPER_SPAWN_EGG = register(new SpawnEggItem(ZombieCreeperEntity.ZOMBIE_CREEPER, 44975, 7969893, new Item.Settings()),"zombie_creeper_spawn_egg");
+    public static final Item TALISMAN = register(new TalismanItem(new Item.Settings(), TalismanItem.Type.NONE),"talisman"); //剑气
+    public static final Item TALISMAN_BLACK_PURPLE= register(new TalismanItem(new Item.Settings(), TalismanItem.Type.BLACK_PURPLE),"talisman_black_purple"); //死亡阴影
+    public static final Item TALISMAN_BLUE= register(new TalismanItem(new Item.Settings(), TalismanItem.Type.BLUE),"talisman_blue"); //雷法
+    public static final Item TALISMAN_GREEN= register(new TalismanItem(new Item.Settings(), TalismanItem.Type.GREEN),"talisman_green"); //道法自然
+    public static final Item TALISMAN_YELLOW_RED= register(new TalismanItem(new Item.Settings(), TalismanItem.Type.YELLOW_RED),"talisman_yellow_red"); //点燃
+    public static final Item TALISMAN_PURPLE= register(new TalismanItem(new Item.Settings(), TalismanItem.Type.PURPLE),"talisman_purple"); //血魔
+    public static final Item TALISMAN_DARKGREEN= register(new TalismanItem(new Item.Settings(), TalismanItem.Type.DARKGREEN),"talisman_darkgreen"); //剑魁
+    public static final Item TALISMAN_PINK = register(new TalismanItem(new Item.Settings(), TalismanItem.Type.PINK),"talisman_pink"); //避邪
+    public static final Item TALISMAN_YELLOW = register(new TalismanItem(new Item.Settings(), TalismanItem.Type.YELLOW),"talisman_yellow"); //大人时代变了
+    public static final Item TALISMAN_SKYBLUE = register(new TalismanItem(new Item.Settings(), TalismanItem.Type.SKYBLUE),"talisman_skyblue"); //飞行
+    public static final Item TALISMAN_GREY = register(new TalismanItem(new Item.Settings(), TalismanItem.Type.GREY),"talisman_grey"); //凋零之力
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
@@ -94,7 +105,7 @@ public class ItemsRegister {
             itemGroup.add(SKELETON_ZOMBIE_SPAWN_EGG);
             itemGroup.add(CREEPER_SKELETON_SPAWN_EGG);
             itemGroup.add(ZOMBIE_CREEPER_SPAWN_EGG);
-            itemGroup.add(DIAMOND_SWORD_PLANT); //未完成
+            itemGroup.add(DIAMOND_SWORD_PLANT);
         });
         ItemGroupEvents.modifyEntriesEvent(COMMON_ITEM_GROUP_KEY).register(itemGroup->{ //普通物品
             itemGroup.add(AIR_PICKAXE);
@@ -119,7 +130,17 @@ public class ItemsRegister {
             itemGroup.add(GOLDEN_DETECT_STAFF);
             itemGroup.add(FLYING_STICK);
             itemGroup.add(ModBlock.TT_BLOCK);
-
+            itemGroup.add(TALISMAN);
+            itemGroup.add(TALISMAN_BLACK_PURPLE);
+            itemGroup.add(TALISMAN_BLUE);
+            itemGroup.add(TALISMAN_GREEN);
+            itemGroup.add(TALISMAN_YELLOW_RED);
+            itemGroup.add(TALISMAN_PURPLE);
+            itemGroup.add(TALISMAN_DARKGREEN);
+            itemGroup.add(TALISMAN_PINK);
+            itemGroup.add(TALISMAN_YELLOW);
+            itemGroup.add(TALISMAN_SKYBLUE);
+            itemGroup.add(TALISMAN_GREY);
         });
     }
 

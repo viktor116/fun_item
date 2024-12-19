@@ -40,6 +40,18 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ItemsRegister.ZOMBIE_PLANT,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.MINECART_LIVE,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.OAK_BOAT_LIVE,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.TALISMAN,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.TALISMAN_BLACK_PURPLE,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.TALISMAN_BLUE,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.TALISMAN_GREEN,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.TALISMAN_YELLOW_RED,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.TALISMAN_PURPLE,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.TALISMAN_DARKGREEN,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.TALISMAN_PINK,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.TALISMAN_YELLOW,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.TALISMAN_SKYBLUE,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.TALISMAN_GREY,Models.GENERATED);
+
         itemModelGenerator.register(ItemsRegister.SKELETON_ZOMBIE_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));
         itemModelGenerator.register(ItemsRegister.CREEPER_SKELETON_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));
         itemModelGenerator.register(ItemsRegister.ZOMBIE_CREEPER_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));
