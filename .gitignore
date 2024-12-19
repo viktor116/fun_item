@@ -5,7 +5,7 @@ build/
 out/
 classes/
 .github/
-src/main/generated/.cache
+src/main/generated/.cache/
 # eclipse
 
 *.launch
