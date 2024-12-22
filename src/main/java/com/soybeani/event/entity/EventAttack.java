@@ -6,6 +6,7 @@ import com.soybeani.items.item.TalismanItem;
 import com.soybeani.items.weapon.SwordItemOfGrass;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
+import net.minecraft.entity.Attackable;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

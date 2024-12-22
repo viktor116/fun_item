@@ -6,7 +6,8 @@
 		"ExampleMixin",
 		"PlayerEntityMixin",
 		"EntityMixin",
-		"ArrowEntityMixin"
+		"ArrowEntityMixin",
+		"ItemMixin"
 	],
 	"client": [
 		"ItemRendererMixin",
