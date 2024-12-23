@@ -4,6 +4,7 @@ import com.soybeani.event.entity.EventAttack;
 import com.soybeani.event.entity.EventBreak;
 import com.soybeani.event.entity.EventTick;
 import com.soybeani.event.entity.EventUse;
+import com.soybeani.utils.DelayedTaskManager;
 
 /**
  * @author soybean
@@ -16,5 +17,6 @@ public class EventRegister {
         EventAttack.register();
         EventUse.register();
         EventBreak.register();
+        DelayedTaskManager.init();
     }
 }

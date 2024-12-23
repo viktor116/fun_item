@@ -3,6 +3,7 @@ package com.soybeani.items.item;
 import com.soybeani.Fun_Item;
 import com.soybeani.items.ItemsRegister;
 import com.soybeani.utils.CommonUtils;
+import com.soybeani.utils.DelayedTaskManager;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -11,7 +12,9 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -91,11 +94,6 @@ public class TalismanItem extends Item {
         return super.use(world, player, hand);
     }
 
-
-
-    private boolean invulnerabilityTaskScheduled = false;
-    private int tickCounter = 0;
-
     private void handleLightningSpell(PlayerEntity player, BlockPos blockPos,ItemStack stack) { //雷法
         LightningEntity lightning = EntityType.LIGHTNING_BOLT.create(player.getWorld());
         player.setInvulnerable(true);
@@ -104,16 +102,12 @@ public class TalismanItem extends Item {
         if(!player.isInCreativeMode()){
             stack.decrement(1);
         }
-        // 如果没有安排任务，则注册一个新的tick事件
-        if (!invulnerabilityTaskScheduled) {
-            ServerTickEvents.END_SERVER_TICK.register(server -> {
-                tickCounter++;
-                if (tickCounter >= 20) { // 20 ticks后
-                    tickCounter = 0;
-                    player.setInvulnerable(false);
-                }
+        // 如果没有相关的任务正在进行，创建新任务
+        String taskId = "lightning_invulnerability_" + player.getUuid();
+        if (!DelayedTaskManager.hasTask(taskId)) {
+            DelayedTaskManager.scheduleTask(taskId, 20, () -> {
+                player.setInvulnerable(false);
             });
-            invulnerabilityTaskScheduled = true;
         }
     }
 
@@ -270,7 +264,7 @@ public class TalismanItem extends Item {
                     break;
                 case PINK:
                     if (entity instanceof LivingEntity target) {
-                        float extraDamage =(float) (target instanceof AbstractSkeletonEntity ? baseDamage+20.0f : baseDamage + 0f ); // 对亡灵额外伤害
+                        float extraDamage =(float) (target instanceof HostileEntity ? baseDamage + 10.0f : baseDamage + 0f ); // 对亡灵额外伤害
                         target.damage(target.getDamageSources().magic(), extraDamage);
 
                         // 击中特效
@@ -291,13 +285,56 @@ public class TalismanItem extends Item {
                         if (!player.isInCreativeMode()) {
                             offHandStack.decrement(1);
                         }
+                    }
+                    break;
+                case GREY: //凋零之力
+                    if (entity instanceof LivingEntity target) {
+                        float extraDamage =(float) (target instanceof AbstractSkeletonEntity ? baseDamage + 20.0f : baseDamage + 0f ); //
+                        target.damage(target.getDamageSources().magic(), extraDamage);
 
                         if(((LivingEntity) entity).isDead()){
-                            ItemEntity itemEntity = new ItemEntity(target.getWorld(), target.getX()-0.5+Math.random(), target.getY()+1, target.getZ()-0.5+Math.random(), ItemsRegister.TALISMAN_PINK.getDefaultStack());
-                            world.spawnEntity(itemEntity);
+                            // 击中特效
+                            if (world instanceof ServerWorld serverWorld) {
+                                serverWorld.spawnParticles(
+                                        ParticleTypes.SMOKE,
+                                        target.getX(), target.getY() + target.getHeight() / 2, target.getZ(),
+                                        50, 0.2, 0.2, 0.2,
+                                        0.1
+                                );
+                            }
+
+                            // 播放音效
+                            world.playSound(null, target.getBlockPos(),
+                                    SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP,
+                                    SoundCategory.PLAYERS, 1.0f, 1.2f);
+                            if(target instanceof AbstractSkeletonEntity){
+                                ItemEntity itemEntity = new ItemEntity(target.getWorld(), target.getX()-0.5+Math.random(), target.getY()+1, target.getZ()-0.5+Math.random(), ItemsRegister.TALISMAN_GREY.getDefaultStack());
+                                world.spawnEntity(itemEntity);
+                            }
+                            if (!player.isInCreativeMode()) {
+                                offHandStack.decrement(1);
+                            }
                         }
                     }
                     break;
+                case BLACK_PURPLE:
+                    if (entity instanceof LivingEntity target) {
+                        target.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 1200, 1));
+                        if (world instanceof ServerWorld serverWorld) {
+                            serverWorld.spawnParticles(
+                                    ParticleTypes.SMOKE,
+                                    target.getX(), target.getY() + target.getHeight() / 2, target.getZ(),
+                                    200, 1, 1, 1,
+                                    0.2
+                            );
+                        }
+                        world.playSound(null, target.getBlockPos(),
+                                SoundEvents.ENTITY_SKELETON_DEATH,
+                                SoundCategory.PLAYERS, 1.0f, 1.2f);
+                        if (!player.isInCreativeMode()) {
+                            offHandStack.decrement(1);
+                        }
+                    }
             }
         }
     }
