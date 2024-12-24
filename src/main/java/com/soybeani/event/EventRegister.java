@@ -5,6 +5,9 @@ import com.soybeani.event.entity.EventBreak;
 import com.soybeani.event.entity.EventTick;
 import com.soybeani.event.entity.EventUse;
 import com.soybeani.utils.DelayedTaskManager;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.GameMode;
 
 /**
  * @author soybean
@@ -18,5 +21,9 @@ public class EventRegister {
         EventUse.register();
         EventBreak.register();
         DelayedTaskManager.init();
+    }
+
+    public static void initializeClient(){
+        EventTick.registerClient();
     }
 }

@@ -21,14 +21,14 @@ public class ModMessage {
         PayloadTypeRegistry.playC2S().register(KeyRPacket.ID, KeyRPacket.CODEC);
         PayloadTypeRegistry.playC2S().register(KeyVPacket.ID, KeyVPacket.CODEC);
 
+        PayloadTypeRegistry.playS2C().register(KeyRPacket.ID, KeyRPacket.CODEC);
+        PayloadTypeRegistry.playS2C().register(KeyVPacket.ID, KeyVPacket.CODEC);
+
         ServerPlayNetworking.registerGlobalReceiver(KeyRPacket.ID, KeyRPacket::receive);
         ServerPlayNetworking.registerGlobalReceiver(KeyVPacket.ID, KeyVPacket::receive);
     }
 
     public static void registerS2CPackets(){
-        PayloadTypeRegistry.playS2C().register(KeyRPacket.ID, KeyRPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(KeyVPacket.ID, KeyVPacket.CODEC);
-
         ClientPlayNetworking.registerGlobalReceiver(KeyRPacket.ID, KeyRPacket::receiveOfClient);
         ClientPlayNetworking.registerGlobalReceiver(KeyVPacket.ID, KeyVPacket::receiveOfClient);
     }

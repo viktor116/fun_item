@@ -4,7 +4,6 @@ package com.soybeani.mixin;
 import com.soybeani.items.item.TalismanItem;
 import com.soybeani.utils.DelayedTaskManager;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
@@ -13,12 +12,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.packet.s2c.play.GameStateChangeS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
@@ -124,6 +123,27 @@ public class ItemMixin {
                                 }
                             }
                         });
+                    }
+
+                    cir.cancel();
+                    cir.setReturnValue(TypedActionResult.success(user.getStackInHand(hand)));
+                }else if(type == TalismanItem.Type.PURPLE){
+                    if(user instanceof ServerPlayerEntity serverPlayer) {
+                        // 扣除玩家一半生命值
+                        float currentHealth = user.getHealth();
+                        user.setHealth(currentHealth / 2);
+                        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_PLAYER_HURT_DROWN, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                        if(!user.isInCreativeMode()){
+                            ItemStack offHandStack = user.getOffHandStack();
+                            offHandStack.decrement(1);
+                        }
+                        TalismanItem.StoreEffectDAO storeEffectDAO = talismanItem.activePurpleEffects.get(user.getUuid());
+                        int level = 1;
+                        if(storeEffectDAO != null){
+                            level = storeEffectDAO.getLevel() + 1;
+                        }
+                        talismanItem.activePurpleEffects.put(user.getUuid(), new TalismanItem.StoreEffectDAO(level,20*30*2)); // 10秒持续时间
+
                     }
 
                     cir.cancel();

@@ -1,27 +1,26 @@
 package com.soybeani.items.item;
 
-import com.soybeani.Fun_Item;
 import com.soybeani.items.ItemsRegister;
 import com.soybeani.utils.CommonUtils;
 import com.soybeani.utils.DelayedTaskManager;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
+import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.network.packet.s2c.play.EntityAnimationS2CPacket;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -29,9 +28,13 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.GameMode;
 import net.minecraft.world.World;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author soybean
@@ -44,6 +47,118 @@ public class TalismanItem extends Item {
     public TalismanItem(Settings settings,Type type) {
         super(settings);
         this.type = type;
+    }
+    public static class StoreEffectDAO{
+        private int level;
+        public int remainingTicks;
+
+        public StoreEffectDAO(int level, int remainingTicks) {
+            this.setLevel(level);
+            this.remainingTicks = remainingTicks;
+        }
+
+        public int getLevel() {
+            return level;
+        }
+
+        public void setLevel(int level) {
+            this.level = level;
+        }
+    }
+    public static final Map<UUID, StoreEffectDAO> activePurpleEffects = new HashMap<>();
+
+    private static final Map<UUID, IronGolemEntity> playerGolemMap = new HashMap<>();
+    private static final Map<UUID, Boolean> playerControllingMap = new HashMap<>();
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        if (world.isClient || !(entity instanceof PlayerEntity player)) return;
+        // 处理紫色符禄效果
+        activePurpleEffects.entrySet().removeIf(entry -> {
+            UUID playerId = entry.getKey();
+            StoreEffectDAO value = entry.getValue();
+            int remainingTicks = value.remainingTicks;
+
+            if (remainingTicks <= 0) {
+                return true; // 移除已结束的效果
+            }
+
+            PlayerEntity affectedPlayer = world.getServer().getPlayerManager().getPlayer(playerId);
+            if (affectedPlayer == null || !affectedPlayer.isAlive()) {
+                return true; // 移除无效玩家的效果
+            }
+
+            // 应用紫色符禄效果
+            applyPurpleEffect(world, affectedPlayer,value.level);
+            value.remainingTicks = remainingTicks -1;
+            entry.setValue(value);
+            return false;
+        });
+        super.inventoryTick(stack, world, entity, slot, selected);
+    }
+
+    private void applyPurpleEffect(World world, PlayerEntity player,Integer level) {
+        // 生成伤害性粒子环绕效果
+        double radius = level + 1.0;
+        double particleCount = 30;
+        double angleIncrement = (2 * Math.PI) / particleCount;
+        boolean hasHealedThisTick = false; // 用于追踪这一tick是否已经触发过治疗
+
+        for(int i = 0; i < particleCount; i++) {
+            double angle = i * angleIncrement;
+            double x = player.getX() + radius * Math.cos(angle);
+            double z = player.getZ() + radius * Math.sin(angle);
+
+            // 生成紫色粒子
+            ServerWorld serverWorld = (ServerWorld) world;
+            serverWorld.spawnParticles(
+                    ParticleTypes.WITCH,
+                    x,
+                    player.getY() + 1,
+                    z,
+                    1,
+                    0.0, 0.0, 0.0,
+                    0.0
+            );
+
+            // 对周围实体造成伤害
+            Box damageBox = new Box(
+                    x - 0.5, player.getY(), z - 0.5,
+                    x + 0.5, player.getY() + 2, z + 0.5
+            );
+
+            List<LivingEntity> entities = world.getEntitiesByClass(
+                    LivingEntity.class,
+                    damageBox,
+                    entity -> entity != player && !entity.isSpectator()
+            );
+
+            for(LivingEntity entity : entities) {
+                if(entity.damage(world.getDamageSources().magic(), 5.0f)) {
+                    // 如果伤害成功应用且玩家未满血
+                    if (!hasHealedThisTick && player.getHealth() < player.getMaxHealth()) {
+                        // 恢复生命值
+                        player.heal(1.0f);
+                        hasHealedThisTick = true;
+
+                        // 在玩家周围生成绿色治疗粒子
+                        if (world instanceof ServerWorld) {
+                            ServerWorld serverWorld2 = (ServerWorld) world;
+                            serverWorld2.spawnParticles(
+                                    ParticleTypes.HAPPY_VILLAGER,
+                                    player.getX(),
+                                    player.getY() + 1,
+                                    player.getZ(),
+                                    10,  // 粒子数量
+                                    0.5, // X方向扩散
+                                    0.5, // Y方向扩散
+                                    0.5, // Z方向扩散
+                                    0.0  // 速度
+                            );
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public Type getType(){
@@ -74,7 +189,7 @@ public class TalismanItem extends Item {
         if (!world.isClient) {
             switch (type) {
                 case GREEN -> handleNatureHealing(player, stack ,0.5F);
-
+                case DARKGREEN -> handleGolemControl(player, world, stack);
 //                case YELLOW_RED -> handleIgniteEffect(player, stack);
 //                case NONE -> handleSwordQi(player, world, stack);
 //                case PINK -> handleCinnabarWarding(player, stack);
@@ -94,6 +209,113 @@ public class TalismanItem extends Item {
         return super.use(world, player, hand);
     }
 
+    //附身附魔
+    private void handleGolemControl(PlayerEntity player, World world, ItemStack stack) {
+        UUID playerId = player.getUuid();
+
+        // 如果玩家已经在控制铁傀儡，右键点击会结束控制
+        if (playerGolemMap.containsKey(playerId)) {
+            // 获取并移除铁傀儡
+            IronGolemEntity golem = playerGolemMap.get(playerId);
+            if (golem != null && golem.isAlive()) {
+                golem.remove(Entity.RemovalReason.DISCARDED);
+            }
+            playerGolemMap.remove(playerId);
+            playerControllingMap.remove(playerId);
+
+            // 恢复玩家状态
+            player.setNoGravity(false);
+            player.setInvulnerable(false);
+            player.setVelocity(Vec3d.ZERO);
+
+            player.sendMessage(Text.literal("已退出铁傀儡控制模式"), false);
+        } else {
+            // 生成铁傀儡
+            IronGolemEntity golem = EntityType.IRON_GOLEM.create(world);
+            if (golem != null) {
+                // 设置铁傀儡位置和朝向
+                golem.refreshPositionAndAngles(
+                        player.getX(),
+                        player.getY(),
+                        player.getZ(),
+                        player.getYaw(),
+                        player.getPitch()
+                );
+
+                // 设置铁傀儡属性
+                golem.setAiDisabled(true);
+                golem.setCustomName(Text.literal(player.getName().getString() + "的铁傀儡"));
+                golem.setCustomNameVisible(true);
+
+                // 生成铁傀儡
+                world.spawnEntity(golem);
+
+                // 设置玩家状态
+                player.setNoGravity(true);
+                player.setInvulnerable(true);
+                player.setVelocity(Vec3d.ZERO);
+
+                // 记录关联
+                playerGolemMap.put(playerId, golem);
+                playerControllingMap.put(playerId, true);
+
+                player.sendMessage(Text.literal("已进入铁傀儡控制模式"), false);
+            }
+        }
+    }
+
+    // 处理铁傀儡攻击
+    @Override
+    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        if (!attacker.getWorld().isClient && attacker instanceof PlayerEntity player) {
+            UUID playerId = player.getUuid();
+            IronGolemEntity golem = playerGolemMap.get(playerId);
+
+            if (golem != null && golem.isAlive()) {
+                // 让铁傀儡执行攻击
+                golem.tryAttack(target);
+
+                // 播放攻击音效和动画
+                World world = golem.getWorld();
+                world.playSound(null,
+                        golem.getX(),
+                        golem.getY(),
+                        golem.getZ(),
+                        SoundEvents.ENTITY_IRON_GOLEM_ATTACK,
+                        SoundCategory.HOSTILE,
+                        1.0F,
+                        1.0F
+                );
+                return true;
+            }
+        }
+        return super.postHit(stack, target, attacker);
+    }
+
+    public static IronGolemEntity getControlledGolem(UUID playerId) {
+        return playerGolemMap.get(playerId);
+    }
+
+    public static boolean isControllingGolem(UUID playerId) {
+        return playerControllingMap.getOrDefault(playerId, false);
+    }
+
+    public static void cleanup(PlayerEntity player) {
+        UUID playerId = player.getUuid();
+        if (playerGolemMap.containsKey(playerId)) {
+            IronGolemEntity golem = playerGolemMap.get(playerId);
+            if (golem != null && golem.isAlive()) {
+                golem.remove(Entity.RemovalReason.DISCARDED);
+            }
+            playerGolemMap.remove(playerId);
+            playerControllingMap.remove(playerId);
+
+            player.setNoGravity(false);
+            player.setInvulnerable(false);
+        }
+    }
+
+    // 清理方法更新
     private void handleLightningSpell(PlayerEntity player, BlockPos blockPos,ItemStack stack) { //雷法
         LightningEntity lightning = EntityType.LIGHTNING_BOLT.create(player.getWorld());
         player.setInvulnerable(true);
