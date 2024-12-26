@@ -65,6 +65,10 @@ tasks.withType(JavaCompile).configureEach {
 	it.options.release = 21
 }
 
+loom {
+	accessWidenerPath = file("src/main/resources/${project_name}.accesswidener")
+}
+
 java {
 	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
 	// if it is present.

@@ -3,10 +3,7 @@ package com.soybeani.entity;
 
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.custom.*;
-import com.soybeani.entity.vehicle.FlyBoatEntity;
-import com.soybeani.entity.vehicle.Ice2BoatEntity;
-import com.soybeani.entity.vehicle.IceBoatEntity;
-import com.soybeani.entity.vehicle.Su7CarEntity;
+import com.soybeani.entity.vehicle.*;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
@@ -54,6 +51,14 @@ public class EntityRegister {
             FabricEntityTypeBuilder.<IceBoatEntity>create(SpawnGroup.MISC, IceBoatEntity::new)
                     .dimensions(EntityDimensions.fixed(1.375F, 0.5625F))
                     .trackRangeBlocks(10)
+                    .build()
+    );
+
+    public static final EntityType<FlyingWoodSwordEntity> FLYING_WOOD_SWORD_ENTITY_ENTITY_TYPE = Registry.register(
+            Registries.ENTITY_TYPE,
+            Identifier.of(InitValue.MOD_ID, "flying_wood_sword"),
+            FabricEntityTypeBuilder.<FlyingWoodSwordEntity>create(SpawnGroup.CREATURE, FlyingWoodSwordEntity::new)
+                    .dimensions(EntityDimensions.fixed(1f, 0.5f))
                     .build()
     );
     public static void initialize(){

@@ -1,10 +1,14 @@
 package com.soybeani.event.entity;
 
 
+import com.soybeani.entity.vehicle.FlyingWoodSwordEntity;
 import com.soybeani.items.ItemsRegister;
 import com.soybeani.items.item.LightningSpyglassItem;
 import com.soybeani.items.item.NirvanaSpyglassItem;
+import com.soybeani.network.packet.KeyRPacket;
+import com.soybeani.network.packet.PlayerControlPayload;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -38,18 +42,17 @@ public class EventTick {
     public static void registerClient(){
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             PlayerEntity player = client.player;
-            //铁傀儡控制
-            if (player != null && player.isSpectator()) {
-                // 检查玩家是否在控制铁傀儡
-                boolean forward = client.options.forwardKey.isPressed();
-                boolean back = client.options.backKey.isPressed();
-                boolean left = client.options.leftKey.isPressed();
-                boolean right = client.options.rightKey.isPressed();
-                boolean jump = client.options.jumpKey.isPressed();
-
-                // 发送移动数据到服务器
-                // 这里需要实现自定义的网络包发送
-//                sendMovementPacket(forward, back, left, right, jump);
+            if(player != null){
+                if (client.player.getVehicle() instanceof FlyingWoodSwordEntity) {
+                    FlyingWoodSwordEntity sword = (FlyingWoodSwordEntity)client.player.getVehicle() ;
+                    boolean leftKey = client.options.leftKey.isPressed();
+                    boolean rightKey = client.options.rightKey.isPressed();
+                    boolean forwardKey = client.options.forwardKey.isPressed();
+                    boolean backKey = client.options.backKey.isPressed();
+                    boolean jumpKey = client.options.jumpKey.isPressed();
+                    boolean sneakKey = client.options.sneakKey.isPressed();
+                    ClientPlayNetworking.send(new PlayerControlPayload(leftKey, rightKey, forwardKey, backKey, jumpKey, sneakKey));
+                }
             }
         });
     }

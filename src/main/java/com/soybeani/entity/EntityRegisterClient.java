@@ -3,6 +3,7 @@ package com.soybeani.entity;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.client.renderer.*;
 import com.soybeani.entity.custom.*;
+import com.soybeani.entity.vehicle.FlyingWoodSwordEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -34,6 +35,7 @@ public class EntityRegisterClient {
         EntityRendererRegistry.register(SkeletonZombieEntity.SKELETON_ZOMBIE, SkeletonZombieEntityRenderer::new);
         EntityRendererRegistry.register(CreeperSkeletonEntity.CREEPER_SKELETON, CreeperSkeletonEntityRenderer::new);
         EntityRendererRegistry.register(ZombieCreeperEntity.ZOMBIE_CREEPER, ZombieCreeperEntityRenderer::new);
+        EntityRendererRegistry.register(EntityRegister.FLYING_WOOD_SWORD_ENTITY_ENTITY_TYPE, FlyingWoodSwordEntityRenderer::new);
     }
 
 }
