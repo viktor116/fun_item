@@ -45,13 +45,13 @@ public class EventTick {
             if(player != null){
                 if (client.player.getVehicle() instanceof FlyingWoodSwordEntity) {
                     FlyingWoodSwordEntity sword = (FlyingWoodSwordEntity)client.player.getVehicle() ;
-                    boolean leftKey = client.options.leftKey.isPressed();
-                    boolean rightKey = client.options.rightKey.isPressed();
                     boolean forwardKey = client.options.forwardKey.isPressed();
                     boolean backKey = client.options.backKey.isPressed();
+                    boolean leftKey = client.options.leftKey.isPressed();
+                    boolean rightKey = client.options.rightKey.isPressed();
                     boolean jumpKey = client.options.jumpKey.isPressed();
                     boolean sneakKey = client.options.sneakKey.isPressed();
-                    ClientPlayNetworking.send(new PlayerControlPayload(leftKey, rightKey, forwardKey, backKey, jumpKey, sneakKey));
+                    ClientPlayNetworking.send(new PlayerControlPayload(forwardKey, backKey, leftKey, rightKey, jumpKey, sneakKey));
                 }
             }
         });

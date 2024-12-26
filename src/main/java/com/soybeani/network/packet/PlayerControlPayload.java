@@ -55,6 +55,7 @@ public record PlayerControlPayload (boolean forward, boolean back, boolean left,
         if (player.hasVehicle()) {
             if (player.getVehicle() instanceof FlyingWoodSwordEntity woodSwordEntity) { //飞行木剑
                 woodSwordEntity.setInputs(payload.forward(), payload.back(), payload.left(), payload.right(),payload.jump(),payload.sneak());
+                ServerPlayNetworking.send(player,new PlayerControlPayload(payload.forward(), payload.back(), payload.left(), payload.right(),payload.jump(),payload.sneak()));
             }
         }
     }

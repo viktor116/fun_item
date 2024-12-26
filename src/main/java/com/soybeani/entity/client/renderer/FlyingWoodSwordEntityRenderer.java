@@ -34,7 +34,7 @@ public class FlyingWoodSwordEntityRenderer extends EntityRenderer<FlyingWoodSwor
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
         matrices.push();
         matrices.scale(2,2,2);
-        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-45));
+        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-90));
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90));
         MinecraftClient.getInstance().getItemRenderer().renderItem(
                 new ItemStack(Items.WOODEN_SWORD),

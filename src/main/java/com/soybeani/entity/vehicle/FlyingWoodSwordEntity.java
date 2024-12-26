@@ -1,9 +1,12 @@
 package com.soybeani.entity.vehicle;
 
+import com.soybeani.config.InitValue;
 import com.soybeani.entity.EntityRegister;
 import com.soybeani.network.packet.BlockPosPayload;
 import net.fabricmc.fabric.api.client.message.v1.ClientSendMessageEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.fabric.impl.networking.payload.PayloadHelper;
+import net.fabricmc.fabric.impl.registry.sync.packet.DirectRegistryPacketHandler;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -14,6 +17,7 @@ import net.minecraft.entity.vehicle.VehicleEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -28,19 +32,8 @@ import net.minecraft.world.World;
  * @description 飞行木剑载具实体
  */
 public class FlyingWoodSwordEntity extends VehicleEntity {
-    private static final double BASE_SPEED = 0.8;
     private static final float MAX_DAMAGE = 40.0f;
     private static final float ROTATION_SPEED = 2.0f;
-    private static final float ACCELERATION = 0.04F;
-    private static final float DECELERATION = 0.02F;
-    private static final float MAX_FORWARD_SPEED = 1.5F;
-
-    // DataTracker fields
-    private static final TrackedData<Float> FORWARD_SPEED = DataTracker.registerData(FlyingWoodSwordEntity.class, TrackedDataHandlerRegistry.FLOAT);
-    private static final TrackedData<Float> YAW_VELOCITY = DataTracker.registerData(FlyingWoodSwordEntity.class, TrackedDataHandlerRegistry.FLOAT);
-    private static final TrackedData<Boolean> LEFT_MOVING = DataTracker.registerData(FlyingWoodSwordEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private static final TrackedData<Boolean> RIGHT_MOVING = DataTracker.registerData(FlyingWoodSwordEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-
     // Input fields
     private boolean pressingLeft;
     private boolean pressingRight;
@@ -53,6 +46,7 @@ public class FlyingWoodSwordEntity extends VehicleEntity {
     private float velocityDecay = 0.9F;
     private float yawVelocity;
     private LivingEntity pilot;
+    private Vec3d lastLocation;
 
     public FlyingWoodSwordEntity(EntityType<? extends VehicleEntity> type, World world) {
         super(type, world);
@@ -71,48 +65,64 @@ public class FlyingWoodSwordEntity extends VehicleEntity {
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
-        builder.add(FORWARD_SPEED, 0.0f);
-        builder.add(YAW_VELOCITY, 0.0f);
-        builder.add(LEFT_MOVING, false);
-        builder.add(RIGHT_MOVING, false);
+    }
+
+    protected Entity.MoveEffect getMoveEffect() {
+        return MoveEffect.EVENTS;
     }
 
     @Override
     public void tick() {
-        super.tick();
-
-        // 如果有驾驶员且在客户端
+        this.lastLocation = this.getPos();
         if (this.pilot != null && !this.pilot.isRemoved() && this.pilot.getVehicle() == this) {
-            if (this.getWorld().isClient) {
-                this.updateMovement();
+            InitValue.LOGGER.info("this.isLogicalSideForUpdatingMovement()="+this.isLogicalSideForUpdatingMovement());
+            if (this.isLogicalSideForUpdatingMovement()) {
+                Vec3d movement = this.calculateMovement();
+                this.setVelocity(movement);
+                InitValue.LOGGER.info("movement数值:{},x={}", movement, movement.x);
+                this.move(MovementType.SELF, this.getVelocity());
+            } else {
+                // 非逻辑端时设置为零向量
+                this.setVelocity(Vec3d.ZERO);
             }
-
-            // 应用移动
-            Vec3d movement = this.calculateMovement();
-            this.setVelocity(movement);
-            this.move(MovementType.SELF, this.getVelocity());
-
-            // 更新DataTracker
-            this.dataTracker.set(FORWARD_SPEED, (float)movement.length());
-
-            // 水中上浮
-            if (this.isTouchingWater()) {
-                this.addVelocity(0, 0.1, 0);
-            }
-        } else {
-            // 没有驾驶员时停止
-            this.setVelocity(Vec3d.ZERO);
-            this.dataTracker.set(FORWARD_SPEED, 0.0f);
-            this.yawVelocity = 0.0f;
         }
-
+        this.setPitch(0);
         // 应用转向
         this.setYaw(this.getYaw() + this.yawVelocity);
+        super.tick();
+    }
+
+    private Vec3d calculateMovement() {
+        if (this.pilot == null || this.pilot.isRemoved()) {
+            return Vec3d.ZERO;
+        }
+
+        // 获取驾驶员的朝向
+        float yaw = this.pilot.getYaw();  // Minecraft中，0度是南方，90度是西方
+        float pitch = this.pilot.getPitch();
+
+        // 基础移动速度
+        double speed = 1D;
+        Vec3d movement = Vec3d.ZERO;
+
+        // 只处理前进键，根据玩家视角移动
+        if (this.pressingForward) {
+            // 计算水平方向的移动
+            double horizontalSpeed = Math.cos(Math.toRadians(pitch)) * speed;
+            // 修正南北方向
+            double x = -Math.sin(Math.toRadians(yaw)) * horizontalSpeed;
+            double z = Math.cos(Math.toRadians(yaw)) * horizontalSpeed;  // 去掉负号
+
+            // 计算垂直方向的移动（基于pitch）
+            double y = -Math.sin(Math.toRadians(pitch)) * speed;
+
+            movement = new Vec3d(x, y, z);
+        }
+
+        return movement;
     }
 
     private void updateMovement() {
-        float forwardSpeed = this.dataTracker.get(FORWARD_SPEED);
-
         // 处理转向
         if (this.pressingLeft) {
             this.yawVelocity -= ROTATION_SPEED;
@@ -120,39 +130,15 @@ public class FlyingWoodSwordEntity extends VehicleEntity {
         if (this.pressingRight) {
             this.yawVelocity += ROTATION_SPEED;
         }
-
-        // 处理前进/后退
-        if (this.pressingForward) {
-            forwardSpeed = Math.min(forwardSpeed + ACCELERATION, MAX_FORWARD_SPEED);
-        } else if (this.pressingBack) {
-            forwardSpeed = Math.max(forwardSpeed - ACCELERATION, -MAX_FORWARD_SPEED * 0.5f);
-        } else {
-            forwardSpeed *= (1 - DECELERATION);
-        }
-
-        // 更新速度和动画状态
-        this.dataTracker.set(FORWARD_SPEED, forwardSpeed);
-        this.dataTracker.set(LEFT_MOVING, this.pressingLeft);
-        this.dataTracker.set(RIGHT_MOVING, this.pressingRight);
-        if(pilot instanceof ServerPlayerEntity serverPlayer){
-            ServerPlayNetworking.send(serverPlayer,new BlockPosPayload(pilot.getBlockPos()));
+        if (pilot instanceof ServerPlayerEntity serverPlayer) {
+            ServerPlayNetworking.send(serverPlayer, new BlockPosPayload(pilot.getBlockPos()));
         }
         // 应用阻力
         this.yawVelocity *= this.velocityDecay;
     }
 
-    private Vec3d calculateMovement() {
-        float forwardSpeed = this.dataTracker.get(FORWARD_SPEED);
-        float yaw = this.getYaw();
 
-        // 根据朝向和速度计算移动向量
-        double vx = -MathHelper.sin(yaw * 0.017453292F) * forwardSpeed;
-        double vz = MathHelper.cos(yaw * 0.017453292F) * forwardSpeed;
-
-        return new Vec3d(vx, 0, vz);
-    }
-
-    public void setInputs(boolean pressingLeft, boolean pressingRight, boolean pressingForward, boolean pressingBack,boolean pressingJump,boolean pressingSneak) {
+    public void setInputs(boolean pressingForward, boolean pressingBack, boolean pressingLeft, boolean pressingRight, boolean pressingJump, boolean pressingSneak) {
         this.pressingLeft = pressingLeft;
         this.pressingRight = pressingRight;
         this.pressingForward = pressingForward;
@@ -164,13 +150,11 @@ public class FlyingWoodSwordEntity extends VehicleEntity {
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
         if (nbt.contains("ForwardSpeed")) {
-            this.dataTracker.set(FORWARD_SPEED, nbt.getFloat("ForwardSpeed"));
         }
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
-        nbt.putFloat("ForwardSpeed", this.dataTracker.get(FORWARD_SPEED));
     }
 
     @Override
@@ -180,22 +164,9 @@ public class FlyingWoodSwordEntity extends VehicleEntity {
             this.pilot = (LivingEntity) passenger;
         }
     }
-
     @Override
-    public boolean damage(DamageSource source, float amount) {
-        if (this.isInvulnerableTo(source)) {
-            return false;
-        }
-
-        // 调用父类的damage方法来处理基础伤害逻辑
-        boolean damaged = super.damage(source, amount);
-
-        if (!this.getWorld().isClient && !this.isRemoved()) {
-            if (this.getDamageWobbleStrength() > MAX_DAMAGE) {
-                this.killAndDropSelf(source);
-            }
-        }
-        return damaged;
+    public LivingEntity getControllingPassenger() {
+        return pilot;
     }
 
     @Override
@@ -211,7 +182,12 @@ public class FlyingWoodSwordEntity extends VehicleEntity {
 
         if (!this.getWorld().isClient) {
             if (!player.isSneaking()) {
-                return player.startRiding(this) ? ActionResult.CONSUME : ActionResult.PASS;
+                if(player.startRiding(this)){
+                    player.setPos(this.prevX,this.prevY,this.prevZ);
+                    return ActionResult.CONSUME;
+                }else {
+                    return ActionResult.PASS;
+                }
             }
         }
 
