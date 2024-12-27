@@ -1,5 +1,7 @@
 package com.soybeani.items.item;
 
+import com.soybeani.config.InitValue;
+import com.soybeani.entity.vehicle.FlyingWoodSwordEntity;
 import com.soybeani.items.ItemsRegister;
 import com.soybeani.utils.CommonUtils;
 import com.soybeani.utils.DelayedTaskManager;
@@ -174,6 +176,7 @@ public class TalismanItem extends Item {
             switch (type) {
                 case BLUE -> handleLightningSpell(player, blockPos, stack);
                 case YELLOW_RED -> handleFlame(player, blockPos, stack);
+                case SKYBLUE -> handleSummonFlyWoodSword(player, blockPos, stack);
                 default -> {
                     return ActionResult.PASS;
                 }
@@ -207,6 +210,21 @@ public class TalismanItem extends Item {
         }
 
         return super.use(world, player, hand);
+    }
+
+    //
+    public void handleSummonFlyWoodSword(PlayerEntity player, BlockPos blockPos, ItemStack stack) {
+        if (!player.getWorld().isClient) {
+            ItemStack stackInHand = player.getStackInHand(Hand.MAIN_HAND);
+            if(stackInHand.getItem() == Items.WOODEN_SWORD){
+                FlyingWoodSwordEntity flyingWoodSwordEntity = new FlyingWoodSwordEntity(player.getWorld(), blockPos.getX(), blockPos.getY() + 1.5, blockPos.getZ());
+                player.getWorld().spawnEntity(flyingWoodSwordEntity);
+                if(!player.isInCreativeMode()){
+                    stackInHand.decrement(1);
+                    stack.decrement(1);
+                }
+            }
+        }
     }
 
     //附身附魔
@@ -552,6 +570,16 @@ public class TalismanItem extends Item {
                         }
                         world.playSound(null, target.getBlockPos(),
                                 SoundEvents.ENTITY_SKELETON_DEATH,
+                                SoundCategory.PLAYERS, 1.0f, 1.2f);
+                        if (!player.isInCreativeMode()) {
+                            offHandStack.decrement(1);
+                        }
+                    }
+                case SKYBLUE:
+                    if (entity instanceof LivingEntity target) {
+                        target.setPosition(target.getX(), target.getY() + InitValue.RANDOM.nextInt(5,10), target.getZ());
+                        world.playSound(null, target.getBlockPos(),
+                                SoundEvents.ENTITY_ENDERMAN_TELEPORT,
                                 SoundCategory.PLAYERS, 1.0f, 1.2f);
                         if (!player.isInCreativeMode()) {
                             offHandStack.decrement(1);

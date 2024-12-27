@@ -66,6 +66,7 @@ public class ModChineseLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ItemsRegister.TALISMAN,"剑气符箓");
         translationBuilder.add(ItemsRegister.TALISMAN_BLACK_PURPLE,"死亡阴影符箓");
         translationBuilder.add(ItemsRegister.TALISMAN_BLUE,"雷法符箓");
+        translationBuilder.add(ItemsRegister.GATLING_GUN,"加特林");
 
         translationBuilder.add(ItemsRegister.TALISMAN_GREEN,"道法自然符箓");
         translationBuilder.add(ItemsRegister.TALISMAN_YELLOW_RED,"燃烧符箓");

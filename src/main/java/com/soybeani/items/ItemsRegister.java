@@ -89,6 +89,7 @@ public class ItemsRegister {
     public static final Item TALISMAN_YELLOW = register(new TalismanItem(new Item.Settings(), TalismanItem.Type.YELLOW),"talisman_yellow"); //大人时代变了
     public static final Item TALISMAN_SKYBLUE = register(new TalismanItem(new Item.Settings(), TalismanItem.Type.SKYBLUE),"talisman_skyblue"); //飞行
     public static final Item TALISMAN_GREY = register(new TalismanItem(new Item.Settings(), TalismanItem.Type.GREY),"talisman_grey"); //凋零之力
+    public static final Item GATLING_GUN = register(new GatlingItem(new Item.Settings().maxDamage(1000).maxCount(1)),"gatling_gun");
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
@@ -141,6 +142,7 @@ public class ItemsRegister {
             itemGroup.add(TALISMAN_YELLOW);
             itemGroup.add(TALISMAN_SKYBLUE);
             itemGroup.add(TALISMAN_GREY);
+            itemGroup.add(GATLING_GUN);
         });
     }
 

@@ -58,7 +58,7 @@ public class EntityRegister {
             Registries.ENTITY_TYPE,
             Identifier.of(InitValue.MOD_ID, "flying_wood_sword"),
             FabricEntityTypeBuilder.<FlyingWoodSwordEntity>create(SpawnGroup.CREATURE, FlyingWoodSwordEntity::new)
-                    .dimensions(EntityDimensions.fixed(1f, 0.5f))
+                    .dimensions(EntityDimensions.fixed(1.8f, 0.5f))
                     .build()
     );
     public static void initialize(){

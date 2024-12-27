@@ -1,9 +1,6 @@
 package com.soybeani.event;
 
-import com.soybeani.event.entity.EventAttack;
-import com.soybeani.event.entity.EventBreak;
-import com.soybeani.event.entity.EventTick;
-import com.soybeani.event.entity.EventUse;
+import com.soybeani.event.entity.*;
 import com.soybeani.utils.DelayedTaskManager;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,6 +21,6 @@ public class EventRegister {
     }
 
     public static void initializeClient(){
-        EventTick.registerClient();
+        EventTickClient.registerClient();
     }
 }

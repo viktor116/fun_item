@@ -1,0 +1,85 @@
+{
+  "credit": "Made with Blockbench",
+  "parent": "builtin/entity",
+  "texture_size": [
+    2050,
+    2563
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        74,
+        0,
+        0
+      ],
+      "translation": [
+        0,
+        -17,
+        -8.25
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        75,
+        0,
+        0
+      ],
+      "translation": [
+        -0.75,
+        -18,
+        -8.75
+      ]
+    },
+    "firstperson_righthand": {
+      "translation": [
+        1.75,
+        -8,
+        17
+      ]
+    },
+    "firstperson_lefthand": {
+      "translation": [
+        -1.25,
+        -8.25,
+        18
+      ]
+    },
+    "gui": {
+      "rotation": [
+        90,
+        -43,
+        0
+      ],
+      "translation": [
+        -5.75,
+        -6.25,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        -90,
+        133,
+        0
+      ],
+      "translation": [
+        5.5,
+        -5.75,
+        4
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  },
+  "textures": {
+    "particle": "item/gatling_gun"
+  }
+}
