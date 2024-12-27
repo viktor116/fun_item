@@ -9,5 +9,10 @@
       "fun_item:leijun/jubigojune",
       "fun_item:leijun/three_tricks"
     ]
+  },
+  "gatling_gun": {
+    "sounds": [
+      "fun_item:misc/gatling_gun"
+    ]
   }
 }

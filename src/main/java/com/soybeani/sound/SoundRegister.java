@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
  */
 public class SoundRegister {
     public static final SoundEvent LEI_JUN = register("lei_jun");
-
+    public static final SoundEvent GATLING_GUN = register("gatling_gun");
     public static void initialize(){
 
     }
