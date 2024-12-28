@@ -51,6 +51,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ItemsRegister.TALISMAN_YELLOW,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.TALISMAN_SKYBLUE,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.TALISMAN_GREY,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.COPPER_BULLET,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.IRON_BULLET,Models.GENERATED);
 //        itemModelGenerator.register(ItemsRegister.GATLING_GUN,Models.HANDHELD);
 
         itemModelGenerator.register(ItemsRegister.SKELETON_ZOMBIE_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));

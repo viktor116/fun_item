@@ -36,6 +36,7 @@ public class EntityRegisterClient {
         EntityRendererRegistry.register(CreeperSkeletonEntity.CREEPER_SKELETON, CreeperSkeletonEntityRenderer::new);
         EntityRendererRegistry.register(ZombieCreeperEntity.ZOMBIE_CREEPER, ZombieCreeperEntityRenderer::new);
         EntityRendererRegistry.register(EntityRegister.FLYING_WOOD_SWORD_ENTITY_ENTITY_TYPE, FlyingWoodSwordEntityRenderer::new);
+        EntityRendererRegistry.register(EntityRegister.BULLET_ENTITY_TYPE, BulletEntityRenderer::new);
     }
 
 }

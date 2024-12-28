@@ -103,5 +103,19 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.GOLD_INGOT), conditionsFromItem(Items.GOLD_INGOT))
                 .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
                 .offerTo(exporter);
+        //铜弹
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ItemsRegister.COPPER_BULLET,4)
+                .input('S', Items.COPPER_INGOT)
+                .pattern("S")
+                .pattern("S")
+                .criterion(hasItem(Items.COPPER_INGOT), conditionsFromItem(Items.COPPER_INGOT))
+                .offerTo(exporter);;
+        //铁弹
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ItemsRegister.IRON_BULLET,4)
+                .input('S', Items.IRON_INGOT)
+                .pattern("S")
+                .pattern("S")
+                .criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT))
+                .offerTo(exporter);;
     }
 }

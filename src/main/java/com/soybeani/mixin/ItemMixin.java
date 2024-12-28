@@ -1,6 +1,7 @@
 package com.soybeani.mixin;
 
 
+import com.soybeani.items.ItemsRegister;
 import com.soybeani.items.item.TalismanItem;
 import com.soybeani.utils.DelayedTaskManager;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -145,7 +146,18 @@ public class ItemMixin {
                         talismanItem.activePurpleEffects.put(user.getUuid(), new TalismanItem.StoreEffectDAO(level,20*30*2)); // 10秒持续时间
 
                     }
+                    cir.cancel();
+                    cir.setReturnValue(TypedActionResult.success(user.getStackInHand(hand)));
+                }else if(type == TalismanItem.Type.YELLOW){
+                    if(user instanceof ServerPlayerEntity serverPlayer) {
+                        ItemStack gunStack = new ItemStack(ItemsRegister.GATLING_GUN);
+                        user.setStackInHand(Hand.MAIN_HAND, gunStack);
 
+                        if(!user.isInCreativeMode()){
+                            ItemStack offHandStack = user.getOffHandStack();
+                            offHandStack.decrement(1);
+                        }
+                    }
                     cir.cancel();
                     cir.setReturnValue(TypedActionResult.success(user.getStackInHand(hand)));
                 }

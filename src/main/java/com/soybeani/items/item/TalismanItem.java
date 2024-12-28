@@ -334,7 +334,7 @@ public class TalismanItem extends Item {
     }
 
     // 清理方法更新
-    private void handleLightningSpell(PlayerEntity player, BlockPos blockPos,ItemStack stack) { //雷法
+    public static void handleLightningSpell(PlayerEntity player, BlockPos blockPos,ItemStack stack) { //雷法
         LightningEntity lightning = EntityType.LIGHTNING_BOLT.create(player.getWorld());
         player.setInvulnerable(true);
         lightning.setPosition(blockPos.getX(), blockPos.getY(), blockPos.getZ());
@@ -351,7 +351,7 @@ public class TalismanItem extends Item {
         }
     }
 
-    private static void handleNatureHealing(PlayerEntity player, ItemStack stack,float healAmount) { //道法自然治疗
+    public static void handleNatureHealing(PlayerEntity player, ItemStack stack,float healAmount) { //道法自然治疗
         if(player.getHealth() >= player.getMaxHealth()) return;
         player.heal(healAmount);
         // 播放治疗音效
@@ -376,7 +376,7 @@ public class TalismanItem extends Item {
         }
     }
 
-    private static void handleFlame(PlayerEntity player, BlockPos blockPos,ItemStack stack){
+    public static void handleFlame(PlayerEntity player, BlockPos blockPos,ItemStack stack){
         World world = player.getWorld();
         if(world.getBlockState(blockPos.up()) == Blocks.AIR.getDefaultState()){
             world.setBlockState(blockPos.up(), Blocks.FIRE.getDefaultState());
@@ -385,7 +385,7 @@ public class TalismanItem extends Item {
             }
         }
     }
-    private static void handleFlameToEntity(PlayerEntity player,Entity entity,ItemStack stack,int tick){
+    public static void handleFlameToEntity(PlayerEntity player,Entity entity,ItemStack stack,int tick){
         entity.setFireTicks(tick);
         if(!player.isInCreativeMode()){
             stack.decrement(1);
@@ -472,9 +472,39 @@ public class TalismanItem extends Item {
                 }
             }
         }
-
     }
 
+    public static void handleWitherStatus(PlayerEntity player,Entity entity,World world,ItemStack itemStack) {
+        if (entity instanceof LivingEntity target) {
+            target.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 1200, 1));
+            if (world instanceof ServerWorld serverWorld) {
+                serverWorld.spawnParticles(
+                        ParticleTypes.SMOKE,
+                        target.getX(), target.getY() + target.getHeight() / 2, target.getZ(),
+                        200, 1, 1, 1,
+                        0.2
+                );
+            }
+            world.playSound(null, target.getBlockPos(),
+                    SoundEvents.ENTITY_SKELETON_DEATH,
+                    SoundCategory.PLAYERS, 1.0f, 1.2f);
+            if (!player.isInCreativeMode()) {
+                itemStack.decrement(1);
+            }
+        }
+    }
+    public static void handleFlySkyToEntity(PlayerEntity player,Entity entity,ItemStack stack){
+        if (entity instanceof LivingEntity target) {
+            World world = target.getWorld();
+            target.setPosition(target.getX(), target.getY() + InitValue.RANDOM.nextInt(5,10), target.getZ());
+            world.playSound(null, target.getBlockPos(),
+                    SoundEvents.ENTITY_ENDERMAN_TELEPORT,
+                    SoundCategory.PLAYERS, 1.0f, 1.2f);
+            if (!player.isInCreativeMode()) {
+                stack.decrement(1);
+            }
+        }
+    }
     public static void EventRegister(PlayerEntity player, Hand hand, World world, Entity entity, HitResult hitResult) {
         if(world.isClient){
             return;
@@ -558,33 +588,11 @@ public class TalismanItem extends Item {
                     }
                     break;
                 case BLACK_PURPLE:
-                    if (entity instanceof LivingEntity target) {
-                        target.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 1200, 1));
-                        if (world instanceof ServerWorld serverWorld) {
-                            serverWorld.spawnParticles(
-                                    ParticleTypes.SMOKE,
-                                    target.getX(), target.getY() + target.getHeight() / 2, target.getZ(),
-                                    200, 1, 1, 1,
-                                    0.2
-                            );
-                        }
-                        world.playSound(null, target.getBlockPos(),
-                                SoundEvents.ENTITY_SKELETON_DEATH,
-                                SoundCategory.PLAYERS, 1.0f, 1.2f);
-                        if (!player.isInCreativeMode()) {
-                            offHandStack.decrement(1);
-                        }
-                    }
+                    handleWitherStatus(player, entity, world, offHandStack);
+                    break;
                 case SKYBLUE:
-                    if (entity instanceof LivingEntity target) {
-                        target.setPosition(target.getX(), target.getY() + InitValue.RANDOM.nextInt(5,10), target.getZ());
-                        world.playSound(null, target.getBlockPos(),
-                                SoundEvents.ENTITY_ENDERMAN_TELEPORT,
-                                SoundCategory.PLAYERS, 1.0f, 1.2f);
-                        if (!player.isInCreativeMode()) {
-                            offHandStack.decrement(1);
-                        }
-                    }
+                    handleFlySkyToEntity(player, entity,offHandStack);
+                    break;
             }
         }
     }

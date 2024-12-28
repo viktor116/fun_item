@@ -15,6 +15,8 @@ import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
+import org.apache.http.client.entity.EntityBuilder;
 
 /**
  * @author soybean
@@ -44,7 +46,6 @@ public class EntityRegister {
                     .build()
     );
 
-
     public static final EntityType<IceBoatEntity> ICE_BOAT = Registry.register(
             Registries.ENTITY_TYPE,
             Identifier.of(InitValue.MOD_ID, "ice_boat"),
@@ -61,6 +62,15 @@ public class EntityRegister {
                     .dimensions(EntityDimensions.fixed(1.8f, 0.5f))
                     .build()
     );
+
+    public static final EntityType<BulletEntity> BULLET_ENTITY_TYPE = Registry.register(
+            Registries.ENTITY_TYPE,
+            InitValue.id("bullet_entity"),
+            EntityType.Builder.create((EntityType<BulletEntity> entityType, World world) -> new BulletEntity(entityType, world),SpawnGroup.MISC)
+                            .dimensions(0.1f, 0.1f)
+                            .maxTrackingRange(200)
+                            .trackingTickInterval(5)
+                            .build());
     public static void initialize(){
         FabricDefaultAttributeRegistry.register(SU7,Su7CarEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(WheatEntity.WHEAT, WheatEntity.createAttributes());
