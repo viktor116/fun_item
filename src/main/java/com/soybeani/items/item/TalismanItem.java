@@ -7,6 +7,7 @@ import com.soybeani.utils.CommonUtils;
 import com.soybeani.utils.DelayedTaskManager;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -26,12 +27,17 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
+import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -70,7 +76,8 @@ public class TalismanItem extends Item {
     public static final Map<UUID, StoreEffectDAO> activePurpleEffects = new HashMap<>();
 
     private static final Map<UUID, IronGolemEntity> playerGolemMap = new HashMap<>();
-    private static final Map<UUID, Boolean> playerControllingMap = new HashMap<>();
+    private static final Map<UUID, Long> golemSpawnTimes = new HashMap<>();
+    private static final long MAX_IDLE_TIME = 20*60; // 1分钟 (毫秒)
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (world.isClient || !(entity instanceof PlayerEntity player)) return;
@@ -95,6 +102,23 @@ public class TalismanItem extends Item {
             entry.setValue(value);
             return false;
         });
+        // 处理傀儡超时检查
+        if (type == Type.DARKGREEN) {
+            UUID playerId = player.getUuid();
+            if (playerGolemMap.containsKey(playerId)) {
+                IronGolemEntity golem = playerGolemMap.get(playerId);
+                Long spawnTime = golemSpawnTimes.get(playerId);
+
+                if (golem == null || !golem.isAlive() || world.getTime() - spawnTime > MAX_IDLE_TIME) {
+                    if (golem != null && golem.isAlive()) {
+                        golem.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                    playerGolemMap.remove(playerId);
+                    golemSpawnTimes.remove(playerId);
+                    player.sendMessage(Text.literal("傀儡已消失"), true);
+                }
+            }
+        }
         super.inventoryTick(stack, world, entity, slot, selected);
     }
 
@@ -177,6 +201,14 @@ public class TalismanItem extends Item {
                 case BLUE -> handleLightningSpell(player, blockPos, stack);
                 case YELLOW_RED -> handleFlame(player, blockPos, stack);
                 case SKYBLUE -> handleSummonFlyWoodSword(player, blockPos, stack);
+                case DARKGREEN -> {
+                    if(player.getMainHandStack().isOf(Items.WOODEN_SWORD)){
+                        handleGolemMovement(player, player.getWorld());
+                        if(!player.isInCreativeMode()){
+                            stack.decrement(1);
+                        }
+                    }
+                }
                 default -> {
                     return ActionResult.PASS;
                 }
@@ -185,23 +217,54 @@ public class TalismanItem extends Item {
         }
         return super.useOnBlock(context);
     }
+    @Override
+    public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity target, Hand hand) {
+        if (!player.getWorld().isClient && type == Type.DARKGREEN) {
+            if(player.getMainHandStack().isOf(Items.WOODEN_SWORD)){
+                UUID playerId = player.getUuid();
+                if (!playerGolemMap.containsKey(playerId)) {
+                    // 如果还没有傀儡，先召唤一个
+                    IronGolemEntity golem = EntityType.IRON_GOLEM.create(player.getWorld());
+                    if (golem != null) {
+                        golem.refreshPositionAndAngles(
+                                player.getX(), player.getY(), player.getZ(),
+                                player.getYaw(), player.getPitch()
+                        );
+                        golem.setCustomName(Text.literal(player.getName().getString() + "的铁傀儡"));
+                        golem.setCustomNameVisible(true);
+                        golem.setAiDisabled(false);
 
+                        player.getWorld().spawnEntity(golem);
+                        playerGolemMap.put(playerId, golem);
+                        golemSpawnTimes.put(playerId, player.getWorld().getTime());
+                        player.sendMessage(Text.literal("召唤傀儡成功并开始攻击目标"), true);
+                    }
+                }
+
+                // 控制傀儡攻击目标
+                IronGolemEntity golem = playerGolemMap.get(playerId);
+                if (golem != null && golem.isAlive()) {
+                    golem.getNavigation().stop();
+                    golem.setTarget(target);
+                    golemSpawnTimes.put(playerId, player.getWorld().getTime());
+                    player.sendMessage(Text.literal("傀儡开始攻击目标"), true);
+                }
+                if(!player.isInCreativeMode()){
+                    stack.decrement(1);
+                }
+
+                return ActionResult.SUCCESS;
+            }
+        }
+        return ActionResult.PASS;
+    }
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
         if (!world.isClient) {
             switch (type) {
                 case GREEN -> handleNatureHealing(player, stack ,0.5F);
-                case DARKGREEN -> handleGolemControl(player, world, stack);
-//                case YELLOW_RED -> handleIgniteEffect(player, stack);
-//                case NONE -> handleSwordQi(player, world, stack);
-//                case PINK -> handleCinnabarWarding(player, stack);
-//                case DARKGREEN -> handlePuppetMaster(player, world, stack);
-//                case YELLOW -> handleGatlingGun(player, world, stack);
-//                case SKYBLUE -> handleFlySword(player, world, stack);
-//                case PURPLE -> handleBloodMagic(player, stack);
-//                case GREY -> handleWitherPower(player, stack);
-//                case BLACK_PURPLE -> handleDeathShadow(player, world, stack);
+                case DARKGREEN -> {}
                 default -> {
                     return TypedActionResult.pass(stack);
                 }
@@ -211,8 +274,89 @@ public class TalismanItem extends Item {
 
         return super.use(world, player, hand);
     }
+    private void handleGolemMovement(PlayerEntity player, World world) {
+        // 获取玩家视线方向的目标位置
+        Vec3d startPos = player.getEyePos();
+        Vec3d lookVec = player.getRotationVec(1.0F);
+        Vec3d endPos = startPos.add(lookVec.multiply(50.0D));
 
-    //
+        BlockHitResult hitResult = world.raycast(new RaycastContext(
+                startPos,
+                endPos,
+                RaycastContext.ShapeType.OUTLINE,
+                RaycastContext.FluidHandling.NONE,
+                player
+        ));
+
+        if (hitResult.getType() == HitResult.Type.BLOCK) {
+            BlockPos targetPos = hitResult.getBlockPos();
+            Direction hitSide = hitResult.getSide();
+
+            // 根据击中的面调整目标位置，让傀儡站在方块上面
+            if (hitSide == Direction.UP) {
+                targetPos = targetPos.up();
+            } else if (hitSide != Direction.DOWN) {
+                targetPos = targetPos.offset(hitSide);
+            }
+
+            UUID playerId = player.getUuid();
+            if (!playerGolemMap.containsKey(playerId)) {
+                // 召唤新傀儡
+                IronGolemEntity golem = EntityType.IRON_GOLEM.create(world);
+                if (golem != null) {
+                    golem.refreshPositionAndAngles(
+                            player.getX(), player.getY(), player.getZ(),
+                            player.getYaw(), player.getPitch()
+                    );
+                    golem.setCustomName(Text.literal(player.getName().getString() + "的铁傀儡"));
+                    golem.setCustomNameVisible(true);
+                    golem.setAiDisabled(false);
+                    EntityAttributeInstance speedAttribute = golem.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+                    if (speedAttribute != null) {
+                        speedAttribute.setBaseValue(0.5D); // 默认是0.25，提升移动速度
+                    }
+
+                    world.spawnEntity(golem);
+                    playerGolemMap.put(playerId, golem);
+                    golemSpawnTimes.put(playerId, world.getTime());
+                    player.sendMessage(Text.literal("召唤傀儡成功"), true);
+                }
+            } else {
+                // 控制已有傀儡移动
+                IronGolemEntity golem = playerGolemMap.get(playerId);
+                if (golem != null && golem.isAlive()) {
+                    golem.getNavigation().stop();
+                    golem.setTarget(null);
+
+                    // 计算实际的目标位置，确保傀儡能站立
+                    BlockPos finalPos = targetPos;
+                    while (!world.getBlockState(finalPos.down()).isFullCube(world, finalPos.down())
+                            && finalPos.getY() > world.getBottomY()) {
+                        finalPos = finalPos.down();
+                    }
+
+                    golem.getNavigation().startMovingTo(
+                            finalPos.getX() + 0.5,
+                            finalPos.getY(),
+                            finalPos.getZ() + 0.5,
+                            1.0D
+                    );
+
+                    // 粒子效果显示目标位置
+                    world.addParticle(ParticleTypes.END_ROD,
+                            finalPos.getX() + 0.5,
+                            finalPos.getY(),
+                            finalPos.getZ() + 0.5,
+                            0, 0.5, 0);
+
+                    golemSpawnTimes.put(playerId, world.getTime());
+                    double distance = Math.sqrt(player.squaredDistanceTo(finalPos.getX(), finalPos.getY(), finalPos.getZ()));
+                    player.sendMessage(Text.literal(String.format("傀儡正在移动到该位置", distance)), true);
+                }
+            }
+        }
+    }
+    //飞行
     public void handleSummonFlyWoodSword(PlayerEntity player, BlockPos blockPos, ItemStack stack) {
         if (!player.getWorld().isClient) {
             ItemStack stackInHand = player.getStackInHand(Hand.MAIN_HAND);
@@ -224,112 +368,6 @@ public class TalismanItem extends Item {
                     stack.decrement(1);
                 }
             }
-        }
-    }
-
-    //附身附魔
-    private void handleGolemControl(PlayerEntity player, World world, ItemStack stack) {
-        UUID playerId = player.getUuid();
-
-        // 如果玩家已经在控制铁傀儡，右键点击会结束控制
-        if (playerGolemMap.containsKey(playerId)) {
-            // 获取并移除铁傀儡
-            IronGolemEntity golem = playerGolemMap.get(playerId);
-            if (golem != null && golem.isAlive()) {
-                golem.remove(Entity.RemovalReason.DISCARDED);
-            }
-            playerGolemMap.remove(playerId);
-            playerControllingMap.remove(playerId);
-
-            // 恢复玩家状态
-            player.setNoGravity(false);
-            player.setInvulnerable(false);
-            player.setVelocity(Vec3d.ZERO);
-
-            player.sendMessage(Text.literal("已退出铁傀儡控制模式"), false);
-        } else {
-            // 生成铁傀儡
-            IronGolemEntity golem = EntityType.IRON_GOLEM.create(world);
-            if (golem != null) {
-                // 设置铁傀儡位置和朝向
-                golem.refreshPositionAndAngles(
-                        player.getX(),
-                        player.getY(),
-                        player.getZ(),
-                        player.getYaw(),
-                        player.getPitch()
-                );
-
-                // 设置铁傀儡属性
-                golem.setAiDisabled(true);
-                golem.setCustomName(Text.literal(player.getName().getString() + "的铁傀儡"));
-                golem.setCustomNameVisible(true);
-
-                // 生成铁傀儡
-                world.spawnEntity(golem);
-
-                // 设置玩家状态
-                player.setNoGravity(true);
-                player.setInvulnerable(true);
-                player.setVelocity(Vec3d.ZERO);
-
-                // 记录关联
-                playerGolemMap.put(playerId, golem);
-                playerControllingMap.put(playerId, true);
-
-                player.sendMessage(Text.literal("已进入铁傀儡控制模式"), false);
-            }
-        }
-    }
-
-    // 处理铁傀儡攻击
-    @Override
-    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (!attacker.getWorld().isClient && attacker instanceof PlayerEntity player) {
-            UUID playerId = player.getUuid();
-            IronGolemEntity golem = playerGolemMap.get(playerId);
-
-            if (golem != null && golem.isAlive()) {
-                // 让铁傀儡执行攻击
-                golem.tryAttack(target);
-
-                // 播放攻击音效和动画
-                World world = golem.getWorld();
-                world.playSound(null,
-                        golem.getX(),
-                        golem.getY(),
-                        golem.getZ(),
-                        SoundEvents.ENTITY_IRON_GOLEM_ATTACK,
-                        SoundCategory.HOSTILE,
-                        1.0F,
-                        1.0F
-                );
-                return true;
-            }
-        }
-        return super.postHit(stack, target, attacker);
-    }
-
-    public static IronGolemEntity getControlledGolem(UUID playerId) {
-        return playerGolemMap.get(playerId);
-    }
-
-    public static boolean isControllingGolem(UUID playerId) {
-        return playerControllingMap.getOrDefault(playerId, false);
-    }
-
-    public static void cleanup(PlayerEntity player) {
-        UUID playerId = player.getUuid();
-        if (playerGolemMap.containsKey(playerId)) {
-            IronGolemEntity golem = playerGolemMap.get(playerId);
-            if (golem != null && golem.isAlive()) {
-                golem.remove(Entity.RemovalReason.DISCARDED);
-            }
-            playerGolemMap.remove(playerId);
-            playerControllingMap.remove(playerId);
-
-            player.setNoGravity(false);
-            player.setInvulnerable(false);
         }
     }
 

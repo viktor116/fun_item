@@ -21,6 +21,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -48,7 +49,7 @@ public class GatlingItem extends RangedWeaponItem implements GeoItem {
     private int shootCooldown = 0;
 
     // 添加声音控制相关变量
-    private static final int SOUND_DURATION = 140; // 7秒 = 140 ticks
+    private static final int SOUND_DURATION = 16; // 7秒 = 140 ticks
     private int soundTimer = 0;
     private boolean isSoundPlaying = false;
 
@@ -110,8 +111,8 @@ public class GatlingItem extends RangedWeaponItem implements GeoItem {
                                 player.getBlockPos(),
                                 SoundRegister.GATLING_GUN,
                                 SoundCategory.PLAYERS,
-                                1f,
-                                0.5f + world.random.nextFloat()
+                                0.5f,
+                                1
                         );
                         isSoundPlaying = true;
                         soundTimer = SOUND_DURATION;
@@ -156,6 +157,7 @@ public class GatlingItem extends RangedWeaponItem implements GeoItem {
                 bulletItem.setType(type);
                 PersistentProjectileEntity projectile = bulletItem.createBullet(world, bulletStack, player,bulletStack);
                 projectile.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 5.0F, world.random.nextFloat());
+                projectile.setNoGravity(true);
                 projectile.setOwner(player);
                 projectile.setDamage(projectile.getDamage() * 1.5);
 

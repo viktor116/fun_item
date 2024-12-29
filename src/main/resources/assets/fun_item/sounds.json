@@ -12,7 +12,9 @@
   },
   "gatling_gun": {
     "sounds": [
-      "fun_item:misc/gatling_gun"
+      "fun_item:misc/gatling_gun",
+      "fun_item:misc/gatling_gun1",
+      "fun_item:misc/gatling_gun2"
     ]
   }
 }

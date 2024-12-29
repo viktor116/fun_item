@@ -123,7 +123,7 @@ public class BulletEntity extends PersistentProjectileEntity {
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
-        super.onBlockHit(blockHitResult);
+//        super.onBlockHit(blockHitResult);
         this.discard();
     }
 

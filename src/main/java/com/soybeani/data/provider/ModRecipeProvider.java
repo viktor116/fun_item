@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
@@ -117,5 +118,92 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern("S")
                 .criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT))
                 .offerTo(exporter);;
+
+        //雷法
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ItemsRegister.TALISMAN_BLUE)
+                .input(Items.PAPER)
+                .input(Items.BLUE_DYE)
+                .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
+                .criterion(hasItem(Items.BLUE_DYE), conditionsFromItem(Items.BLUE_DYE))
+                .offerTo(exporter);
+
+        //道法自然
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ItemsRegister.TALISMAN_GREEN)
+                .input(Items.PAPER)
+                .input(Items.LIME_DYE)
+                .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
+                .criterion(hasItem(Items.LIME_DYE), conditionsFromItem(Items.LIME_DYE))
+                .offerTo(exporter);
+
+        //燃烧
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ItemsRegister.TALISMAN_YELLOW_RED)
+                .input(Items.PAPER)
+                .input(Items.ORANGE_DYE)
+                .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
+                .criterion(hasItem(Items.ORANGE_DYE), conditionsFromItem(Items.ORANGE_DYE))
+                .offerTo(exporter);
+
+        //剑气
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ItemsRegister.TALISMAN)
+                .input(Items.PAPER)
+                .input(Items.YELLOW_DYE)
+                .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
+                .criterion(hasItem(Items.YELLOW_DYE), conditionsFromItem(Items.YELLOW_DYE))
+                .offerTo(exporter);
+
+        //辟邪
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ItemsRegister.TALISMAN_PINK)
+                .input(Items.PAPER)
+                .input(Items.REDSTONE)
+                .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
+                .criterion(hasItem(Items.REDSTONE), conditionsFromItem(Items.REDSTONE))
+                .offerTo(exporter);
+
+        //剑魁
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ItemsRegister.TALISMAN_DARKGREEN)
+                .input(Items.PAPER)
+                .input(Items.GREEN_DYE)
+                .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
+                .criterion(hasItem(Items.GREEN_DYE), conditionsFromItem(Items.GREEN_DYE))
+                .offerTo(exporter);
+
+        //大人时代变了
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ItemsRegister.TALISMAN_YELLOW)
+                .input(Items.PAPER)
+                .input(Items.GOLD_INGOT,8)
+                .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
+                .criterion(hasItem(Items.GOLD_INGOT), conditionsFromItem(Items.GOLD_INGOT))
+                .offerTo(exporter);
+
+        //御剑飞行
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ItemsRegister.TALISMAN_SKYBLUE)
+                .input(Items.PAPER)
+                .input(Items.LIGHT_BLUE_DYE)
+                .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
+                .criterion(hasItem(Items.LIGHT_BLUE_DYE), conditionsFromItem(Items.LIGHT_BLUE_DYE))
+                .offerTo(exporter);
+
+        //血魔
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ItemsRegister.TALISMAN_PURPLE)
+                .input(Items.PAPER)
+                .input(Items.PURPLE_DYE)
+                .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
+                .criterion(hasItem(Items.PURPLE_DYE), conditionsFromItem(Items.PURPLE_DYE))
+                .offerTo(exporter);
+        //凋零之力
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ItemsRegister.TALISMAN_GREY)
+                .input(Items.PAPER)
+                .input(Items.GRAY_DYE)
+                .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
+                .criterion(hasItem(Items.GRAY_DYE), conditionsFromItem(Items.GRAY_DYE))
+                .offerTo(exporter);
+
+        //死亡之力
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ItemsRegister.TALISMAN_BLACK_PURPLE)
+                .input(Items.PAPER)
+                .input(Items.BLACK_DYE)
+                .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
+                .criterion(hasItem(Items.BLACK_DYE), conditionsFromItem(Items.BLACK_DYE))
+                .offerTo(exporter);
     }
 }
