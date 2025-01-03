@@ -7,6 +7,7 @@ import com.soybeani.entity.custom.PurpleLightningEntity;
 import com.soybeani.items.ItemsRegister;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.client.render.item.ItemModels;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
@@ -40,6 +41,8 @@ public abstract class ItemRendererMixin {
     @Shadow
     private @Final ItemModels models;
 
+    @Shadow
+    private @Final BuiltinModelItemRenderer builtinModelItemRenderer;
     @Inject(method = "renderItem", at = @At("HEAD"), cancellable = true)
     private void onRenderItem(ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, CallbackInfo ci) {
 
