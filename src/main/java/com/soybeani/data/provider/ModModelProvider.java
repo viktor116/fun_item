@@ -53,6 +53,12 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ItemsRegister.TALISMAN_GREY,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.COPPER_BULLET,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.IRON_BULLET,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.PREGNANT_SPYGLASS,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.TNT_BOAT,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.BOTTOM_ICE_BOAT,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.TELEPORT_CRYSTAL,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.TP_CRYSTAL,Models.GENERATED);
+        itemModelGenerator.register(ItemsRegister.JINGDOU_CLOUD,Models.GENERATED);
 //        itemModelGenerator.register(ItemsRegister.GATLING_GUN,Models.HANDHELD);
 
         itemModelGenerator.register(ItemsRegister.SKELETON_ZOMBIE_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));

@@ -52,7 +52,7 @@ public abstract class ItemRendererMixin {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player != null && stack.getUseAction() == UseAction.SPYGLASS &&
                     client.player.getActiveItem() == stack) {  // 检查当前激活的物品是否为这个望远镜
-                if (stack.isOf(ItemsRegister.LIGHTNING_SPYGLASS) || stack.isOf(ItemsRegister.NIRVANA_SPYGLASS)) {
+                if (stack.isOf(ItemsRegister.LIGHTNING_SPYGLASS) || stack.isOf(ItemsRegister.NIRVANA_SPYGLASS) || stack.isOf(ItemsRegister.PREGNANT_SPYGLASS)) {
                     matrices.push();
                     // 将物品移动到眼睛位置
                     if (renderMode == ModelTransformationMode.THIRD_PERSON_RIGHT_HAND) {
@@ -96,7 +96,7 @@ public abstract class ItemRendererMixin {
             MinecraftClient client = MinecraftClient.getInstance();
             if (client.player != null && stack.getUseAction() == UseAction.SPYGLASS &&
                     client.player.getActiveItem() == stack) {
-                if (stack.isOf(ItemsRegister.LIGHTNING_SPYGLASS) || stack.isOf(ItemsRegister.NIRVANA_SPYGLASS)) {
+                if (stack.isOf(ItemsRegister.LIGHTNING_SPYGLASS) || stack.isOf(ItemsRegister.NIRVANA_SPYGLASS) || stack.isOf(ItemsRegister.PREGNANT_SPYGLASS)) {
                     matrices.pop();
                 }
             }
@@ -111,6 +111,8 @@ public abstract class ItemRendererMixin {
                     return models.getModelManager().getModel(EntityRegisterClient.LIGHTNING_SPYGLASS_IN_HAND);
                 } else if (stack.isOf(ItemsRegister.NIRVANA_SPYGLASS)) {
                     return models.getModelManager().getModel(EntityRegisterClient.NIRVANA_SPYGLASS_IN_HAND);
+                } else if(stack.isOf(ItemsRegister.PREGNANT_SPYGLASS)){
+                    return models.getModelManager().getModel(EntityRegisterClient.PREGNANT_SPYGLASS_IN_HAND);
                 }
             }
         }

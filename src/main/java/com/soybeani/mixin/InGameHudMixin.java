@@ -36,6 +36,8 @@ public abstract class InGameHudMixin {
                     SpyglassHudOverlay.renderSpyglassOverlay(context, this.spyglassScale, HudRegister.LIGHTNING_SPYGLASS_SCOPE);
                 }else if (playerItemInHand == ItemsRegister.NIRVANA_SPYGLASS){
                     SpyglassHudOverlay.renderSpyglassOverlay(context, this.spyglassScale, HudRegister.NIRVANA_SPYGLASS_SCOPE);
+                }else if(playerItemInHand == ItemsRegister.PREGNANT_SPYGLASS){
+                    SpyglassHudOverlay.renderSpyglassOverlay(context, this.spyglassScale, HudRegister.PREGNANT_SPYGLASS_SCOPE);
                 }
             }
         }

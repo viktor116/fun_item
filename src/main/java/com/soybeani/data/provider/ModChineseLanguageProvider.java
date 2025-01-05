@@ -66,6 +66,14 @@ public class ModChineseLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ItemsRegister.GATLING_GUN,"加特林");
         translationBuilder.add(ItemsRegister.COPPER_BULLET,"铜弹");
         translationBuilder.add(ItemsRegister.IRON_BULLET,"铁弹");
+        translationBuilder.add(ItemsRegister.PREGNANT_SPYGLASS,"望孕镜");
+        translationBuilder.add(ItemsRegister.TNT_BOAT,"TNT橡木船");
+        translationBuilder.add(ItemsRegister.BOTTOM_ICE_BOAT,"冰底橡木船");
+        translationBuilder.add(ItemsRegister.TELEPORT_CRYSTAL,"传送符文");
+        translationBuilder.add(ItemsRegister.TP_CRYSTAL,"高级传送符文");
+        translationBuilder.add(ItemsRegister.SKYFIRE_SWORD,"天火圣裁大剑");
+        translationBuilder.add(ItemsRegister.YINGYI_KNIFE,"莹璃刃");
+        translationBuilder.add(ItemsRegister.JINGDOU_CLOUD,"筋斗云之物");
 
         translationBuilder.add(ItemsRegister.TALISMAN,"剑气符箓");
         translationBuilder.add(ItemsRegister.TALISMAN_BLACK_PURPLE,"死亡阴影符箓");

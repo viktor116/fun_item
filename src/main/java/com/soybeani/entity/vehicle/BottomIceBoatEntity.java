@@ -1,20 +1,14 @@
 package com.soybeani.entity.vehicle;
 
-import com.soybeani.config.InitValue;
 import com.soybeani.entity.EntityRegister;
-import com.soybeani.entity.EntityRegisterClient;
 import com.soybeani.items.ItemsRegister;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FrostedIceBlock;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -26,14 +20,14 @@ import java.util.Iterator;
  * @description
  */
 // CustomBoatEntity.java
-public class IceBoatEntity extends BoatEntity {
+public class BottomIceBoatEntity extends BoatEntity {
 
-    public IceBoatEntity(EntityType<? extends BoatEntity> entityType, World world) {
+    public BottomIceBoatEntity(EntityType<? extends BoatEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    public IceBoatEntity(World world, double x, double y, double z) {
-        this(EntityRegister.ICE_BOAT, world);
+    public BottomIceBoatEntity(World world, double x, double y, double z) {
+        this(EntityRegister.BOTTOM_ICE_BOAT, world);
         this.setPosition(x, y, z);
         this.prevX = x;
         this.prevY = y;
@@ -68,7 +62,7 @@ public class IceBoatEntity extends BoatEntity {
 
     @Override
     public Item asItem() {
-        return ItemsRegister.ICE_BOAT;
+        return ItemsRegister.BOTTOM_ICE_BOAT;
     }
 
 }

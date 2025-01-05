@@ -55,6 +55,24 @@ public class EntityRegister {
                     .build()
     );
 
+    public static final EntityType<TntBoatEntity> TNT_BOAT = Registry.register(
+            Registries.ENTITY_TYPE,
+            Identifier.of(InitValue.MOD_ID, "tnt_boat"),
+            FabricEntityTypeBuilder.<TntBoatEntity>create(SpawnGroup.MISC, TntBoatEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.375F, 0.5625F))
+                    .trackRangeBlocks(10)
+                    .build()
+    );
+
+    public static final EntityType<BottomIceBoatEntity> BOTTOM_ICE_BOAT = Registry.register(
+            Registries.ENTITY_TYPE,
+            Identifier.of(InitValue.MOD_ID, "bottom_ice_boat"),
+            FabricEntityTypeBuilder.<BottomIceBoatEntity>create(SpawnGroup.MISC, BottomIceBoatEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.375F, 0.5625F))
+                    .trackRangeBlocks(10)
+                    .build()
+    );
+
     public static final EntityType<FlyingWoodSwordEntity> FLYING_WOOD_SWORD_ENTITY_ENTITY_TYPE = Registry.register(
             Registries.ENTITY_TYPE,
             Identifier.of(InitValue.MOD_ID, "flying_wood_sword"),

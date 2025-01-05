@@ -18,7 +18,8 @@ public abstract class PlayerEntityMixin {
         PlayerEntity playerEntity = (PlayerEntity) (Object) this;
         boolean isSpyglass = playerEntity.getActiveItem().isOf(Items.SPYGLASS)
                 || playerEntity.getActiveItem().isOf(ItemsRegister.LIGHTNING_SPYGLASS)
-                || playerEntity.getActiveItem().isOf(ItemsRegister.NIRVANA_SPYGLASS);
+                || playerEntity.getActiveItem().isOf(ItemsRegister.NIRVANA_SPYGLASS)
+                || playerEntity.getActiveItem().isOf(ItemsRegister.PREGNANT_SPYGLASS);
         cir.setReturnValue(playerEntity.isUsingItem() && isSpyglass);
         cir.cancel();
     }

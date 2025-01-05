@@ -11,6 +11,7 @@ import net.minecraft.item.ProjectileItem;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
+import net.minecraft.world.tick.Tick;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -23,6 +24,7 @@ public class BulletItem extends Item implements ProjectileItem {
         super(settings);
     }
     public BulletEntity.Type type;
+
     @Override
     public ProjectileEntity createEntity(World world, Position pos, ItemStack stack, Direction direction) {
         return new BulletEntity(world, pos.getX(), pos.getY(), pos.getZ(), stack.copyWithCount(1), (ItemStack)null,type);

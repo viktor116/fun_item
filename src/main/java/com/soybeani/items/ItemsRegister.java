@@ -8,6 +8,7 @@ import com.soybeani.entity.custom.ZombieCreeperEntity;
 import com.soybeani.items.effect.EmeraldStatusEffect;
 import com.soybeani.items.effect.LapisStatusEffect;
 import com.soybeani.items.effect.RedStoneStatusEffect;
+import com.soybeani.items.item.TntBoatItem;
 import com.soybeani.items.food.FoodRegister;
 import com.soybeani.items.item.*;
 import com.soybeani.items.item.MinecartItem;
@@ -17,7 +18,6 @@ import com.soybeani.items.weapon.SwordItemOfGrass;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.DataComponentTypes;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
@@ -54,8 +54,11 @@ public class ItemsRegister {
     public static final Item ICE_BOAT = register(new IceBoatItem(new Item.Settings().maxCount(1)), "ice_boat");
     public static final Item ICE2_BOAT = register(new Ice2BoatItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)), "ice2_boat");
     public static final Item FLY_BOAT = register(new FlyBoatItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)), "fly_boat");
+    public static final Item TNT_BOAT = register(new TntBoatItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE)), "tnt_boat");
+    public static final Item BOTTOM_ICE_BOAT = register(new BottomBoatItem(new Item.Settings().maxCount(1)), "bottom_ice_boat");
     public static final Item LIGHTNING_SPYGLASS = register(new LightningSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)),"lightning_spyglass");
     public static final Item NIRVANA_SPYGLASS = register(new NirvanaSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)),"nirvana_spyglass");
+    public static final Item PREGNANT_SPYGLASS = register(new PregnantSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE)),"pregnant_spyglass");
     public static final Item PURPLE_LIGHTNING = register(new PurpleLightningItem(new Item.Settings().maxCount(16).rarity(Rarity.RARE)),"purple_lightning");
     public static final Item LIGHTNING =  register(new LightningItem(new Item.Settings().maxCount(16)),"lightning");
     public static final Item AIR_PICKAXE = register(new UnbreakablePickaxeItem(AirMaterial.INSTANCE,new Item.Settings().attributeModifiers(PickaxeItem.createAttributeModifiers(AirMaterial.INSTANCE, 9999.0F, 9999F)).maxCount(1).maxDamage(-1)),"air_pickaxe");
@@ -92,6 +95,11 @@ public class ItemsRegister {
     public static final Item GATLING_GUN = register(new GatlingItem(new Item.Settings().maxDamage(1000).maxCount(1)),"gatling_gun");
     public static final Item COPPER_BULLET= register(new BulletItem(new Item.Settings()),"copper_bullet");
     public static final Item IRON_BULLET= register(new BulletItem(new Item.Settings()),"iron_bullet");
+    public static final Item TELEPORT_CRYSTAL= register(new Item(new Item.Settings()),"teleport_crystal");
+    public static final Item TP_CRYSTAL= register(new Item(new Item.Settings()),"tp_crystal");
+    public static final Item SKYFIRE_SWORD = register(new Item(new Item.Settings()),"skyfire_sword");
+    public static final Item YINGYI_KNIFE = register(new Item(new Item.Settings()),"yingli_knife");
+    public static final Item JINGDOU_CLOUD = register(new Item(new Item.Settings()),"jingdou_cloud");
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
@@ -120,8 +128,11 @@ public class ItemsRegister {
             itemGroup.add(ICE_BOAT);
             itemGroup.add(ICE2_BOAT);
             itemGroup.add(FLY_BOAT);
+            itemGroup.add(TNT_BOAT);
+            itemGroup.add(BOTTOM_ICE_BOAT);
             itemGroup.add(LIGHTNING_SPYGLASS);
             itemGroup.add(NIRVANA_SPYGLASS);
+            itemGroup.add(PREGNANT_SPYGLASS);
             itemGroup.add(LIGHTNING);
             itemGroup.add(PURPLE_LIGHTNING);
             itemGroup.add(ModBlock.SUPER_SLIME_BLOCK.asItem());
@@ -147,6 +158,12 @@ public class ItemsRegister {
             itemGroup.add(GATLING_GUN);
             itemGroup.add(COPPER_BULLET);
             itemGroup.add(IRON_BULLET);
+            itemGroup.add(BOTTOM_ICE_BOAT);
+            itemGroup.add(TELEPORT_CRYSTAL);
+            itemGroup.add(TP_CRYSTAL);
+            itemGroup.add(SKYFIRE_SWORD);
+            itemGroup.add(YINGYI_KNIFE);
+            itemGroup.add(JINGDOU_CLOUD);
         });
     }
 

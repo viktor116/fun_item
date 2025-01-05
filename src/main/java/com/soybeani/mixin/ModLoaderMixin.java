@@ -35,5 +35,6 @@ public abstract class ModLoaderMixin {
     public void addSpyglass(BlockColors blockColors, Profiler profiler, Map<Identifier, JsonUnbakedModel> jsonUnbakedModels, Map<Identifier, List<BlockStatesLoader.SourceTrackedData>> blockStates, CallbackInfo ci){
         this.loadItemModel(EntityRegisterClient.LIGHTNING_SPYGLASS_IN_HAND);
         this.loadItemModel(EntityRegisterClient.NIRVANA_SPYGLASS_IN_HAND);
+        this.loadItemModel(EntityRegisterClient.PREGNANT_SPYGLASS_IN_HAND);
     }
 }

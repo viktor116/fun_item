@@ -7,6 +7,7 @@ public class HudRegister {
 
     public static final Identifier LIGHTNING_SPYGLASS_SCOPE = Identifier.of(InitValue.MOD_ID,"textures/misc/lightning_spyglass_scope.png");
     public static final Identifier NIRVANA_SPYGLASS_SCOPE = Identifier.of(InitValue.MOD_ID,"textures/misc/nirvana_spyglass_scope.png");
+    public static final Identifier PREGNANT_SPYGLASS_SCOPE = Identifier.of(InitValue.MOD_ID,"textures/misc/pregnant_spyglass_scope.png");
     public static void Initialize(){
 
     }

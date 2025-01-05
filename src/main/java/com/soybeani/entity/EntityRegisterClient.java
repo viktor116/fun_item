@@ -20,12 +20,15 @@ public class EntityRegisterClient {
 
     public static final ModelIdentifier LIGHTNING_SPYGLASS_IN_HAND = ModelIdentifier.ofInventoryVariant(Identifier.of(InitValue.MOD_ID, "lightning_spyglass_in_hand"));
     public static final ModelIdentifier NIRVANA_SPYGLASS_IN_HAND = ModelIdentifier.ofInventoryVariant(Identifier.of(InitValue.MOD_ID, "nirvana_spyglass_in_hand"));
+    public static final ModelIdentifier PREGNANT_SPYGLASS_IN_HAND = ModelIdentifier.ofInventoryVariant(Identifier.of(InitValue.MOD_ID, "pregnant_spyglass_in_hand"));
 
     public static void initializeClient(){
         EntityRendererRegistry.register(EntityRegister.SU7, Su7CarRenderer::new);
         EntityRendererRegistry.register(EntityRegister.ICE_BOAT, IceBoatEntityRenderer::new);
         EntityRendererRegistry.register(EntityRegister.ICE2_BOAT, Ice2BoatEntityRenderer::new);
         EntityRendererRegistry.register(EntityRegister.FLY_BOAT, FlyBoatEntityRenderer::new);
+        EntityRendererRegistry.register(EntityRegister.TNT_BOAT, TntBoatEntityRenderer::new);
+        EntityRendererRegistry.register(EntityRegister.BOTTOM_ICE_BOAT, bottomIceBoatEntityRenderer::new);
         EntityRendererRegistry.register(PurpleLightningEntity.PURPLE_LIGHTNING, PurpleLightningRenderer::new);
         EntityRendererRegistry.register(WheatEntity.WHEAT, WheatRenderer::new);
         EntityRendererRegistry.register(MinecartEntity.MINECART,MinecartEntityRenderer::new);

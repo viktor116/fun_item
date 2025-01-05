@@ -29,7 +29,9 @@ import org.jetbrains.annotations.Nullable;
 public class BulletEntity extends PersistentProjectileEntity {
 
     private static final TrackedData<Integer> BULLET_TYPE = DataTracker.registerData(BulletEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final int MAX_EXIST_TIME = 200;
 
+    private int already_exist_time = 0;
 
     public Type type = Type.COPPER;
 
@@ -79,6 +81,12 @@ public class BulletEntity extends PersistentProjectileEntity {
                         0.1
                 );
             }
+        }
+        if(already_exist_time < MAX_EXIST_TIME){
+            already_exist_time++;
+        }else {
+            this.discard();
+            already_exist_time = 0;
         }
     }
     @Override
