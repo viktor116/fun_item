@@ -69,9 +69,6 @@ public class TntBoatItem extends Item {
                             spawnPos.getX() + 0.5D,
                             spawnPos.getY(),
                             spawnPos.getZ() + 0.5D);
-                    if (user.getDisplayName() != null) {
-                        boat.setCustomName(user.getDisplayName());
-                    }
                     world.spawnEntity(boat);
                 }
 

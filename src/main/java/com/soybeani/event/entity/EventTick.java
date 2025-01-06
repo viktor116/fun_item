@@ -5,6 +5,7 @@ import com.soybeani.entity.vehicle.FlyingWoodSwordEntity;
 import com.soybeani.items.ItemsRegister;
 import com.soybeani.items.item.LightningSpyglassItem;
 import com.soybeani.items.item.NirvanaSpyglassItem;
+import com.soybeani.items.item.PregnantSpyglassItem;
 import com.soybeani.network.packet.KeyRPacket;
 import com.soybeani.network.packet.PlayerControlPayload;
 import net.fabricmc.api.EnvType;
@@ -38,9 +39,9 @@ public class EventTick {
                     spyglassItem.lookLightning((PlayerEntity) serverPlayer,spyglassItem.getSpyglassMode());
                 }
                 //望孕镜
-                if(serverPlayer.isUsingSpyglass() && serverPlayer.getMainHandStack().getItem() == ItemsRegister.NIRVANA_SPYGLASS){
-                    NirvanaSpyglassItem spyglassItem =(NirvanaSpyglassItem) serverPlayer.getMainHandStack().getItem();
-                    spyglassItem.lookLightning((PlayerEntity) serverPlayer,spyglassItem.getSpyglassMode());
+                if(serverPlayer.isUsingSpyglass() && serverPlayer.getMainHandStack().getItem() == ItemsRegister.PREGNANT_SPYGLASS){
+                    PregnantSpyglassItem spyglassItem =(PregnantSpyglassItem) serverPlayer.getMainHandStack().getItem();
+                    spyglassItem.lookPregnant((PlayerEntity) serverPlayer,serverPlayer.getMainHandStack());
                 }
             }
         });

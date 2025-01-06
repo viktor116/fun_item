@@ -59,7 +59,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ItemsRegister.TELEPORT_CRYSTAL,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.TP_CRYSTAL,Models.GENERATED);
         itemModelGenerator.register(ItemsRegister.JINGDOU_CLOUD,Models.GENERATED);
-//        itemModelGenerator.register(ItemsRegister.GATLING_GUN,Models.HANDHELD);
+        itemModelGenerator.register(ItemsRegister.TNT_BATON,Models.HANDHELD);
 
         itemModelGenerator.register(ItemsRegister.SKELETON_ZOMBIE_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));
         itemModelGenerator.register(ItemsRegister.CREEPER_SKELETON_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));

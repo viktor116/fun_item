@@ -58,7 +58,7 @@ public class ItemsRegister {
     public static final Item BOTTOM_ICE_BOAT = register(new BottomBoatItem(new Item.Settings().maxCount(1)), "bottom_ice_boat");
     public static final Item LIGHTNING_SPYGLASS = register(new LightningSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)),"lightning_spyglass");
     public static final Item NIRVANA_SPYGLASS = register(new NirvanaSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)),"nirvana_spyglass");
-    public static final Item PREGNANT_SPYGLASS = register(new PregnantSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE)),"pregnant_spyglass");
+    public static final Item PREGNANT_SPYGLASS = register(new PregnantSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE).maxDamage(1000)),"pregnant_spyglass");
     public static final Item PURPLE_LIGHTNING = register(new PurpleLightningItem(new Item.Settings().maxCount(16).rarity(Rarity.RARE)),"purple_lightning");
     public static final Item LIGHTNING =  register(new LightningItem(new Item.Settings().maxCount(16)),"lightning");
     public static final Item AIR_PICKAXE = register(new UnbreakablePickaxeItem(AirMaterial.INSTANCE,new Item.Settings().attributeModifiers(PickaxeItem.createAttributeModifiers(AirMaterial.INSTANCE, 9999.0F, 9999F)).maxCount(1).maxDamage(-1)),"air_pickaxe");
@@ -95,11 +95,12 @@ public class ItemsRegister {
     public static final Item GATLING_GUN = register(new GatlingItem(new Item.Settings().maxDamage(1000).maxCount(1)),"gatling_gun");
     public static final Item COPPER_BULLET= register(new BulletItem(new Item.Settings()),"copper_bullet");
     public static final Item IRON_BULLET= register(new BulletItem(new Item.Settings()),"iron_bullet");
-    public static final Item TELEPORT_CRYSTAL= register(new Item(new Item.Settings()),"teleport_crystal");
-    public static final Item TP_CRYSTAL= register(new Item(new Item.Settings()),"tp_crystal");
-    public static final Item SKYFIRE_SWORD = register(new Item(new Item.Settings()),"skyfire_sword");
-    public static final Item YINGYI_KNIFE = register(new Item(new Item.Settings()),"yingli_knife");
-    public static final Item JINGDOU_CLOUD = register(new Item(new Item.Settings()),"jingdou_cloud");
+    public static final Item TELEPORT_CRYSTAL= register(new TeleportCrystalItem(new Item.Settings()),"teleport_crystal");
+    public static final Item TP_CRYSTAL= register(new TeleportCrystalItem(new Item.Settings()),"tp_crystal");
+    public static final Item TNT_BATON = register(new TntBatonItem(new Item.Settings()),"tnt_baton");
+    public static final Item SKYFIRE_SWORD = register(new SkyFireSwordItem(new Item.Settings()),"skyfire_sword");
+    public static final Item YINGYI_KNIFE = register(new YingliSwordItem(new Item.Settings()),"yingli_knife");
+    public static final Item JINGDOU_CLOUD = register(new JingdouCloudItem(new Item.Settings()),"jingdou_cloud");
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
         Registry.register(Registries.ITEM_GROUP, COMMON_ITEM_GROUP_KEY, COMMON_CUSTOM_ITEM_GROUP);
@@ -161,6 +162,7 @@ public class ItemsRegister {
             itemGroup.add(BOTTOM_ICE_BOAT);
             itemGroup.add(TELEPORT_CRYSTAL);
             itemGroup.add(TP_CRYSTAL);
+            itemGroup.add(TNT_BATON);
             itemGroup.add(SKYFIRE_SWORD);
             itemGroup.add(YINGYI_KNIFE);
             itemGroup.add(JINGDOU_CLOUD);

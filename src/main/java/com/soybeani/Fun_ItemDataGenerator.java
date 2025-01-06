@@ -1,5 +1,6 @@
 package com.soybeani;
 
+import com.soybeani.data.generator.ModEnchantmentGenerator;
 import com.soybeani.data.provider.*;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -13,5 +14,6 @@ public class Fun_ItemDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModChineseLanguageProvider::new);
 		pack.addProvider(ModBlockLootTableProvider::new);
 		pack.addProvider(ModRecipeProvider::new);
+		pack.addProvider(ModEnchantmentGenerator::new);
 	}
 }
