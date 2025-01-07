@@ -58,7 +58,7 @@ public class ItemsRegister {
     public static final Item BOTTOM_ICE_BOAT = register(new BottomBoatItem(new Item.Settings().maxCount(1)), "bottom_ice_boat");
     public static final Item LIGHTNING_SPYGLASS = register(new LightningSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON)),"lightning_spyglass");
     public static final Item NIRVANA_SPYGLASS = register(new NirvanaSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.EPIC)),"nirvana_spyglass");
-    public static final Item PREGNANT_SPYGLASS = register(new PregnantSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE).maxDamage(1000)),"pregnant_spyglass");
+    public static final Item PREGNANT_SPYGLASS = register(new PregnantSpyglassItem(new Item.Settings().maxCount(1).rarity(Rarity.RARE).maxDamage(520)),"pregnant_spyglass");
     public static final Item PURPLE_LIGHTNING = register(new PurpleLightningItem(new Item.Settings().maxCount(16).rarity(Rarity.RARE)),"purple_lightning");
     public static final Item LIGHTNING =  register(new LightningItem(new Item.Settings().maxCount(16)),"lightning");
     public static final Item AIR_PICKAXE = register(new UnbreakablePickaxeItem(AirMaterial.INSTANCE,new Item.Settings().attributeModifiers(PickaxeItem.createAttributeModifiers(AirMaterial.INSTANCE, 9999.0F, 9999F)).maxCount(1).maxDamage(-1)),"air_pickaxe");

@@ -1,60 +1,60 @@
 package com.soybeani.items.item;
 
-import com.soybeani.config.InitValue;
 import com.soybeani.utils.RayCastUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpyglassItem;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.Optional;
 
 public class PregnantSpyglassItem extends SpyglassItem {
+
     public PregnantSpyglassItem(Settings settings) {
         super(settings);
     }
+    private static final int MAX_COUNT_TIME = 20;
+    private int countTime = 0;
 
     public void lookPregnant(PlayerEntity user,ItemStack itemStack) {
         World world = user.getWorld();
         if (world.isClient) return;
         Entity targetEntity = RayCastUtils.getTargetEntity(world, user, 200.0);
-        if (targetEntity instanceof AnimalEntity animalEntity) {
-            if (!animalEntity.isBaby()) {
-                InitValue.LOGGER.info("animalEntity exist");
-                animalEntity.setBreedingAge(0); // 确保繁殖冷却已结束
-                animalEntity.setLoveTicks(600);
-                itemStack.setDamage(itemStack.getDamage() + 1);
-                spawnLoveParticles(world, animalEntity);
-                // 播放音效
-                world.playSound(null, user.getX(), user.getY(), user.getZ(),
-                        SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1.0F, 1.0F);
+        if(countTime >= MAX_COUNT_TIME){
+            if (targetEntity instanceof AnimalEntity animalEntity) {
+                if (!animalEntity.isBaby()) {
+                    animalEntity.setBreedingAge(0); // 确保繁殖冷却已结束
+                    animalEntity.setLoveTicks(600);
+                    animalEntity.lovePlayer(user);
+                    world.sendEntityStatus(animalEntity, (byte) 18);
+                    itemStack.setDamage(itemStack.getDamage() + 1);
+                }
+            }else if (targetEntity instanceof VillagerEntity villager) {
+                if (!villager.hasCustomer() && !villager.isBaby()) {
+                    attemptVillagerBreeding(villager, world, user);
+                    itemStack.setDamage(itemStack.getDamage() + 1);
+                }
             }
+            countTime = 0;
+        }else {
+            countTime++;
         }
+
     }
 
-    private void spawnLoveParticles(World world, Entity entity) {
-        for (int i = 0; i < 7; i++) {
-            double d = world.random.nextGaussian() * 0.02D;
-            double e = world.random.nextGaussian() * 0.02D;
-            double f = world.random.nextGaussian() * 0.02D;
-            world.addParticle(
-                    ParticleTypes.HEART,
-                    entity.getParticleX(1.0D),
-                    entity.getRandomBodyY() + 0.5D,
-                    entity.getParticleZ(1.0D),
-                    d, e, f
-            );
+    private void attemptVillagerBreeding(VillagerEntity villager, World world, PlayerEntity user) {
+        world.sendEntityStatus(villager, (byte) 12);
+        if (!world.isClient) {
+            VillagerEntity child = villager.createChild((ServerWorld) world, villager);
+            if (child != null) {
+                BlockPos spawnPos = villager.getBlockPos().add(world.random.nextInt(3) - 1, 0, world.random.nextInt(3) - 1);
+                child.refreshPositionAndAngles(spawnPos.getX() + 0.5, spawnPos.getY(), spawnPos.getZ() + 0.5, 0.0F, 0.0F);
+                world.spawnEntity(child);
+            }
         }
     }
 }

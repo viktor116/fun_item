@@ -2,6 +2,7 @@ package com.soybeani;
 
 import com.soybeani.block.ModBlock;
 import com.soybeani.entity.EntityRegisterClient;
+import com.soybeani.entity.client.ModEntityModelLayers;
 import com.soybeani.event.EventRegister;
 import com.soybeani.event.keybinds.KeyBindsInputHandler;
 import com.soybeani.hud.HudRegister;
@@ -17,5 +18,6 @@ public class Fun_ItemClient implements ClientModInitializer {
 		EntityRegisterClient.initializeClient();
 		HudRegister.Initialize();
 		EventRegister.initializeClient();
+		ModEntityModelLayers.registerModelLayers();
 	}
 }

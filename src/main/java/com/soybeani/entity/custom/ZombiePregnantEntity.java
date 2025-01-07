@@ -18,7 +18,7 @@ import net.minecraft.world.World;
  */
 
 public class ZombiePregnantEntity extends ZombieEntity {
-    public static final EntityType<ZombiePregnantEntity> SKELETON_ZOMBIE = Registry.register(
+    public static final EntityType<ZombiePregnantEntity> ZOMBIE_PREGNANT = Registry.register(
             Registries.ENTITY_TYPE,
             InitValue.id("zombie_pregnant"),
             EntityType.Builder.create(ZombiePregnantEntity::new, SpawnGroup.MONSTER)
@@ -33,8 +33,6 @@ public class ZombiePregnantEntity extends ZombieEntity {
     public ZombiePregnantEntity(EntityType<? extends ZombieEntity> entityType, World world) {
         super(entityType, world);
     }
-
-    // 设置实体属性，包括更快的移动速度
     public static DefaultAttributeContainer.Builder createZombieAttributes() {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0)
