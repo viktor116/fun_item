@@ -5,6 +5,8 @@ import com.soybeani.entity.vehicle.TntBoatEntity;
 import com.soybeani.event.keybinds.KeyBindsInputHandler;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,13 +25,13 @@ import net.minecraft.world.World;
 public class TntBatonItem extends Item {
     public static final int MAX_MODE = 5 + 1;
     private int current_mode = 0;
+
     public TntBatonItem(Settings settings) {
         super(settings);
     }
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-//        if(!world.isClient) return TypedActionResult.pass(user.getStackInHand(hand));;
         HitResult hitResult = user.raycast(200, 0, true);
         Vec3d pos = hitResult.getPos();
         ItemStack stackInHand = user.getStackInHand(hand);
@@ -41,16 +43,23 @@ public class TntBatonItem extends Item {
             case 1:
                 if (hitResult.getType() == HitResult.Type.BLOCK) {
                     world.createExplosion(user, pos.x, pos.y, pos.z, 4.0f, true, World.ExplosionSourceType.TNT);
-                    if(!user.isInCreativeMode()) {
-                        user.getStackInHand(hand).setDamage(stackInHand.getDamage() + 10);
-                    }
+                    stackInHand.damage(10,user, EquipmentSlot.MAINHAND);
                     return TypedActionResult.success(user.getStackInHand(hand));
                 }
                 break;
             case 2: //指挥
                 if(this.validHasTntBoat(user)){
-
+                    TntBoatEntity boat = (TntBoatEntity) user.getVehicle();
+                    boat.launchTntAtTarget(user,pos);
                 }else{
+                    this.sendNeedTNTBoat(user);
+                }
+                break;
+            case 3://全自动
+                if(this.validHasTntBoat(user)){
+                    TntBoatEntity boat = (TntBoatEntity) user.getVehicle();
+                    boat.setAutoMode(true);
+                }else {
                     this.sendNeedTNTBoat(user);
                 }
                 break;
@@ -66,7 +75,7 @@ public class TntBatonItem extends Item {
         // 获取并发送快捷键名称（没有其他的附加信息）
         String keyName = keyBinding.getBoundKeyLocalizedText().getString();
         // 使用本地化后的快捷键名称发送消息
-        player.sendMessage(Text.of("请使用快捷键: " + keyName + " 切换模式使用"), true);
+        player.sendMessage(Text.of("请使用快捷键 " + keyName + " 切换模式使用"), true);
     }
 
     public void sendSwitchModeMessage(PlayerEntity player){

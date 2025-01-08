@@ -63,6 +63,7 @@ public class ModChineseLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ItemsRegister.RED_STONE_EFFECT,"附魔红苹果");
         translationBuilder.add(ItemsRegister.EMERALD_EFFECT,"附魔绿苹果");
         translationBuilder.add(ItemsRegister.LAPIS_EFFECT,"附魔青苹果");
+        translationBuilder.add(ItemsRegister.JING_DOU_CLOUD_EFFECT,"筋斗云之力");
         translationBuilder.add(ItemsRegister.FLYING_STICK,"小飞棍");
         translationBuilder.add(ItemsRegister.GATLING_GUN,"加特林");
         translationBuilder.add(ItemsRegister.COPPER_BULLET,"铜弹");

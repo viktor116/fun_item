@@ -3,6 +3,7 @@ package com.soybeani.items.item;
 import com.soybeani.entity.custom.ZombiePregnantEntity;
 import com.soybeani.utils.RayCastUtils;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.VillagerEntity;
@@ -34,16 +35,12 @@ public class PregnantSpyglassItem extends SpyglassItem {
                     animalEntity.setLoveTicks(600);
                     animalEntity.lovePlayer(user);
                     world.sendEntityStatus(animalEntity, (byte) 18);
-                    if(!user.isInCreativeMode()){
-                        itemStack.setDamage(itemStack.getDamage() + 1);
-                    }
+                    itemStack.damage(1,user, EquipmentSlot.MAINHAND);
                 }
             }else if (targetEntity instanceof VillagerEntity villager) {
                 if (!villager.hasCustomer() && !villager.isBaby()) {
                     attemptVillagerBreeding(villager, world, user);
-                    if(!user.isInCreativeMode()){
-                        itemStack.setDamage(itemStack.getDamage() + 10);
-                    }
+                    itemStack.damage(10,user, EquipmentSlot.MAINHAND);
                 }
             }else if(targetEntity instanceof ZombieEntity zombieEntity){
                 ZombiePregnantEntity zombiePregnantEntity = ZombiePregnantEntity.ZOMBIE_PREGNANT.create(world);
@@ -51,9 +48,7 @@ public class PregnantSpyglassItem extends SpyglassItem {
                     zombiePregnantEntity.setPosition(zombieEntity.getX(), zombieEntity.getY(), zombieEntity.getZ());
                     zombieEntity.getWorld().spawnEntity(zombiePregnantEntity);
                     zombieEntity.discard();
-                    if(!user.isInCreativeMode()){
-                        itemStack.setDamage(itemStack.getDamage() + 1);
-                    }
+                    itemStack.damage(1,user, EquipmentSlot.MAINHAND);
                 }
             }
             countTime = 0;
@@ -68,6 +63,7 @@ public class PregnantSpyglassItem extends SpyglassItem {
         if (!world.isClient) {
             VillagerEntity child = villager.createChild((ServerWorld) world, villager);
             if (child != null) {
+                child.setBaby(true);
                 BlockPos spawnPos = villager.getBlockPos().add(world.random.nextInt(3) - 1, 0, world.random.nextInt(3) - 1);
                 child.refreshPositionAndAngles(spawnPos.getX() + 0.5, spawnPos.getY(), spawnPos.getZ() + 0.5, 0.0F, 0.0F);
                 world.spawnEntity(child);

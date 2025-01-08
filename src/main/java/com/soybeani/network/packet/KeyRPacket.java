@@ -5,10 +5,7 @@ import com.soybeani.entity.vehicle.BoatAbility;
 import com.soybeani.entity.vehicle.FlyBoatEntity;
 import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import com.soybeani.items.ItemsRegister;
-import com.soybeani.items.item.LightningSpyglassItem;
-import com.soybeani.items.item.NirvanaSpyglassItem;
-import com.soybeani.items.item.PregnantSpyglassItem;
-import com.soybeani.items.item.TntBatonItem;
+import com.soybeani.items.item.*;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -82,6 +79,10 @@ public record KeyRPacket() implements CustomPayload{
             tntBatonItem.switchMode();
             tntBatonItem.sendSwitchModeMessage(player);
         }
+        if(player.getMainHandStack().getItem() instanceof TeleportCrystalItem teleportCrystalItem){
+            teleportCrystalItem.switchBlockTP();
+            teleportCrystalItem.sendBlockTPMessage(player);
+        }
     }
 
     public static void receiveOfClient(KeyRPacket payload, ClientPlayNetworking.Context context) {
@@ -95,6 +96,9 @@ public record KeyRPacket() implements CustomPayload{
             }
             if(player.getMainHandStack().getItem() instanceof TntBatonItem tntBatonItem){
                 tntBatonItem.switchMode();
+            }
+            if(player.getMainHandStack().getItem() instanceof TeleportCrystalItem teleportCrystalItem){
+                teleportCrystalItem.switchBlockTP();
             }
         }
     }
