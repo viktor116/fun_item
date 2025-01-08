@@ -99,6 +99,6 @@ public class EntityRegister {
         FabricDefaultAttributeRegistry.register(SkeletonZombieEntity.SKELETON_ZOMBIE, SkeletonZombieEntity.createSkeletonZombieAttributes());
         FabricDefaultAttributeRegistry.register(CreeperSkeletonEntity.CREEPER_SKELETON, SkeletonEntity.createAbstractSkeletonAttributes());
         FabricDefaultAttributeRegistry.register(ZombieCreeperEntity.ZOMBIE_CREEPER, CreeperEntity.createCreeperAttributes());
-        FabricDefaultAttributeRegistry.register(ZombiePregnantEntity.ZOMBIE_PREGNANT, ZombieEntity.createZombieAttributes());
+        FabricDefaultAttributeRegistry.register(ZombiePregnantEntity.ZOMBIE_PREGNANT, ZombiePregnantEntity.createZombieAttributes());
     }
 }

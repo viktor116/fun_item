@@ -1,11 +1,14 @@
 package com.soybeani.items.item;
 
+import com.soybeani.entity.custom.ZombiePregnantEntity;
 import com.soybeani.utils.RayCastUtils;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.SpyglassItem;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -31,12 +34,26 @@ public class PregnantSpyglassItem extends SpyglassItem {
                     animalEntity.setLoveTicks(600);
                     animalEntity.lovePlayer(user);
                     world.sendEntityStatus(animalEntity, (byte) 18);
-                    itemStack.setDamage(itemStack.getDamage() + 1);
+                    if(!user.isInCreativeMode()){
+                        itemStack.setDamage(itemStack.getDamage() + 1);
+                    }
                 }
             }else if (targetEntity instanceof VillagerEntity villager) {
                 if (!villager.hasCustomer() && !villager.isBaby()) {
                     attemptVillagerBreeding(villager, world, user);
-                    itemStack.setDamage(itemStack.getDamage() + 1);
+                    if(!user.isInCreativeMode()){
+                        itemStack.setDamage(itemStack.getDamage() + 10);
+                    }
+                }
+            }else if(targetEntity instanceof ZombieEntity zombieEntity){
+                ZombiePregnantEntity zombiePregnantEntity = ZombiePregnantEntity.ZOMBIE_PREGNANT.create(world);
+                if (zombiePregnantEntity != null) {
+                    zombiePregnantEntity.setPosition(zombieEntity.getX(), zombieEntity.getY(), zombieEntity.getZ());
+                    zombieEntity.getWorld().spawnEntity(zombiePregnantEntity);
+                    zombieEntity.discard();
+                    if(!user.isInCreativeMode()){
+                        itemStack.setDamage(itemStack.getDamage() + 1);
+                    }
                 }
             }
             countTime = 0;
@@ -56,5 +73,10 @@ public class PregnantSpyglassItem extends SpyglassItem {
                 world.spawnEntity(child);
             }
         }
+    }
+
+    @Override
+    public boolean canRepair(ItemStack stack, ItemStack ingredient) {
+        return ingredient.isOf(Items.SPYGLASS);
     }
 }

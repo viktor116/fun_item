@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.registry.Registries;
@@ -36,9 +37,22 @@ public class ZombiePregnantEntity extends ZombieEntity {
     public static DefaultAttributeContainer.Builder createZombieAttributes() {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.23000000417232513)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.15000000417232513)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0)
                 .add(EntityAttributes.GENERIC_ARMOR, 2.0)
                 .add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
+    }
+
+    @Override
+    public void onDeath(DamageSource source) {
+        super.onDeath(source);
+        if (!this.getWorld().isClient) {
+            ZombieEntity babyZombie = EntityType.ZOMBIE.create(this.getWorld());
+            if (babyZombie != null) {
+                babyZombie.setBaby(true);  // 设置为小僵尸
+                babyZombie.setPosition(this.getX(), this.getY(), this.getZ());
+                this.getWorld().spawnEntity(babyZombie);
+            }
+        }
     }
 }

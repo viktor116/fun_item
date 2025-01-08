@@ -64,6 +64,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ItemsRegister.SKELETON_ZOMBIE_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));
         itemModelGenerator.register(ItemsRegister.CREEPER_SKELETON_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));
         itemModelGenerator.register(ItemsRegister.ZOMBIE_CREEPER_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));
+        itemModelGenerator.register(ItemsRegister.ZOMBIE_PREGNANT_SPAWN_EGG,new Model(Optional.of(TEMPLATE_SPAWN_EGG),Optional.empty()));
 
         //ModelIds.getMinecraftNamespacedItem("hay_block");
         itemModelGenerator.register(ItemsRegister.HAY_BLOCK_LIVE, new Model(Optional.of(Identifier.ofVanilla("block/hay_block")), Optional.empty()));

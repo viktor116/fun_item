@@ -5,6 +5,7 @@ import com.soybeani.config.InitValue;
 import com.soybeani.entity.custom.CreeperSkeletonEntity;
 import com.soybeani.entity.custom.SkeletonZombieEntity;
 import com.soybeani.entity.custom.ZombieCreeperEntity;
+import com.soybeani.entity.custom.ZombiePregnantEntity;
 import com.soybeani.items.effect.EmeraldStatusEffect;
 import com.soybeani.items.effect.LapisStatusEffect;
 import com.soybeani.items.effect.RedStoneStatusEffect;
@@ -81,6 +82,7 @@ public class ItemsRegister {
     public static final Item SKELETON_ZOMBIE_SPAWN_EGG = register(new SpawnEggItem(SkeletonZombieEntity.SKELETON_ZOMBIE, 0xC1C1C1, 0x494949, new Item.Settings()),"skeleton_zombie_spawn_egg");
     public static final Item CREEPER_SKELETON_SPAWN_EGG = register(new SpawnEggItem(CreeperSkeletonEntity.CREEPER_SKELETON, 894731, 0, new Item.Settings()),"creeper_skeleton_spawn_egg");
     public static final Item ZOMBIE_CREEPER_SPAWN_EGG = register(new SpawnEggItem(ZombieCreeperEntity.ZOMBIE_CREEPER, 44975, 7969893, new Item.Settings()),"zombie_creeper_spawn_egg");
+    public static final Item ZOMBIE_PREGNANT_SPAWN_EGG = register(new SpawnEggItem(ZombiePregnantEntity.ZOMBIE_PREGNANT, 44975, 7969893, new Item.Settings()),"zombie_pregnant_spawn_egg");
     public static final Item TALISMAN = register(new TalismanItem(new Item.Settings(), TalismanItem.Type.NONE),"talisman"); //剑气
     public static final Item TALISMAN_BLACK_PURPLE= register(new TalismanItem(new Item.Settings(), TalismanItem.Type.BLACK_PURPLE),"talisman_black_purple"); //死亡阴影
     public static final Item TALISMAN_BLUE= register(new TalismanItem(new Item.Settings(), TalismanItem.Type.BLUE),"talisman_blue"); //雷法
@@ -97,7 +99,7 @@ public class ItemsRegister {
     public static final Item IRON_BULLET= register(new BulletItem(new Item.Settings()),"iron_bullet");
     public static final Item TELEPORT_CRYSTAL= register(new TeleportCrystalItem(new Item.Settings()),"teleport_crystal");
     public static final Item TP_CRYSTAL= register(new TeleportCrystalItem(new Item.Settings()),"tp_crystal");
-    public static final Item TNT_BATON = register(new TntBatonItem(new Item.Settings()),"tnt_baton");
+    public static final Item TNT_BATON = register(new TntBatonItem(new Item.Settings().maxCount(1).maxDamage(200)),"tnt_baton");
     public static final Item SKYFIRE_SWORD = register(new SkyFireSwordItem(new Item.Settings()),"skyfire_sword");
     public static final Item YINGYI_KNIFE = register(new YingliSwordItem(new Item.Settings()),"yingli_knife");
     public static final Item JINGDOU_CLOUD = register(new JingdouCloudItem(new Item.Settings()),"jingdou_cloud");
@@ -117,6 +119,7 @@ public class ItemsRegister {
             itemGroup.add(SKELETON_ZOMBIE_SPAWN_EGG);
             itemGroup.add(CREEPER_SKELETON_SPAWN_EGG);
             itemGroup.add(ZOMBIE_CREEPER_SPAWN_EGG);
+            itemGroup.add(ZOMBIE_PREGNANT_SPAWN_EGG);
             itemGroup.add(DIAMOND_SWORD_PLANT);
         });
         ItemGroupEvents.modifyEntriesEvent(COMMON_ITEM_GROUP_KEY).register(itemGroup->{ //普通物品

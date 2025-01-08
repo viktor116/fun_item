@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#G#",
+    "QSQ",
+    "#G#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:pink_dye"
+    },
+    "G": {
+      "item": "minecraft:golden_carrot"
+    },
+    "Q": {
+      "item": "minecraft:golden_apple"
+    },
+    "S": {
+      "item": "minecraft:spyglass"
+    }
+  },
+  "result": {
+    "id": "fun_item:pregnant_spyglass",
+    "count": 1
+  }
+}

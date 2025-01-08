@@ -3,6 +3,7 @@ package com.soybeani;
 import com.soybeani.block.ModBlock;
 import com.soybeani.config.InitValue;
 import com.soybeani.entity.EntityRegister;
+import com.soybeani.entity.client.ModEntityModelLayers;
 import com.soybeani.event.EventRegister;
 import com.soybeani.hud.HudRegister;
 import com.soybeani.items.ItemsRegister;
@@ -21,6 +22,7 @@ public class Fun_Item implements ModInitializer {
 		ItemsRegister.initialize(); //注册物品
 		ModBlock.initialize(); //方块初始化
 		EventRegister.initialize(); //事件初始化
+
 
 		InitValue.LOGGER.info("soybeani fun items start successful q(≧▽≦q)!");
 	}

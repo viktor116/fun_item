@@ -5,6 +5,7 @@ import com.soybeani.config.InitValue;
 import com.soybeani.entity.custom.CreeperSkeletonEntity;
 import com.soybeani.entity.custom.SkeletonZombieEntity;
 import com.soybeani.entity.custom.ZombieCreeperEntity;
+import com.soybeani.entity.custom.ZombiePregnantEntity;
 import com.soybeani.event.keybinds.KeyBindsInputHandler;
 import com.soybeani.items.ItemsRegister;
 import com.soybeani.items.item.FlyBoatItem;
@@ -101,10 +102,12 @@ public class ModChineseLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add(ItemsRegister.SKELETON_ZOMBIE_SPAWN_EGG,"骷髅僵尸刷怪蛋");
         translationBuilder.add(ItemsRegister.CREEPER_SKELETON_SPAWN_EGG,"爬行者骷髅刷怪蛋");
         translationBuilder.add(ItemsRegister.ZOMBIE_CREEPER_SPAWN_EGG,"僵尸爬行者刷怪蛋");
+        translationBuilder.add(ItemsRegister.ZOMBIE_PREGNANT_SPAWN_EGG,"孕妇僵尸刷怪蛋");
 
         translationBuilder.add(SkeletonZombieEntity.SKELETON_ZOMBIE,"骷髅僵尸");
         translationBuilder.add(CreeperSkeletonEntity.CREEPER_SKELETON,"爬行骷髅射手");
         translationBuilder.add(ZombieCreeperEntity.ZOMBIE_CREEPER,"僵尸爬行者");
+        translationBuilder.add(ZombiePregnantEntity.ZOMBIE_PREGNANT,"孕妇僵尸");
 
         translationBuilder.add(ModBlock.AIR_ICE,"空气冰");
         translationBuilder.add(ModBlock.SUPER_SLIME_BLOCK,"超级黏液块");

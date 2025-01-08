@@ -7,10 +7,13 @@ import com.soybeani.entity.vehicle.Ice2BoatEntity;
 import com.soybeani.items.ItemsRegister;
 import com.soybeani.items.item.LightningSpyglassItem;
 import com.soybeani.items.item.NirvanaSpyglassItem;
+import com.soybeani.items.item.PregnantSpyglassItem;
+import com.soybeani.items.item.TntBatonItem;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
@@ -74,6 +77,11 @@ public record KeyRPacket() implements CustomPayload{
             spyglassItem.setOpenLightning(!spyglassItem.getOpenLightning());
             player.sendMessage(Text.of("大雷模式:"+ (spyglassItem.getOpenLightning() ? "开启" : "关闭")),true);
         }
+        //TNT指挥棒
+        if(player.getMainHandStack().getItem() instanceof TntBatonItem tntBatonItem){
+            tntBatonItem.switchMode();
+            tntBatonItem.sendSwitchModeMessage(player);
+        }
     }
 
     public static void receiveOfClient(KeyRPacket payload, ClientPlayNetworking.Context context) {
@@ -84,6 +92,9 @@ public record KeyRPacket() implements CustomPayload{
             }
             if(player.getVehicle() instanceof FlyBoatEntity flyBoatEntity){
                 flyBoatEntity.SwitchFly();
+            }
+            if(player.getMainHandStack().getItem() instanceof TntBatonItem tntBatonItem){
+                tntBatonItem.switchMode();
             }
         }
     }
