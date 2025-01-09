@@ -9,7 +9,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FrostedIceBlock;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.BoatEntity;
@@ -37,7 +39,7 @@ import java.util.Iterator;
 public class TntBoatEntity extends ChestBoatEntity {
 
     private boolean isAutoMode = false;
-
+    private boolean isRandomMode = false;
     private int autoModeTimer = 0;
     private static final int AUTO_MAX_TIME = 20;
 
@@ -55,13 +57,13 @@ public class TntBoatEntity extends ChestBoatEntity {
     @Override
     public void tick() {
         if(this.getIsAutoMode() && this.hasPassengers()){
-            if(this.getPassengerList().get(0) instanceof PlayerEntity player){
+            if(this.getPassengerList().get(0) instanceof LivingEntity entity){
                 if(hasTntInInventory()){
                     this.autoModeTimer++;
                     if (this.autoModeTimer >= AUTO_MAX_TIME) {
                         this.autoModeTimer = 0;
-                        double bodyYawInRadians = Math.toRadians(player.getBodyYaw());
-                        this.launchTntAtTarget(player, player.getPos().add(-Math.sin(bodyYawInRadians),0, Math.cos(bodyYawInRadians)));
+                        double bodyYawInRadians = Math.toRadians(entity.getBodyYaw());
+                        this.launchTntAtTarget(entity, entity.getPos().add(-Math.sin(bodyYawInRadians),0, Math.cos(bodyYawInRadians)),this.getIsRandomMode());
                     }
                 }else {
                     this.setAutoMode(false);
@@ -93,22 +95,32 @@ public class TntBoatEntity extends ChestBoatEntity {
     }
 
     // 发射 TNT 方法
-    public void launchTntAtTarget(PlayerEntity player, Vec3d targetPos) {
-        if(player.getWorld().isClient) return;
+    public void launchTntAtTarget(LivingEntity entity, Vec3d targetPos, boolean isRandom) {
+        if(entity.getWorld().isClient) return;
         if (this.hasTntInInventory()) {
             Item item= this.removeTntFromInventory();
             // 3. 获取船尾的箱子位置
             Vec3d boatTailPos = this.getPos().add(0, 0, 0);
-            Vec3d direction = targetPos.subtract(boatTailPos).normalize();
+            Vec3d direction;
+            if(isRandom){
+                double randomX = entity.getWorld().getRandom().nextDouble() * 2 - 1;  // [-1, 1]
+                double randomY = entity.getWorld().getRandom().nextDouble() * 2 - 1;  // [-1, 1]
+                double randomZ = entity.getWorld().getRandom().nextDouble() * 2 - 1;  // [-1, 1]
+                Vec3d randomVec3d = new Vec3d(randomX, randomY, randomZ);
+                direction = randomVec3d.normalize();  // 确保方向是单位向量
+            }else{
+                direction = targetPos.subtract(boatTailPos).normalize();
+            }
+            InitValue.LOGGER.info("direction="+direction.toString());
             double velocity = 0.5;
-            Vec3d velocityVector = direction.multiply(velocity).add(0, 0.8, 0); // 增加一个 y 方向的速度值来模拟抛物线
+            Vec3d velocityVector = direction.multiply(velocity).add(0, 0.8, 0);
             if(item == Items.TNT && item != null){
-                TntEntity tntEntity = new TntEntity(this.getWorld(), boatTailPos.x, boatTailPos.y, boatTailPos.z, player);
+                TntEntity tntEntity = new TntEntity(this.getWorld(), boatTailPos.x, boatTailPos.y, boatTailPos.z, entity);
                 tntEntity.setFuse(80); // 设置 TNT 的引爆时间
                 tntEntity.setVelocity(velocityVector.x, velocityVector.y, velocityVector.z);
                 this.getWorld().spawnEntity(tntEntity);
             }else if(item == ModBlock.TT_BLOCK.asItem() && item != null){
-                TTEntity ttEntity = new TTEntity(this.getWorld(), boatTailPos.x, boatTailPos.y, boatTailPos.z, player);
+                TTEntity ttEntity = new TTEntity(this.getWorld(), boatTailPos.x, boatTailPos.y, boatTailPos.z, entity);
                 ttEntity.setFuse(80); // 设置 TNT 的引爆时间
                 ttEntity.setVelocity(velocityVector.x, velocityVector.y, velocityVector.z);
                 this.getWorld().spawnEntity(ttEntity);
@@ -116,7 +128,9 @@ public class TntBoatEntity extends ChestBoatEntity {
             // 6. 在目标位置发射 TNT
             this.getWorld().playSound(null, boatTailPos.x, boatTailPos.y, boatTailPos.z, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.PLAYERS, 1f, 1f);
         }else {
-            player.sendMessage(Text.of("船内无TNT物品"),true);
+            if(entity instanceof PlayerEntity player) {
+                player.sendMessage(Text.of("船内无TNT物品"), true);
+            }
         }
     }
 
@@ -143,6 +157,14 @@ public class TntBoatEntity extends ChestBoatEntity {
 
     public boolean getIsAutoMode() {
         return this.isAutoMode;
+    }
+
+    public boolean getIsRandomMode() {
+        return this.isRandomMode;
+    }
+
+    public void setIsRandomMode(boolean isRandomMode) {
+        this.isRandomMode = isRandomMode;
     }
 
 }

@@ -50,7 +50,9 @@ public class TntBatonItem extends Item {
             case 2: //指挥
                 if(this.validHasTntBoat(user)){
                     TntBoatEntity boat = (TntBoatEntity) user.getVehicle();
-                    boat.launchTntAtTarget(user,pos);
+                    boat.setAutoMode(false);
+                    boat.setIsRandomMode(false);
+                    boat.launchTntAtTarget(user,pos,false);
                 }else{
                     this.sendNeedTNTBoat(user);
                 }
@@ -58,7 +60,27 @@ public class TntBatonItem extends Item {
             case 3://全自动
                 if(this.validHasTntBoat(user)){
                     TntBoatEntity boat = (TntBoatEntity) user.getVehicle();
-                    boat.setAutoMode(true);
+                    boat.setAutoMode(!boat.getIsAutoMode());
+                    boat.setIsRandomMode(false);
+                }else {
+                    this.sendNeedTNTBoat(user);
+                }
+                break;
+            case 4: //随机
+                if(this.validHasTntBoat(user)){
+                    TntBoatEntity boat = (TntBoatEntity) user.getVehicle();
+                    boat.setAutoMode(false);
+                    boat.setIsRandomMode(false);
+                    boat.launchTntAtTarget(user,pos,true);
+                }else{
+                    this.sendNeedTNTBoat(user);
+                }
+                break;
+            case 5://随机全自动
+                if(this.validHasTntBoat(user)){
+                    TntBoatEntity boat = (TntBoatEntity) user.getVehicle();
+                    boat.setAutoMode(!boat.getIsAutoMode());
+                    boat.setIsRandomMode(!boat.getIsRandomMode());
                 }else {
                     this.sendNeedTNTBoat(user);
                 }
