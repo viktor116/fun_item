@@ -34,7 +34,7 @@ public class AlchemyParticle extends SpriteBillboardParticle {
     public void tick() {
         super.tick();
         // 这里可以添加额外的逻辑，比如旋转、扩展等
-        this.setVelocity(0, 0.1, 0); // 在Y轴上有轻微上升
+        this.setVelocity(0, 0.0, 0); // 在Y轴上有轻微上升
         // 让粒子绕 Y 轴旋转，增大 angle 值
         this.prevAngle = this.angle;
         this.angle += 0.5F;
