@@ -7,6 +7,7 @@ import com.soybeani.event.EventRegister;
 import com.soybeani.event.keybinds.KeyBindsInputHandler;
 import com.soybeani.hud.HudRegister;
 import com.soybeani.network.ModMessage;
+import com.soybeani.particles.ParticlesRegister;
 import net.fabricmc.api.ClientModInitializer;
 
 public class Fun_ItemClient implements ClientModInitializer {
@@ -19,5 +20,6 @@ public class Fun_ItemClient implements ClientModInitializer {
 		EntityRegisterClient.initializeClient();
 		HudRegister.Initialize();
 		EventRegister.initializeClient();
+		ParticlesRegister.initializeClient(); //客户端粒子注册
 	}
 }

@@ -1,8 +1,10 @@
 package com.soybeani.items.item;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterials;
+import net.minecraft.util.ActionResult;
 
 /**
  * @author soybean
@@ -12,5 +14,10 @@ import net.minecraft.item.ToolMaterials;
 public class YingliSwordItem extends SwordItem {
     public YingliSwordItem(Settings settings) {
         super(ToolMaterials.NETHERITE,settings);
+    }
+
+    @Override
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        return super.useOnBlock(context);
     }
 }

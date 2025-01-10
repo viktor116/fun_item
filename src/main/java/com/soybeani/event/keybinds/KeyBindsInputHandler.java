@@ -22,16 +22,16 @@ public class KeyBindsInputHandler {
     public static final String KEY_CATEGORY_ID = "key.category."+ InitValue.MOD_ID +".soybean";
 
     public static KeyBinding KEY_R = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-            KEY_TOGGLE_NAME, // The translation key of the keybinding's name
+            KEY_TOGGLE_NAME,
             InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
-            GLFW.GLFW_KEY_R, // The keycode of the key
-            KEY_CATEGORY_ID // The translation key of the keybinding's category.
+            GLFW.GLFW_KEY_R,
+            KEY_CATEGORY_ID
     ));
 
     public static KeyBinding KEY_V = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-            KEY_FUNCTION_NAME, // The translation key of the keybinding's name
-            InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
-            GLFW.GLFW_KEY_V, // The keycode of the key
+            KEY_FUNCTION_NAME,
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_V,
             KEY_CATEGORY_ID // The translation key of the keybinding's category.
     ));
 
