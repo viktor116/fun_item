@@ -16,13 +16,15 @@ import net.minecraft.util.Identifier;
  */
 public class ParticlesRegister {
 //    public static final SimpleParticleType SPARKLE_PARTICLE = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(InitValue.MOD_ID, "alchemymod"), FabricParticleTypes.simple());
-    public static final SimpleParticleType SPARKLE_PARTICLE = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(InitValue.MOD_ID, "alchemymod"), FabricParticleTypes.simple());
+    public static final SimpleParticleType ALCHEMYMOD = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(InitValue.MOD_ID, "alchemymod"), FabricParticleTypes.simple());
+    public static final SimpleParticleType ALCHEMYMOD4 = Registry.register(Registries.PARTICLE_TYPE, Identifier.of(InitValue.MOD_ID, "alchemymod4"), FabricParticleTypes.simple());
     public static void initialize(){
 
     }
 
     public static void initializeClient(){
-        ParticleFactoryRegistry.getInstance().register(SPARKLE_PARTICLE, AlchemyParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ALCHEMYMOD, AlchemyParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ALCHEMYMOD4, AlchemyParticle.Factory::new);
 //        ParticleFactoryRegistry.getInstance().register(SPARKLE_PARTICLE, SonicBoomParticle.Factory::new);
     }
 }

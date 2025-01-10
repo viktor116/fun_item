@@ -43,7 +43,6 @@ public class AlchemyParticle extends SpriteBillboardParticle {
         if (this.angle >= 360.0F) {
             this.angle -= 360.0F;
         }
-
         // 可以加一些旋转或更复杂的运动效果
         this.setSpriteForAge(this.spriteProvider);
     }
