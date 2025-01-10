@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#S#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:gold_block"
+    },
+    "S": {
+      "item": "fun_item:teleport_crystal"
+    }
+  },
+  "result": {
+    "id": "fun_item:tp_crystal",
+    "count": 1
+  }
+}

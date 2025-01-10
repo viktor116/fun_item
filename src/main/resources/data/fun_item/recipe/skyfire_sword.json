@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#G#",
+    " P "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:magma_cream"
+    },
+    "G": {
+      "item": "minecraft:gold_block"
+    },
+    "P": {
+      "item": "minecraft:golden_sword"
+    }
+  },
+  "result": {
+    "id": "fun_item:skyfire_sword",
+    "count": 1
+  }
+}

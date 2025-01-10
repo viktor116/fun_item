@@ -27,6 +27,8 @@ public class ModItemTagProvider extends FabricTagProvider<Item> {
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(ItemTags.SWORDS)
                 .add(ItemsRegister.WHEAT_SWORD)
+                .add(ItemsRegister.SKYFIRE_SWORD)
+                .add(ItemsRegister.YINGYI_KNIFE)
                 .add(ItemsRegister.GRASS_SWORD2)
                 .add(ItemsRegister.GRASS_SWORD);
         getOrCreateTagBuilder(ItemTags.BOATS)

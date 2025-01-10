@@ -104,8 +104,8 @@ public class ItemsRegister {
     public static final Item TELEPORT_CRYSTAL= register(new TeleportCrystalItem(new Item.Settings(),0),"teleport_crystal");
     public static final Item TP_CRYSTAL= register(new TeleportCrystalItem(new Item.Settings().maxDamage(200).maxCount(1),1),"tp_crystal");
     public static final Item TNT_BATON = register(new TntBatonItem(new Item.Settings().maxCount(1).maxDamage(200)),"tnt_baton");
-    public static final Item SKYFIRE_SWORD = register(new SkyFireSwordItem(new Item.Settings()),"skyfire_sword");
-    public static final Item YINGYI_KNIFE = register(new YingliSwordItem(new Item.Settings()),"yingli_knife");
+    public static final Item SKYFIRE_SWORD = register(new SkyFireSwordItem(new Item.Settings().maxCount(1).maxDamage(1024).attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.NETHERITE, 5, -2.6F))),"skyfire_sword");
+    public static final Item YINGYI_KNIFE = register(new YingliSwordItem(new Item.Settings().maxCount(1).maxDamage(1024).attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.NETHERITE, 7, -2.6F))),"yingli_knife");
     public static final Item JINGDOU_CLOUD = register(new JingdouCloudItem(new Item.Settings()),"jingdou_cloud");
     public static void initialize() {
         Registry.register(Registries.ITEM_GROUP, FUN_ITEM_GROUP_KEY, ABSTRACT_CUSTOM_ITEM_GROUP);
